@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/units"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Unit Details</ion-title>
+
+    <ion-button 
+      *ngIf="currUser.userType === 'admin'"
+      size="small" 
+      color="tertiary"
+      slot="end" 
+      (click)="onEditUnitOptions()"
+    >
+      <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+  </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-no-padding">
+        <ion-img [src]="currPlace.imageUrl"></ion-img>
+    </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <h6>{{ currPlace.name }}, Singapore {{ currPlace.postal }}</h6>
+        <h6>#{{ currUnit.unitNumber }}</h6>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-button (click)="presentPopover($event)">View Floor Plan</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>No. Of Rooms: {{currUnit.bedrooms}}</ion-item>
+          <ion-item>Area (sqm): {{currUnit.size}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item (click)="toggleItem(1)">
+            <ion-icon slot="start" [name]="isItemExpanded(1) ? 'chevron-down' : 'chevron-forward'"></ion-icon>
+            <ion-label>
+              View More
+            </ion-label>
+          </ion-item>
+          <ion-list *ngIf="isItemExpanded(1)">
+            <ion-item *ngFor="let dets of unitDetails">
+              {{dets}}
+            </ion-item>
+          </ion-list>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
