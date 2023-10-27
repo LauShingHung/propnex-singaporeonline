@@ -50,7 +50,7 @@ export class PlaceService {
   fetchFBPostals() {
     return this.http
       .get(
-        `http://localhost:8100/assets/postalsAndUnits.json`
+        `http://localhost:8100/assets/postalsAndUnits.json` //change to firebase link after setting up firebase
       )
       .pipe(
         map(resData => {
