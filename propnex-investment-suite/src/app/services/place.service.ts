@@ -50,7 +50,7 @@ export class PlaceService {
   fetchFBPostals() {
     return this.http
       .get(
-        `http://localhost:8100/assets/postalsAndUnits.json` //change to firebase link after setting up firebase
+        `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
       )
       .pipe(
         map(resData => {
@@ -79,7 +79,7 @@ export class PlaceService {
   fetchFBRecs() {
     return this.http
       .get(
-        `http://localhost:8100/assets/postalsAndUnits.json`
+        `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
       )
       .pipe(
         map(resData => {
@@ -112,7 +112,7 @@ export class PlaceService {
       `assets/placeholders/property.jpeg`
     );
     return this.http
-      .post('http://localhost:8100/assets/postalsAndUnits.json',
+      .post('https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
       { ...newBlock })
       .pipe(
         switchMap(resData => {
@@ -148,7 +148,7 @@ export class PlaceService {
         );
         this.currPlace = updatedUsers[updatedUserIndex];
         return this.http.put(
-          `http://localhost:8100/assets/postalsAndUnits/${updatedUserIndex}.json`,
+          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -192,7 +192,7 @@ export class PlaceService {
         this.currPlace = updatedPlaces[updatedPlaceIndex];
         this.currUnit = newUnit;
         return this.http.put(
-          `http://localhost:8100/assets/postalsAndUnits/${updatedPlaceIndex}.json`,
+          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedPlaceIndex}.json`,
           { ...updatedPlaces[updatedPlaceIndex] }
         );
       }),
@@ -230,7 +230,7 @@ export class PlaceService {
         this.currPlace = updatedUsers[updatedUserIndex];
         this.currUnit = newUnit;
         return this.http.put(
-          `http://localhost:8100/assets/postalsAndUnits/${updatedUserIndex}.json`,
+          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -282,7 +282,7 @@ export class PlaceService {
         this.currPlace = updatedUsers[updatedUserIndex];
         this.currUnit = oldPlace.units[oldUnitIndex];
         return this.http.put(
-          `http://localhost:8100/assets/postalsAndUnits/${updatedUserIndex}.json`,
+          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
