@@ -25,6 +25,7 @@ export class fbUser {
       public floorplan: string,
       public size: string,
       public unitNumber: string,
+      public UnitFacing: String,
     ) {}
   }
 
