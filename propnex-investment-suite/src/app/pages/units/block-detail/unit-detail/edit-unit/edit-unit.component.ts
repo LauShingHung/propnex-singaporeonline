@@ -136,20 +136,22 @@ export class EditUnitComponent implements OnInit {
     let newSize = this.editUnitForm.value.size;
     let newUnitFacing = this.editUnitForm.value.UnitFacing
 
+    const targetLastTwoDigits = this.currUnit.unitNumber.substring(3,4);
+    this.currPlace.units.forEach((unit) => {
+      if (unit.unitNumber.substring(3,4) == targetLastTwoDigits) {
+          let newUnit = new fbUnit(unit.bedrooms, unit.floorplan, unit.size, unit.unitNumber, newUnitFacing);
+          this.placeService.editUnit(this.currPlace.postal, unit.unitNumber ,newUnit).subscribe(()=>{
+
+          });
+
+      }
+    })
+
     let newUnit = new fbUnit(newBedrooms, this.currUnit.floorplan, newSize, this.currUnit.unitNumber, newUnitFacing);
 
     this.placeService.editUnit(this.currPlace.postal, this.currUnit.unitNumber ,newUnit).subscribe(()=>{
 
     });
-    const targetLastTwoDigits = this.currUnit.unitNumber.substring(3,4);
-    this.currPlace.units.forEach((unit) => {
-      if (unit.unitNumber.substring(3,4) == targetLastTwoDigits) {
-        let newUnit = new fbUnit(unit.bedrooms, unit.floorplan, unit.size, unit.unitNumber, newUnitFacing);
-        this.placeService.editUnit(this.currPlace.postal, unit.unitNumber ,newUnit).subscribe(()=>{
-
-        });
-      }
-    })
     
     this.modalCtrl.dismiss({ message: 'Changes saved'}, 'confirm');
   }
