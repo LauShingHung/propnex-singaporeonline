@@ -132,8 +132,9 @@ export class AddUnitComponent implements OnInit {
     const unitNumber = this.addUnitForm.value.unitNumber;
     const bedrooms = this.addUnitForm.value.bedrooms;
     const size = this.addUnitForm.value.size;
+    const UnitFacing = this.addUnitForm.value.UnitFacing;
     
-    this.placeService.addUnit(this.currPlace.postal, unitNumber, bedrooms, size).subscribe(() => {
+    this.placeService.addUnit(this.currPlace.postal, unitNumber, bedrooms, size,UnitFacing).subscribe(() => {
 
     });
 
