@@ -33,10 +33,13 @@ export class EditUnitComponent implements OnInit {
       size: new FormControl(this.currUnit.size, {
         updateOn: 'blur',
       }), 
+      UnitFacing: new FormControl(this.currUnit.UnitFacing, {
+        updateOn: 'blur',
+      }), 
 
-      homeownerRace: new FormControl(null, {
-         updateOn: 'blur',
-       }), 
+      //homeownerRace: new FormControl(null, {
+      //   updateOn: 'blur',
+      // }), 
       // countryOfCitizenship: new FormControl(null, {
       //   updateOn: 'blur',
       // }),
@@ -131,12 +134,22 @@ export class EditUnitComponent implements OnInit {
 
     let newBedrooms = this.editUnitForm.value.bedrooms;
     let newSize = this.editUnitForm.value.size;
+    let newUnitFacing = this.editUnitForm.value.UnitFacing
 
-    let newUnit = new fbUnit(newBedrooms, this.currUnit.floorplan, newSize, this.currUnit.unitNumber);
+    let newUnit = new fbUnit(newBedrooms, this.currUnit.floorplan, newSize, this.currUnit.unitNumber, newUnitFacing);
 
     this.placeService.editUnit(this.currPlace.postal, this.currUnit.unitNumber ,newUnit).subscribe(()=>{
 
     });
+    const targetLastTwoDigits = this.currUnit.unitNumber.substring(3,4);
+    this.currPlace.units.forEach((unit) => {
+      if (unit.unitNumber.substring(3,4) == targetLastTwoDigits) {
+        let newUnit = new fbUnit(unit.bedrooms, unit.floorplan, unit.size, unit.unitNumber, newUnitFacing);
+        this.placeService.editUnit(this.currPlace.postal, unit.unitNumber ,newUnit).subscribe(()=>{
+
+        });
+      }
+    })
     
     this.modalCtrl.dismiss({ message: 'Changes saved'}, 'confirm');
   }
