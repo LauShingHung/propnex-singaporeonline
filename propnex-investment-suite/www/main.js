@@ -247,7 +247,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu side=\"start\">\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>\n          Menu\n        </ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list>\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n            <ion-label>Home</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/units\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label>Find Individual Units</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/stats\">\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\n            <ion-label>View Statistical Insights</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n            <ion-label>Logout</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet main></ion-router-outlet>\n</ion-app>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-menu side=\"start\">\r\n    <ion-header>\r\n      <ion-toolbar>\r\n        <ion-title>\r\n          Menu\r\n        </ion-title>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\r\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\r\n            <ion-label>Home</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/units\">\r\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\r\n            <ion-label>Find Individual Units</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/stats\">\r\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\r\n            <ion-label>View Statistical Insights</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\r\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\r\n            <ion-label>Logout</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n  <ion-router-outlet main></ion-router-outlet>\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -557,11 +557,12 @@ var fbPostal = /** @class */ (function () {
 }());
 
 var fbUnit = /** @class */ (function () {
-    function fbUnit(bedrooms, floorplan, size, unitNumber) {
+    function fbUnit(bedrooms, floorplan, size, unitNumber, UnitFacing) {
         this.bedrooms = bedrooms;
         this.floorplan = floorplan;
         this.size = size;
         this.unitNumber = unitNumber;
+        this.UnitFacing = UnitFacing;
     }
     return fbUnit;
 }());
@@ -667,7 +668,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.fetchFBUsers = function () {
         var _this = this;
         return this.http
-            .get('https://propnexuser-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
+            .get('https://propnexuser-34e7a-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (resData) {
             var users = [];
             for (var key in resData) {
@@ -685,7 +686,7 @@ var AuthService = /** @class */ (function () {
         var _this = this;
         var newUser = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](email, [], [], name, password, [], 'user');
         return this.http
-            .post('https://propnexuser-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newUser))
+            .post('https://propnexuser-34e7a-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newUser))
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () {
             return _this.fbUsers;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (fbUsers) {
@@ -709,7 +710,7 @@ var AuthService = /** @class */ (function () {
             var oldPlace = updatedUsers[updatedUserIndex];
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](oldPlace.email, oldPlace.favourites, oldPlace.generalRec, newName, newPassword, oldPlace.personalRec, oldPlace.userType);
             _this.currFbUser = updatedUsers[updatedUserIndex];
-            return _this.http.put("https://propnexuser-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexuser-34e7a-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbUsers.next(updatedUsers);
         }));
@@ -738,7 +739,7 @@ var AuthService = /** @class */ (function () {
             var uniqueRecArr = Array.from(new Set(newRecArr));
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](oldPlace.email, newFavArr, oldPlace.generalRec, oldPlace.name, oldPlace.password, uniqueRecArr, oldPlace.userType);
             _this.currFbUser = updatedUsers[updatedUserIndex];
-            return _this.http.put("https://propnexuser-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexuser-34e7a-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbUsers.next(updatedUsers);
         }));
@@ -746,7 +747,7 @@ var AuthService = /** @class */ (function () {
     // remove place from users' favourites
     AuthService.prototype.removeFav = function (userInd, placeInd) {
         return this.http
-            .delete("https://propnexuser-default-rtdb.asia-southeast1.firebasedatabase.app/" + userInd + "/favourites/" + placeInd + ".json");
+            .delete("https://propnexuser-34e7a-default-rtdb.asia-southeast1.firebasedatabase.app/" + userInd + "/favourites/" + placeInd + ".json");
     };
     AuthService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
@@ -825,7 +826,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\user\Desktop\jolenetan07.github.io-main\propnex-investment-suite\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\user\Documents\GitHub\FYP-Recommender-System\propnex-investment-suite\src\main.ts */"./src/main.ts");
 
 
 /***/ })

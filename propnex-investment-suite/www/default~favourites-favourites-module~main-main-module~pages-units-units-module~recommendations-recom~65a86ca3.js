@@ -91,7 +91,7 @@ var PlaceService = /** @class */ (function () {
     PlaceService.prototype.fetchFBPostals = function () {
         var _this = this;
         return this.http
-            .get("http://localhost:8100/assets/postalsAndUnits.json")
+            .get("https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (resData) {
             var postals = [];
             for (var key in resData) {
@@ -108,7 +108,7 @@ var PlaceService = /** @class */ (function () {
     PlaceService.prototype.fetchFBRecs = function () {
         var _this = this;
         return this.http
-            .get("http://localhost:8100/assets/postalsAndUnits.json")
+            .get("https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (resData) {
             var places = [];
             for (var key in resData) {
@@ -126,7 +126,7 @@ var PlaceService = /** @class */ (function () {
         var _this = this;
         var newBlock = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](name, postal, "assets/placeholders/property.jpeg");
         return this.http
-            .post('http://localhost:8100/assets/postalsAndUnits.json', __assign({}, newBlock))
+            .post('https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newBlock))
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (resData) {
             return _this.fbPostals;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (fbUsers) {
@@ -150,13 +150,13 @@ var PlaceService = /** @class */ (function () {
             var oldPlace = updatedUsers[updatedUserIndex];
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](newName, oldPlace.postal, oldPlace.imageUrl);
             _this.currPlace = updatedUsers[updatedUserIndex];
-            return _this.http.put("http://localhost:8100/assets/postalsAndUnits/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedUsers);
         }));
     };
     // add new unit to existing place
-    PlaceService.prototype.addUnit = function (targetPostal, unitNumber, bedrooms, size) {
+    PlaceService.prototype.addUnit = function (targetPostal, unitNumber, bedrooms, size, UnitFacing) {
         var _this = this;
         var updatedPlaces;
         return this.fbPostals.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (places) {
@@ -170,13 +170,13 @@ var PlaceService = /** @class */ (function () {
             var updatedPlaceIndex = places.findIndex(function (p) { return p.postal === targetPostal; });
             updatedPlaces = __spreadArrays(places);
             var oldPlace = updatedPlaces[updatedPlaceIndex];
-            var newUnit = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUnit"](bedrooms, "assets/placeholders/floorplan.png", size, unitNumber);
+            var newUnit = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUnit"](bedrooms, "assets/placeholders/floorplan.png", size, unitNumber, UnitFacing);
             var newUnitsArr = oldPlace.units || [];
             newUnitsArr = newUnitsArr.concat(newUnit);
             updatedPlaces[updatedPlaceIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](oldPlace.name, oldPlace.postal, oldPlace.imageUrl, newUnitsArr);
             _this.currPlace = updatedPlaces[updatedPlaceIndex];
             _this.currUnit = newUnit;
-            return _this.http.put("http://localhost:8100/assets/postalsAndUnits/" + updatedPlaceIndex + ".json", __assign({}, updatedPlaces[updatedPlaceIndex]));
+            return _this.http.put("https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedPlaceIndex + ".json", __assign({}, updatedPlaces[updatedPlaceIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedPlaces);
         }));
@@ -202,7 +202,7 @@ var PlaceService = /** @class */ (function () {
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](oldPlace.name, oldPlace.postal, oldPlace.imageUrl, newFavArr);
             _this.currPlace = updatedUsers[updatedUserIndex];
             _this.currUnit = newUnit;
-            return _this.http.put("http://localhost:8100/assets/postalsAndUnits/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedUsers);
         }));
@@ -240,7 +240,7 @@ var PlaceService = /** @class */ (function () {
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](oldPlace.name, oldPlace.postal, oldPlace.imageUrl, oldPlace.units);
             _this.currPlace = updatedUsers[updatedUserIndex];
             _this.currUnit = oldPlace.units[oldUnitIndex];
-            return _this.http.put("http://localhost:8100/assets/postalsAndUnits/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedUsers);
         }));

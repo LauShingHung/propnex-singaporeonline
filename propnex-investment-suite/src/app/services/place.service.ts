@@ -159,7 +159,7 @@ export class PlaceService {
   }
 
   // add new unit to existing place
-  addUnit(targetPostal: string, unitNumber: string, bedrooms: string, size: string) {
+  addUnit(targetPostal: string, unitNumber: string, bedrooms: string, size: string, UnitFacing: string) {
     let updatedPlaces: fbPostal[];
     return this.fbPostals.pipe(
       take(1),
@@ -178,7 +178,8 @@ export class PlaceService {
           bedrooms,
           `assets/placeholders/floorplan.png`,
           size,
-          unitNumber
+          unitNumber,
+          UnitFacing
         );
         let newUnitsArr = oldPlace.units || [];
         newUnitsArr = newUnitsArr.concat(newUnit);
