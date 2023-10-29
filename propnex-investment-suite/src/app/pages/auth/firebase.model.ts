@@ -25,6 +25,7 @@ export class fbPostal {
       public floorplan: string,
       public size: string,
       public unitNumber: string,
+      public UnitFacing: string,
     ) {}
   }
 
