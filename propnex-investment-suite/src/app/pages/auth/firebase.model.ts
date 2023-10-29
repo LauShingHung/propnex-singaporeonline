@@ -19,21 +19,20 @@ export class fbPostal {
   ) {}
 }
 
-export class fbUnit {
-  constructor(
-    public bedrooms: string,
-    public floorplan: string,
-    public size: string,
-    public unitNumber: string,
-    public UnitFacing: String,
-  ) {}
-}
+  export class fbUnit {
+    constructor(
+      public bedrooms: string,
+      public floorplan: string,
+      public size: string,
+      public unitNumber: string,
+    ) {}
+  }
 
-export class fbRec {
-  constructor(
-    public place: string,
-    public rec1: string,
-    public rec2: string,
-    public rec3: string,
-  ) {}
-}
+  export class fbRec {
+    constructor(
+      public place: string,
+      public rec1: string,
+      public rec2: string,
+      public rec3: string,
+    ) {}
+  }
