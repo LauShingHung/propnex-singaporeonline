@@ -311,7 +311,7 @@ var routes = [
     },
     {
         path: 'units',
-        loadChildren: function () { return Promise.all(/*! import() | pages-units-units-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("pages-units-units-module")]).then(__webpack_require__.bind(null, /*! ./pages/units/units.module */ "./src/app/pages/units/units.module.ts")).then(function (m) { return m.UnitsPageModule; }); },
+        loadChildren: function () { return Promise.all(/*! import() | pages-units-units-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("common"), __webpack_require__.e("pages-units-units-module")]).then(__webpack_require__.bind(null, /*! ./pages/units/units.module */ "./src/app/pages/units/units.module.ts")).then(function (m) { return m.UnitsPageModule; }); },
         canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
     }
 ];
@@ -547,9 +547,22 @@ var fbUser = /** @class */ (function () {
 }());
 
 var fbPostal = /** @class */ (function () {
-    function fbPostal(name, postal, imageUrl, units) {
+    function fbPostal(name, postal, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT, locationSch, imageUrl, units) {
         this.name = name;
         this.postal = postal;
+        this.landArea = landArea;
+        this.grossFloorArea = grossFloorArea;
+        this.tenure = tenure;
+        this.numRooms = numRooms;
+        this.numStorey = numStorey;
+        this.askingPrice = askingPrice;
+        this.priceRoom = priceRoom;
+        this.GFA = GFA;
+        this.roomRate = roomRate;
+        this.netOperatingProfit = netOperatingProfit;
+        this.approvedUsage = approvedUsage;
+        this.locationMRT = locationMRT;
+        this.locationSch = locationSch;
         this.imageUrl = imageUrl;
         this.units = units;
     }

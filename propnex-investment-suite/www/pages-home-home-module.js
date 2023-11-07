@@ -54,7 +54,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("common"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
                     }
                 ]
             },

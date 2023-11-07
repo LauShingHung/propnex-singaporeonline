@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { fbPostal, fbRec, fbUser } from '../auth/firebase.model';
 import { AddBlockComponent } from './add-block/add-block.component';
 import { PlaceService } from '../../services/place.service';
+import { EditProfileComponent } from '../home/main/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-units',
@@ -78,6 +79,22 @@ export class UnitsPage implements OnInit {
   onSelectPlace() {
     this.router.navigate(['/', 'units', this.result.postal]);
   }
+
+  // navigate to edit user profile form
+  onEditProfile() {
+    this.modalCtrl
+      .create({ component: EditProfileComponent })
+      .then(modalEl => {
+        modalEl.present();
+        return modalEl.onDidDismiss();
+      })
+      .then(resultData => {
+        if (resultData.role === 'confirm') {
+          this.ionViewWillEnter();
+        }
+      });
+  }
+
 
   // add new place
   onAddBlock() {

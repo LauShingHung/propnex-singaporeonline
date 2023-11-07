@@ -155,7 +155,7 @@ export class EditUnitComponent implements OnInit {
     
     this.modalCtrl.dismiss({ message: 'Changes saved'}, 'confirm');
   }
-
+   
   // upload floorplan image
   uploadFloorPlanImage() {
     console.log("choose floor plan image to upload")
