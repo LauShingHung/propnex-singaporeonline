@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/units"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Place Details</ion-title>
+    <ion-title>Hotel Details</ion-title>
 
     <ion-button 
 
@@ -12,7 +12,7 @@
     color="tertiary"
     slot="end" 
     (click)="onEditBlockOptions()"
-  >
+    >
     <ion-icon slot="icon-only" name="create-outline"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -20,16 +20,10 @@
 
 <ion-content>
   <ion-grid *ngIf="currPlace">
-    <ion-row>
-      <ion-col class="ion-no-padding">
-        <ion-img *ngIf="!currPlace.imageUrl" src="assets/placeholders/property.jpeg"></ion-img>
-        <ion-img *ngIf="currPlace.imageUrl" [src]="currPlace.imageUrl"></ion-img>
-    </ion-col>
-    </ion-row>
 
     <ion-row>
       <ion-col class="ion-text-center ion-no-padding">
-        <h6>{{ currPlace.name }}, Singapore {{ currPlace.postal }}</h6>
+        <h6>{{ currPlace.name }}, Singapore {{ currPlace.postal }} </h6>
       </ion-col>
     </ion-row>
 
@@ -45,7 +39,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+<!--    <ion-row>
       <ion-col>
         <ion-searchbar 
         color="light"
@@ -53,6 +47,110 @@
         [debounce]="500"
         (ionChange)="handleChange($event)"
         ></ion-searchbar>
+      </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Land Area: {{currPlace.landArea}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Gross Floor Area: {{currPlace.grossFloorArea}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Tenure: {{currPlace.tenure}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>No. of Rooms: {{currPlace.numRooms}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>No. of Storey: {{currPlace.numStorey}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Asking price: {{currPlace.askingPrice}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Price Per Room: {{currPlace.priceRoom}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>S$/GFA: {{currPlace.GFA}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Room Rate: {{currPlace.roomRate}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Net Operating Profit: {{currPlace.netOperatingProfit}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Approved Usage: {{currPlace.approvedUsage}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Location(MRT): {{currPlace.locationMRT}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
+          <ion-item>Location(School): {{currPlace.locationSch}}</ion-item>
+        </ion-list>
       </ion-col>
     </ion-row>
 

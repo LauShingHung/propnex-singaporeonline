@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"primary\">\n      <ion-button fill=\"clear\" color=\"danger\" (click)=\"onCancel()\">\n        <ion-icon name=\"close\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Add Place</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <form [formGroup]=\"addBlockForm\">\n    <ion-grid>\n      <ion-row>\n        <ion-col>\n          <ion-list>\n            <ion-item>\n              <ion-label position=\"floating\">Project Name</ion-label>\n              <ion-input \n                type=\"text\"  \n                formControlName=\"projectName\"\n              ></ion-input>\n            </ion-item>\n        \n            <ion-item>\n              <ion-label position=\"floating\">Postal Code</ion-label>\n              <ion-input \n                type=\"text\"\n                formControlName=\"postalCode\"\n              ></ion-input>\n            </ion-item>\n\n            <ion-row>\n              <ion-col>\n                <ion-button \n                (click)=\"uploadBlockImage()\" \n                expand=\"block\"\n                >Upload Place Image\n                </ion-button>\n              </ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col>\n                <ion-button \n                type=\"submit\" \n                (click)=\"submitAddBlock()\" \n                expand=\"block\"\n                >Submit\n                </ion-button>\n              </ion-col>\n            </ion-row>\n          </ion-list>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </form>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button fill=\"clear\" color=\"danger\" (click)=\"onCancel()\">\r\n        <ion-icon name=\"close\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Add Place</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n  <form [formGroup]=\"addBlockForm\">\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col>\r\n          <ion-list>\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Project Name</ion-label>\r\n              <ion-input \r\n                type=\"text\"  \r\n                formControlName=\"projectName\"\r\n              ></ion-input>\r\n            </ion-item>\r\n        \r\n            <ion-item>\r\n              <ion-label position=\"floating\">Postal Code</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"postalCode\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Land Area</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"landArea\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Gross Floor Area</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"grossFloorArea\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Tenure</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"tenure\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">No. of Rooms</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"numRooms\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">No. of Storey</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"numStorey\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Asking Price</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"askingPrice\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Price Per Room</ion-label>  \r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"priceRoom\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">S$/GFA</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"GFA\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Room Rate</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"roomRate\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Net Operating Profit</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"netOperatingProfit\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Approved Usage</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"approvedUsage\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Location(MRT)</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"locationMRT\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-item>\r\n              <ion-label position=\"floating\">Location(School)</ion-label>\r\n              <ion-input \r\n                type=\"text\"\r\n                formControlName=\"locationSch\"\r\n              ></ion-input>\r\n            </ion-item>\r\n\r\n            <ion-row>\r\n              <ion-col>\r\n                <ion-button \r\n                (click)=\"uploadBlockImage()\" \r\n                expand=\"block\"\r\n                >Upload Place Image\r\n                </ion-button>\r\n              </ion-col>\r\n            </ion-row>\r\n\r\n            <ion-row>\r\n              <ion-col>\r\n                <ion-button \r\n                type=\"submit\" \r\n                (click)=\"submitAddBlock()\" \r\n                expand=\"block\"\r\n                >Submit\r\n                </ion-button>\r\n              </ion-col>\r\n            </ion-row>\r\n          </ion-list>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </form>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n\n    <ion-title>Find Place</ion-title>\n\n    <ion-button \n    *ngIf=\"currUser.userType === 'admin'\"\n    size=\"small\" \n    color=\"tertiary\"\n    slot=\"end\" \n    (click)=\"onAddBlock()\"\n  >\n    <ion-icon slot=\"icon-only\" name=\"add-outline\"></ion-icon>\n</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <ion-searchbar \n        color=\"light\"\n        placeholder=\"Enter postal code\"\n        [debounce]=\"500\"\n        (ionChange)=\"handleChange($event)\"\n        ></ion-searchbar>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-list>\n          <ion-item *ngIf=\"result\">\n            <ion-label *ngIf=\"result.name === undefined\">\n              <h2>No results found</h2>\n            </ion-label>\n\n            <ion-thumbnail *ngIf=\"result.name !== undefined\" slot=\"start\">\n              <ion-img *ngIf=\"result.imageUrl\" [src]=\"result.imageUrl\"></ion-img>\n              <ion-img *ngIf=\"!result.imageUrl\" src=\"assets/placeholders/property.jpeg\"></ion-img>\n            </ion-thumbnail>\n            \n            <ion-label \n              *ngIf=\"result.name !== undefined\"\n              (click) = \"onSelectPlace()\"\n            >\n              <h2>{{ result.name }}</h2>\n              <p>Singapore {{ result.postal}}</p>\n            </ion-label>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-list *ngIf=\"result\">\n          <ion-item class=\"custom-color\">\n            Similar Places:\n          </ion-item>\n          \n          <div *ngIf=\"findRecs.length == 0\">\n            <ion-item>\n              Currently Unavailable\n            </ion-item>\n          </div>\n          \n          <div *ngIf=\"findRecs.length != 0\">\n            <ion-item *ngFor=\"let recPlace of findRecs\">\n              {{recPlace}}\n            </ion-item>\n          </div>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n\r\n    <ion-title>Home</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-card>\r\n          <ion-card-header class=\"ion-text-center\">\r\n            <ion-card-subtitle class=\"ion-text-left ion-margin-bottom\">Welcome Back,</ion-card-subtitle>\r\n            <ion-card-title>{{currUser.name}}</ion-card-title>\r\n            <ion-icon name=\"person-circle\"></ion-icon>\r\n          </ion-card-header>\r\n\r\n          <ion-card-content class=\"ion-text-center\">\r\n            <ion-button fill=\"clear\" color=\"tertiary\" (click)=\"onEditProfile()\">Edit Profile</ion-button>\r\n          </ion-card-content>\r\n        </ion-card>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-searchbar \r\n        color=\"light\"\r\n        placeholder=\"Enter postal code\"\r\n        [debounce]=\"500\"\r\n        (ionChange)=\"handleChange($event)\"\r\n        ></ion-searchbar>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-button \r\n          size=\"small\" \r\n          color=\"tertiary\"\r\n          (click)=\"onAddBlock()\"\r\n          class=\"ion-margin-top\"\r\n        >\r\n          <ion-icon slot=\"icon-only\" name=\"add-outline\"></ion-icon>\r\n        </ion-button>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-list>\r\n          <ion-item *ngIf=\"result\">\r\n            <ion-label *ngIf=\"result.name === undefined\">\r\n              <h2>No results found</h2>\r\n            </ion-label>\r\n\r\n            <ion-thumbnail *ngIf=\"result.name !== undefined\" slot=\"start\">\r\n              <ion-img *ngIf=\"result.imageUrl\" [src]=\"result.imageUrl\"></ion-img>\r\n              <ion-img *ngIf=\"!result.imageUrl\" src=\"assets/placeholders/property.jpeg\"></ion-img>\r\n            </ion-thumbnail>\r\n            \r\n            <ion-label \r\n              *ngIf=\"result.name !== undefined\"\r\n              (click) = \"onSelectPlace()\"\r\n            >\r\n              <h2>{{ result.name }}</h2>\r\n              <p>Singapore {{ result.postal}}</p>\r\n            </ion-label>\r\n          </ion-item>\r\n        </ion-list>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n    <ion-row>\r\n      <ion-col>\r\n        <ion-list *ngIf=\"result\">\r\n          <ion-item class=\"custom-color\">\r\n            Similar Places:\r\n          </ion-item>\r\n          \r\n          <div *ngIf=\"findRecs.length == 0\">\r\n            <ion-item>\r\n              Currently Unavailable\r\n            </ion-item>\r\n          </div>\r\n          \r\n          <div *ngIf=\"findRecs.length != 0\">\r\n            <ion-item *ngFor=\"let recPlace of findRecs\">\r\n              {{recPlace}}\r\n            </ion-item>\r\n          </div>\r\n        </ion-list>\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -82,20 +82,84 @@ var AddBlockComponent = /** @class */ (function () {
             postalCode: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
                 updateOn: 'blur',
             }),
+            landArea: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            grossFloorArea: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            tenure: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            numRooms: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            numStorey: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            askingPrice: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            priceRoom: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            GFA: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            roomRate: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            netOperatingProfit: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            approvedUsage: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            locationMRT: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            }),
+            locationSch: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
+                updateOn: 'blur',
+            })
         });
     };
     // cancel add place
     AddBlockComponent.prototype.onCancel = function () {
         this.modalCtrl.dismiss(null, 'cancel');
     };
-    // submit add block form
+    // // submit add block form
+    // submitAddBlock() {
+    //   if (!this.addBlockForm.valid) {
+    //     return;
+    //   }
+    //   const projectName = this.addBlockForm.value.projectName;
+    //   const postalCode = this.addBlockForm.value.postalCode;
+    //   this.placeService.addBlock(projectName, postalCode).subscribe(() => {
+    //   });
+    //   this.addBlockForm.reset();
+    //   this.modalCtrl.dismiss();
+    // }
+    // submit add hotel form
     AddBlockComponent.prototype.submitAddBlock = function () {
         if (!this.addBlockForm.valid) {
             return;
         }
         var projectName = this.addBlockForm.value.projectName;
         var postalCode = this.addBlockForm.value.postalCode;
-        this.placeService.addBlock(projectName, postalCode).subscribe(function () {
+        var landArea = this.addBlockForm.value.landArea;
+        var grossFloorArea = this.addBlockForm.value.grossFloorArea;
+        var tenure = this.addBlockForm.value.tenure;
+        var numRooms = this.addBlockForm.value.numRooms;
+        var numStorey = this.addBlockForm.value.numStorey;
+        var askingPrice = this.addBlockForm.value.askingPrice;
+        var priceRoom = this.addBlockForm.value.priceRoom;
+        var GFA = this.addBlockForm.value.GFA;
+        var roomRate = this.addBlockForm.value.roomRate;
+        var netOperatingProfit = this.addBlockForm.value.netOperatingProfit;
+        var approvedUsage = this.addBlockForm.value.approvedUsage;
+        var locationMRT = this.addBlockForm.value.locationMRT;
+        var locationSch = this.addBlockForm.value.locationSch;
+        this.placeService.addBlock(projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT, locationSch).subscribe(function () {
         });
         this.addBlockForm.reset();
         this.modalCtrl.dismiss();
@@ -233,7 +297,7 @@ var UnitsPageModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".custom-color {\n  --color: #7f7f7f;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvdW5pdHMvQzpcXFVzZXJzXFx1c2VyXFxEZXNrdG9wXFxqb2xlbmV0YW4wNy5naXRodWIuaW8tbWFpblxccHJvcG5leC1pbnZlc3RtZW50LXN1aXRlL3NyY1xcYXBwXFxwYWdlc1xcdW5pdHNcXHVuaXRzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvcGFnZXMvdW5pdHMvdW5pdHMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3VuaXRzL3VuaXRzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jdXN0b20tY29sb3Ige1xuICAgIC0tY29sb3I6ICM3ZjdmN2Y7IFxufSIsIi5jdXN0b20tY29sb3Ige1xuICAtLWNvbG9yOiAjN2Y3ZjdmO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".custom-color {\n  --color: #7f7f7f;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvdW5pdHMvQzpcXFVzZXJzXFx1c2VyXFxEb2N1bWVudHNcXEdpdEh1YlxcRllQLVJlY29tbWVuZGVyLVN5c3RlbVxccHJvcG5leC1pbnZlc3RtZW50LXN1aXRlL3NyY1xcYXBwXFxwYWdlc1xcdW5pdHNcXHVuaXRzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvcGFnZXMvdW5pdHMvdW5pdHMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3VuaXRzL3VuaXRzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jdXN0b20tY29sb3Ige1xyXG4gICAgLS1jb2xvcjogIzdmN2Y3ZjsgXHJcbn0iLCIuY3VzdG9tLWNvbG9yIHtcbiAgLS1jb2xvcjogIzdmN2Y3Zjtcbn0iXX0= */");
 
 /***/ }),
 
@@ -253,6 +317,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _add_block_add_block_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./add-block/add-block.component */ "./src/app/pages/units/add-block/add-block.component.ts");
 /* harmony import */ var _services_place_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/place.service */ "./src/app/services/place.service.ts");
+/* harmony import */ var _home_main_edit_profile_edit_profile_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../home/main/edit-profile/edit-profile.component */ "./src/app/pages/home/main/edit-profile/edit-profile.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -265,6 +330,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var __importDefault = (undefined && undefined.__importDefault) || function (mod) {
   return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+
 
 
 
@@ -313,6 +379,21 @@ var UnitsPage = /** @class */ (function () {
     // navigate to place details page
     UnitsPage.prototype.onSelectPlace = function () {
         this.router.navigate(['/', 'units', this.result.postal]);
+    };
+    // navigate to edit user profile form
+    UnitsPage.prototype.onEditProfile = function () {
+        var _this = this;
+        this.modalCtrl
+            .create({ component: _home_main_edit_profile_edit_profile_component__WEBPACK_IMPORTED_MODULE_6__["EditProfileComponent"] })
+            .then(function (modalEl) {
+            modalEl.present();
+            return modalEl.onDidDismiss();
+        })
+            .then(function (resultData) {
+            if (resultData.role === 'confirm') {
+                _this.ionViewWillEnter();
+            }
+        });
     };
     // add new place
     UnitsPage.prototype.onAddBlock = function () {

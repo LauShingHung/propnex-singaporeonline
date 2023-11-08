@@ -1,30 +1,43 @@
 export class fbUser {
-    constructor(
-      public email: string,
-      public favourites: fbPostal[],
-      public generalRec: fbPostal[],
-      public name: string,
-      public password: string,
-      public personalRec: string[],
-      public userType: string
-    ) {}
-  }
+  constructor(
+    public email: string,
+    public favourites: fbPostal[],
+    public generalRec: fbPostal[],
+    public name: string,
+    public password: string,
+    public personalRec: string[],
+    public userType: string
+  ) {}
+}
 
-  export class fbPostal {
-    constructor(
-      public name: string,
-      public postal: string,
-      public imageUrl?: string,
-      public units?: fbUnit[]
-    ) {}
-  }
-
+export class fbPostal {
+  constructor(
+    public name: string,
+    public postal: string,
+    public landArea: Float32Array,
+    public grossFloorArea: Float32Array,
+    public tenure: string,
+    public numRooms: Int16Array,
+    public numStorey: Int16Array,
+    public askingPrice: Float32Array,
+    public priceRoom: Float32Array,
+    public GFA: string,
+    public roomRate: Float32Array,
+    public netOperatingProfit: Float32Array,
+    public approvedUsage: string,
+    public locationMRT: string,
+    public locationSch: string,
+    public imageUrl?: string,
+    public units?: fbUnit[]
+  ) {}
+}
   export class fbUnit {
     constructor(
       public bedrooms: string,
       public floorplan: string,
       public size: string,
       public unitNumber: string,
+      public UnitFacing: string,
     ) {}
   }
 

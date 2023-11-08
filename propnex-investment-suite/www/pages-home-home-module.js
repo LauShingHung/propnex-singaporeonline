@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n  <ion-tabs>\n    <ion-tab-bar slot=\"bottom\">\n      <ion-tab-button tab=\"favourites\">\n        <ion-label>Favourites</ion-label>\n        <ion-icon name=\"star\"></ion-icon>\n      </ion-tab-button>\n\n      <ion-tab-button tab=\"main\">\n        <ion-label>Home</ion-label>\n        <ion-icon name=\"home\"></ion-icon>\n      </ion-tab-button>\n\n      <ion-tab-button tab=\"recommendations\">\n        <ion-label>Discover</ion-label>\n        <ion-icon name=\"compass\"></ion-icon>\n      </ion-tab-button>\n    </ion-tab-bar>\n  </ion-tabs>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-tabs>\r\n    <ion-tab-bar slot=\"bottom\">\r\n      <ion-tab-button tab=\"favourites\">\r\n        <ion-label>Favourites</ion-label>\r\n        <ion-icon name=\"star\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"main\">\r\n        <ion-label>Home</ion-label>\r\n        <ion-icon name=\"home\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"recommendations\">\r\n        <ion-label>Discover</ion-label>\r\n        <ion-icon name=\"compass\"></ion-icon>\r\n      </ion-tab-button>\r\n    </ion-tab-bar>\r\n  </ion-tabs>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -54,7 +54,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("common"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
                     }
                 ]
             },

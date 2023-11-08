@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: MainPage
+  },
+  {
+    path: ':postalId',
+    loadChildren: () => import('src/app/pages/units/block-detail/block-detail.module').then( m => m.BlockDetailPageModule)
   }
 ];
 

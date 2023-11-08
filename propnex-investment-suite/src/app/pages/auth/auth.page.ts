@@ -61,7 +61,7 @@ export class AuthPage implements OnInit, OnDestroy {
           
           this.authService.currFbUser = this.result;
           this.authService.login();
-          this.router.navigateByUrl('/home/tabs/main');
+          this.router.navigateByUrl('/units');
         } else {
           // incorrect password
           this.authService.currFbUser = this.result;
