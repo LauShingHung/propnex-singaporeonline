@@ -20,6 +20,11 @@ const routes: Routes = [
     path: 'units',
     loadChildren: () => import('./pages/units/units.module').then( m => m.UnitsPageModule),
     canLoad: [AuthGuard] 
+  },
+  {
+    path: 'buyer',
+    loadChildren: () => import('./pages/buyer/buyer.module').then( m => m.BuyerPageModule),
+    canLoad: [AuthGuard] 
   }
 ];
 
