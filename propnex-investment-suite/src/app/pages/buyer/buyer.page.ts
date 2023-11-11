@@ -7,6 +7,20 @@ import { fbPostal, fbRec, fbUser } from '../auth/firebase.model';
 import { AddBlockComponent } from '../units/add-block/add-block.component';
 import { PlaceService } from '../../services/place.service';
 import { EditProfileComponent } from '../home/main/edit-profile/edit-profile.component';
+export const accommodationTypes = [
+    'Residential',
+    "Backpackers' Hotel",
+    'Hotel',
+    "Students' Hotel",
+    'Serviced Apartment',
+    "Workers' Dormitories"
+  ]; //accommodation types
+
+export const locationTypes = [
+    '0',
+    'Woodlands',
+    'Orchard'
+  ];
 
 @Component({
   selector: 'app-buyer',
@@ -19,11 +33,20 @@ export class BuyerPage implements OnInit {
   currUser: fbUser;
   loadedFBPostals: fbPostal[];
   private fbPostalsSub: Subscription;
-  result: fbPostal;
+  result: fbPostal[];
   loadedFBRecs: fbRec[];
+  filteredresult: fbPostal[];
   private fbRecsSub: Subscription;
   recItem: fbRec;
   findRecs: string[];
+  minPrice: number;
+  maxPrice: number;
+  approvedUsage: string;
+  accommodationTypes = accommodationTypes;
+  locationTypes =   locationTypes;
+  selectedAccommodationType: string = ''; //initially no filter
+  selectedLocationMRT: string = ''; //initially no filter
+  filteredFBPostals: fbPostal[]; //hold filtered results
 
 
   constructor(
@@ -56,29 +79,31 @@ export class BuyerPage implements OnInit {
     });
 
   }
-
-  // retrieve place using postal
-  handleChange(event) {
-    const query = event.target.value;
-    this.result  = this.loadedFBPostals.find(p => p.postal === query);
-
-    if (this.result) {
-      this.placeService.currPlace = this.result;
-      this.recItem = this.loadedFBRecs.find(p => p.place === this.placeService.currPlace.name);
-      if (this.recItem) {
-        this.findRecs = [this.recItem.rec1, this.recItem.rec2, this.recItem.rec3];
-      } else {
-        this.findRecs = []
-      }
-      
-    }
-
+ 
+  handleAccommodationTypeChange(selectedType: string) {
+    this.selectedAccommodationType = selectedType;
+    this.filterPostals();
   }
+  
+  handleLocationMRTChange(selectedType: string) {
+    this.selectedLocationMRT = selectedType;
+    this.filterPostals();
+  }
+  
+  filterPostals() {
+    this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
+      (!this.selectedAccommodationType || postal.approvedUsage === this.selectedAccommodationType) &&
+      (!this.selectedLocationMRT ||  postal.locationMRT === this.selectedLocationMRT)
+      // Add more conditions as needed
+    );
+  }
+  
 
   // navigate to place details page
-  onSelectPlace() {
-    this.router.navigate(['/', 'units', this.result.postal]);
+  onSelectPlace(postal: fbPostal) {
+    this.router.navigate(['/', 'units', postal.postal]);
   }
+
 
   // navigate to edit user profile form
   onEditProfile() {

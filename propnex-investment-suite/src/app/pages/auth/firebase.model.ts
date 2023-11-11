@@ -19,7 +19,7 @@ export class fbPostal {
     public tenure: string,
     public numRooms: Int16Array,
     public numStorey: Int16Array,
-    public askingPrice: Float32Array,
+    public askingPrice: number,
     public priceRoom: Float32Array,
     public GFA: string,
     public roomRate: Float32Array,
