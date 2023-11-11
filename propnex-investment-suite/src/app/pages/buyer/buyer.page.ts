@@ -89,11 +89,16 @@ export class BuyerPage implements OnInit {
     this.selectedLocationMRT = selectedType;
     this.filterPostals();
   }
+
+  handlePriceChange() {
+    this.filterPostals();
+  }
   
   filterPostals() {
     this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
       (!this.selectedAccommodationType || postal.approvedUsage === this.selectedAccommodationType) &&
-      (!this.selectedLocationMRT ||  postal.locationMRT === this.selectedLocationMRT)
+      (!this.selectedLocationMRT ||  postal.locationMRT === this.selectedLocationMRT)&& (!this.minPrice || postal.askingPrice >= this.minPrice) &&
+      (!this.maxPrice || postal.askingPrice <= this.maxPrice)
       // Add more conditions as needed
     );
   }

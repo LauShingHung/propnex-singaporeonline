@@ -33,6 +33,22 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Min Price</ion-label>
+            <ion-input type="number" [(ngModel)]="minPrice" (ionChange)="handlePriceChange()"></ion-input>
+          </ion-item>
+        </ion-col>
+      
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Max Price</ion-label>
+            <ion-input type="number" [(ngModel)]="maxPrice" (ionChange)="handlePriceChange()"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
   
       <!-- New row for displaying filtered results -->
       <ion-row>
