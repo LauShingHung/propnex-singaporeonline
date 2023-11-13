@@ -247,11 +247,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-<<<<<<< Updated upstream
 /* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu side=\"start\">\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>\n          Menu\n        </ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list>\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n            <ion-label>Home</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/units\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label>Find Individual Units</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/stats\">\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\n            <ion-label>View Statistical Insights</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n            <ion-label>Logout</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet main></ion-router-outlet>\n</ion-app>\n");
-=======
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu side=\"start\">\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>\n          Menu\n        </ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list>\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n            <ion-label>Home</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/units\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label> Seller Interface</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/buyer\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label> Buyer Interface</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/stats\">\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\n            <ion-label>View Statistical Insights</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n            <ion-label>Logout</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet main></ion-router-outlet>\n</ion-app>\n");
->>>>>>> Stashed changes
 
 /***/ }),
 
@@ -315,16 +311,7 @@ var routes = [
     },
     {
         path: 'units',
-<<<<<<< Updated upstream
         loadChildren: function () { return Promise.all(/*! import() | pages-units-units-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("pages-units-units-module")]).then(__webpack_require__.bind(null, /*! ./pages/units/units.module */ "./src/app/pages/units/units.module.ts")).then(function (m) { return m.UnitsPageModule; }); },
-=======
-        loadChildren: function () { return Promise.all(/*! import() | pages-units-units-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("pages-units-units-module")]).then(__webpack_require__.bind(null, /*! ./pages/units/units.module */ "./src/app/pages/units/units.module.ts")).then(function (m) { return m.UnitsPageModule; }); },
-        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
-    },
-    {
-        path: 'buyer',
-        loadChildren: function () { return Promise.all(/*! import() | pages-buyer-buyer-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("pages-buyer-buyer-module")]).then(__webpack_require__.bind(null, /*! ./pages/buyer/buyer.module */ "./src/app/pages/buyer/buyer.module.ts")).then(function (m) { return m.BuyerPageModule; }); },
->>>>>>> Stashed changes
         canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
     }
 ];
@@ -560,29 +547,9 @@ var fbUser = /** @class */ (function () {
 }());
 
 var fbPostal = /** @class */ (function () {
-<<<<<<< Updated upstream
     function fbPostal(name, postal, imageUrl, units) {
         this.name = name;
         this.postal = postal;
-=======
-    function fbPostal(name, postal, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT, locationSch, district, imageUrl, units) {
-        this.name = name;
-        this.postal = postal;
-        this.landArea = landArea;
-        this.grossFloorArea = grossFloorArea;
-        this.tenure = tenure;
-        this.numRooms = numRooms;
-        this.numStorey = numStorey;
-        this.askingPrice = askingPrice;
-        this.priceRoom = priceRoom;
-        this.GFA = GFA;
-        this.roomRate = roomRate;
-        this.netOperatingProfit = netOperatingProfit;
-        this.approvedUsage = approvedUsage;
-        this.locationMRT = locationMRT;
-        this.locationSch = locationSch;
-        this.district = district;
->>>>>>> Stashed changes
         this.imageUrl = imageUrl;
         this.units = units;
     }
@@ -858,11 +825,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< Updated upstream
 module.exports = __webpack_require__(/*! C:\Users\user\Desktop\jolenetan07.github.io-main\propnex-investment-suite\src\main.ts */"./src/main.ts");
-=======
-module.exports = __webpack_require__(/*! /Users/pangchenghao/Documents/GitHub/FYP-Recommender-System/propnex-investment-suite/src/main.ts */"./src/main.ts");
->>>>>>> Stashed changes
 
 
 /***/ })

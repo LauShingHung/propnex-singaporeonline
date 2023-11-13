@@ -45,7 +45,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | favourites-favourites-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("favourites-favourites-module")]).then(__webpack_require__.bind(null, /*! ./favourites/favourites.module */ "./src/app/pages/home/favourites/favourites.module.ts")).then(function (m) { return m.FavouritesPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | favourites-favourites-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("favourites-favourites-module")]).then(__webpack_require__.bind(null, /*! ./favourites/favourites.module */ "./src/app/pages/home/favourites/favourites.module.ts")).then(function (m) { return m.FavouritesPageModule; }); }
                     },
                 ]
             },
@@ -54,11 +54,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-<<<<<<< Updated upstream
                         loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
-=======
-                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
->>>>>>> Stashed changes
                     }
                 ]
             },
@@ -67,7 +63,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | recommendations-recommendations-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("recommendations-recommendations-module")]).then(__webpack_require__.bind(null, /*! ./recommendations/recommendations.module */ "./src/app/pages/home/recommendations/recommendations.module.ts")).then(function (m) { return m.RecommendationsPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | recommendations-recommendations-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("recommendations-recommendations-module")]).then(__webpack_require__.bind(null, /*! ./recommendations/recommendations.module */ "./src/app/pages/home/recommendations/recommendations.module.ts")).then(function (m) { return m.RecommendationsPageModule; }); }
                     },
                 ]
             },
