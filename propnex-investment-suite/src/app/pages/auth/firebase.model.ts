@@ -27,6 +27,7 @@ export class fbPostal {
     public approvedUsage: string,
     public locationMRT: string,
     public locationSch: string,
+    public district: string,
     public imageUrl?: string,
     public units?: fbUnit[]
   ) {}

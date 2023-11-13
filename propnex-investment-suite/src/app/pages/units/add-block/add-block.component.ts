@@ -66,6 +66,9 @@ export class AddBlockComponent implements OnInit {
       }),
       locationSch: new FormControl(null, {
         updateOn: 'blur',
+      }),
+      district: new FormControl(null, {
+        updateOn: 'blur',
       })
     });
   }
@@ -110,8 +113,9 @@ export class AddBlockComponent implements OnInit {
     const approvedUsage = this.addBlockForm.value.approvedUsage;
     const locationMRT = this.addBlockForm.value.locationMRT;
     const locationSch = this.addBlockForm.value.locationSch;
+    const district = this.addBlockForm.value.district;
     
-    this.placeService.addBlock(projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT,locationSch).subscribe(() => {
+    this.placeService.addBlock(projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT,locationSch, district).subscribe(() => {
 
     });
     this.addBlockForm.reset();

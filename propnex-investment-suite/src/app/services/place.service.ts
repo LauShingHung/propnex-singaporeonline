@@ -74,6 +74,7 @@ export class PlaceService {
                   resData[key].approvedUsage,
                   resData[key].locationMRT,
                   resData[key].locationSch,
+                  resData[key].district,
                   resData[key].imageUrl,
                   resData[key].units
                 )
@@ -118,7 +119,7 @@ export class PlaceService {
   }
 
   // add new place
-  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: Int16Array, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, LocationMRT: string, LocationSch: string) {
+  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: Int16Array, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, LocationMRT: string, LocationSch: string, district: string) {
     const newBlock = new fbPostal(
       name,
       postal,
@@ -134,7 +135,8 @@ export class PlaceService {
       netOperatingProfit,
       approvedUsage,
       LocationMRT,
-      LocationSch
+      LocationSch,
+      district
     );
     return this.http
       .post('https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
@@ -238,6 +240,7 @@ export class PlaceService {
           oldPlace.approvedUsage,
           oldPlace.locationMRT,
           oldPlace.locationSch,
+          oldPlace.district,
           oldPlace.imageUrl,
           newUnitsArr
         );
@@ -289,6 +292,7 @@ export class PlaceService {
           oldPlace.approvedUsage,
           oldPlace.locationMRT,
           oldPlace.locationSch,
+          oldPlace.district,
           oldPlace.imageUrl,
           newFavArr
         );
@@ -354,6 +358,7 @@ export class PlaceService {
           oldPlace.approvedUsage,
           oldPlace.locationMRT,
           oldPlace.locationSch,
+          oldPlace.district,
           oldPlace.imageUrl,
           oldPlace.units
         );
