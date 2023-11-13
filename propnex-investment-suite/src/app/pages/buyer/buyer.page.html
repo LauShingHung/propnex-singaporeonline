@@ -7,40 +7,63 @@
       <ion-title>Buyer Interface</ion-title>
     </ion-toolbar>
   </ion-header>
-  
+
   <ion-content>
     <ion-grid>
-  
+    <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Filter by Accommodation Type</ion-label>
+            <ion-select placeholder="Select Type" [(ngModel)]="selectedAccommodationType" (ionChange)="handleAccommodationTypeChange($event.detail.value)">
+              <ion-select-option value="">All Types</ion-select-option>
+              <ion-select-option *ngFor="let type of accommodationTypes" [value]="type">{{ type }}</ion-select-option>
+            </ion-select>            
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
       <ion-row>
-        <ion-col>
-          <ion-searchbar 
-          color="light"
-          placeholder="Enter postal code"
-          [debounce]="500"
-          (ionChange)="handleChange($event)"
-          ></ion-searchbar>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Filter by District</ion-label>
+            <ion-select placeholder="Select Type" [(ngModel)]="selectedLocationMRT" (ionChange)="handleLocationMRTChange($event.detail.value)">
+              <ion-select-option value="">All Types</ion-select-option>
+              <ion-select-option *ngFor="let type of locationTypes" [value]="type">{{ type }}</ion-select-option>
+            </ion-select>            
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Min Budget</ion-label>
+            <ion-input type="number" [(ngModel)]="minPrice" (ionChange)="handlePriceChange()"></ion-input>
+          </ion-item>
+        </ion-col>
+      
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Max Budget</ion-label>
+            <ion-input type="number" [(ngModel)]="maxPrice" (ionChange)="handlePriceChange()"></ion-input>
+          </ion-item>
         </ion-col>
       </ion-row>
   
+      <!-- New row for displaying filtered results -->
       <ion-row>
         <ion-col>
           <ion-list>
-            <ion-item *ngIf="result">
-              <ion-label *ngIf="result.name === undefined">
-                <h2>No results found</h2>
-              </ion-label>
-  
-              <ion-thumbnail *ngIf="result.name !== undefined" slot="start">
-                <ion-img *ngIf="result.imageUrl" [src]="result.imageUrl"></ion-img>
-                <ion-img *ngIf="!result.imageUrl" src="assets/placeholders/property.jpeg"></ion-img>
+            <!-- Iterate over filteredFBPostals to display each postal -->
+            <ion-item *ngFor="let postal of filteredFBPostals" [routerLink]="['/', 'units', postal.postal]">
+              <ion-thumbnail slot="start">
+                <ion-img [src]="postal.imageUrl || 'assets/placeholders/property.jpeg'"></ion-img>
               </ion-thumbnail>
-              
-              <ion-label 
-                *ngIf="result.name !== undefined"
-                (click) = "onSelectPlace()"
-              >
-                <h2>{{ result.name }}</h2>
-                <p>Singapore {{ result.postal}}</p>
+              <ion-label *ngIf="postal.name !== undefined">
+                <h2>{{ postal.name }}</h2>
+                <p>Singapore {{ postal.postal }}</p>
+                <p>Asking Price: {{ postal.askingPrice }}</p>
+                <p>District: {{ postal.locationMRT }}</p> <!-- Use the actual properties of your fbPostal object -->
               </ion-label>
             </ion-item>
           </ion-list>

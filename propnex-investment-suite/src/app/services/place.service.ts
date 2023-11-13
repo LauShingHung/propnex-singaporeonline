@@ -118,7 +118,7 @@ export class PlaceService {
   }
 
   // add new place
-  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: Int16Array, numStorey: Int16Array, askingPrice: Float32Array, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, LocationMRT: string, LocationSch: string) {
+  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: Int16Array, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, LocationMRT: string, LocationSch: string) {
     const newBlock = new fbPostal(
       name,
       postal,
