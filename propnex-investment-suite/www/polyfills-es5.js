@@ -14356,9 +14356,15 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< Updated upstream
 __webpack_require__(/*! C:\Users\user\Desktop\jolenetan07.github.io-main\propnex-investment-suite\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\es5-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js");
 __webpack_require__(/*! C:\Users\user\Desktop\jolenetan07.github.io-main\propnex-investment-suite\node_modules\@angular-devkit\build-angular\src\angular-cli-files\models\es5-jit-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-jit-polyfills.js");
 module.exports = __webpack_require__(/*! C:\Users\user\Desktop\jolenetan07.github.io-main\propnex-investment-suite\src\polyfills.ts */"./src/polyfills.ts");
+=======
+__webpack_require__(/*! /Users/pangchenghao/Documents/GitHub/FYP-Recommender-System/propnex-investment-suite/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-polyfills.js");
+__webpack_require__(/*! /Users/pangchenghao/Documents/GitHub/FYP-Recommender-System/propnex-investment-suite/node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-jit-polyfills.js */"./node_modules/@angular-devkit/build-angular/src/angular-cli-files/models/es5-jit-polyfills.js");
+module.exports = __webpack_require__(/*! /Users/pangchenghao/Documents/GitHub/FYP-Recommender-System/propnex-investment-suite/src/polyfills.ts */"./src/polyfills.ts");
+>>>>>>> Stashed changes
 
 
 /***/ })

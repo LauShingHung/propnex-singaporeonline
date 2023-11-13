@@ -1,5 +1,6 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["pages-units-units-module"],{
 
+<<<<<<< Updated upstream
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/units/add-block/add-block.component.html":
 /*!******************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/units/add-block/add-block.component.html ***!
@@ -13,6 +14,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+=======
+>>>>>>> Stashed changes
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/units/units.page.html":
 /*!***********************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/pages/units/units.page.html ***!
@@ -22,6 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< Updated upstream
 /* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n\n    <ion-title>Find Place</ion-title>\n\n    <ion-button \n    *ngIf=\"currUser.userType === 'admin'\"\n    size=\"small\" \n    color=\"tertiary\"\n    slot=\"end\" \n    (click)=\"onAddBlock()\"\n  >\n    <ion-icon slot=\"icon-only\" name=\"add-outline\"></ion-icon>\n</ion-button>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col>\n        <ion-searchbar \n        color=\"light\"\n        placeholder=\"Enter postal code\"\n        [debounce]=\"500\"\n        (ionChange)=\"handleChange($event)\"\n        ></ion-searchbar>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-list>\n          <ion-item *ngIf=\"result\">\n            <ion-label *ngIf=\"result.name === undefined\">\n              <h2>No results found</h2>\n            </ion-label>\n\n            <ion-thumbnail *ngIf=\"result.name !== undefined\" slot=\"start\">\n              <ion-img *ngIf=\"result.imageUrl\" [src]=\"result.imageUrl\"></ion-img>\n              <ion-img *ngIf=\"!result.imageUrl\" src=\"assets/placeholders/property.jpeg\"></ion-img>\n            </ion-thumbnail>\n            \n            <ion-label \n              *ngIf=\"result.name !== undefined\"\n              (click) = \"onSelectPlace()\"\n            >\n              <h2>{{ result.name }}</h2>\n              <p>Singapore {{ result.postal}}</p>\n            </ion-label>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-list *ngIf=\"result\">\n          <ion-item class=\"custom-color\">\n            Similar Places:\n          </ion-item>\n          \n          <div *ngIf=\"findRecs.length == 0\">\n            <ion-item>\n              Currently Unavailable\n            </ion-item>\n          </div>\n          \n          <div *ngIf=\"findRecs.length != 0\">\n            <ion-item *ngFor=\"let recPlace of findRecs\">\n              {{recPlace}}\n            </ion-item>\n          </div>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n");
 
 /***/ }),
@@ -121,6 +125,9 @@ var AddBlockComponent = /** @class */ (function () {
 }());
 
 
+=======
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n\n    <ion-title>Seller Interface</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n\n    <ion-row>\n      <ion-col>\n        <ion-searchbar \n        color=\"light\"\n        placeholder=\"Enter postal code\"\n        [debounce]=\"500\"\n        (ionChange)=\"handleChange($event)\"\n        ></ion-searchbar>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-button \n          size=\"small\" \n          color=\"tertiary\"\n          (click)=\"onAddBlock()\"\n          class=\"ion-margin-top\"\n        >\n          <ion-icon slot=\"icon-only\" name=\"add-outline\"></ion-icon>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-list>\n          <ion-item *ngIf=\"result\">\n            <ion-label *ngIf=\"result.name === undefined\">\n              <h2>No results found</h2>\n            </ion-label>\n\n            <ion-thumbnail *ngIf=\"result.name !== undefined\" slot=\"start\">\n              <ion-img *ngIf=\"result.imageUrl\" [src]=\"result.imageUrl\"></ion-img>\n              <ion-img *ngIf=\"!result.imageUrl\" src=\"assets/placeholders/property.jpeg\"></ion-img>\n            </ion-thumbnail>\n            \n            <ion-label \n              *ngIf=\"result.name !== undefined\"\n              (click) = \"onSelectPlace()\"\n            >\n              <h2>{{ result.name }}</h2>\n              <p>Singapore {{ result.postal}}</p>\n            </ion-label>\n          </ion-item>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n\n    <ion-row>\n      <ion-col>\n        <ion-list *ngIf=\"result\">\n          <ion-item class=\"custom-color\">\n            Similar Places:\n          </ion-item>\n          \n          <div *ngIf=\"findRecs.length == 0\">\n            <ion-item>\n              Currently Unavailable\n            </ion-item>\n          </div>\n          \n          <div *ngIf=\"findRecs.length != 0\">\n            <ion-item *ngFor=\"let recPlace of findRecs\">\n              {{recPlace}}\n            </ion-item>\n          </div>\n        </ion-list>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n</ion-content>\n");
+>>>>>>> Stashed changes
 
 /***/ }),
 
@@ -233,7 +240,11 @@ var UnitsPageModule = /** @class */ (function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+<<<<<<< Updated upstream
 /* harmony default export */ __webpack_exports__["default"] = (".custom-color {\n  --color: #7f7f7f;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZXMvdW5pdHMvQzpcXFVzZXJzXFx1c2VyXFxEZXNrdG9wXFxqb2xlbmV0YW4wNy5naXRodWIuaW8tbWFpblxccHJvcG5leC1pbnZlc3RtZW50LXN1aXRlL3NyY1xcYXBwXFxwYWdlc1xcdW5pdHNcXHVuaXRzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvcGFnZXMvdW5pdHMvdW5pdHMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3VuaXRzL3VuaXRzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jdXN0b20tY29sb3Ige1xuICAgIC0tY29sb3I6ICM3ZjdmN2Y7IFxufSIsIi5jdXN0b20tY29sb3Ige1xuICAtLWNvbG9yOiAjN2Y3ZjdmO1xufSJdfQ== */");
+=======
+/* harmony default export */ __webpack_exports__["default"] = (".custom-color {\n  --color: #7f7f7f;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9wYW5nY2hlbmdoYW8vRG9jdW1lbnRzL0dpdEh1Yi9GWVAtUmVjb21tZW5kZXItU3lzdGVtL3Byb3BuZXgtaW52ZXN0bWVudC1zdWl0ZS9zcmMvYXBwL3BhZ2VzL3VuaXRzL3VuaXRzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvcGFnZXMvdW5pdHMvdW5pdHMucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksZ0JBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL3VuaXRzL3VuaXRzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jdXN0b20tY29sb3Ige1xuICAgIC0tY29sb3I6ICM3ZjdmN2Y7IFxufSIsIi5jdXN0b20tY29sb3Ige1xuICAtLWNvbG9yOiAjN2Y3ZjdmO1xufSJdfQ== */");
+>>>>>>> Stashed changes
 
 /***/ }),
 

@@ -60,7 +60,25 @@ export class PlaceService {
               postals.push(
                 new fbPostal(
                   resData[key].name, 
+<<<<<<< Updated upstream
                   resData[key].postal, 
+=======
+                  resData[key].postal,
+                  resData[key].landArea,
+                  resData[key].grossFloorArea,
+                  resData[key].tenure,
+                  resData[key].numRooms,
+                  resData[key].numStorey,
+                  resData[key].askingPrice,
+                  resData[key].priceRoom,
+                  resData[key].GFA,
+                  resData[key].roomRate,
+                  resData[key].netOperatingProfit,
+                  resData[key].approvedUsage,
+                  resData[key].locationMRT,
+                  resData[key].locationSch,
+                  resData[key].district,
+>>>>>>> Stashed changes
                   resData[key].imageUrl,
                   resData[key].units
                 )
@@ -105,11 +123,32 @@ export class PlaceService {
   }
 
   // add new place
+<<<<<<< Updated upstream
   addBlock(name: string, postal: string) {
     const newBlock = new fbPostal(
       name,
       postal,
       `assets/placeholders/property.jpeg`
+=======
+  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: Int16Array, numStorey: Int16Array, askingPrice: Float32Array, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string,district: string, LocationMRT: string, LocationSch: string) {
+    const newBlock = new fbPostal(
+      name,
+      postal,
+      landArea,
+      grossFloorArea,
+      tenure,
+      numRooms,
+      numStorey,
+      askingPrice,
+      priceRoom,
+      GFA,
+      roomRate,
+      netOperatingProfit,
+      approvedUsage,
+      district,
+      LocationMRT,
+      LocationSch
+>>>>>>> Stashed changes
     );
     return this.http
       .post('http://localhost:8100/assets/postalsAndUnits.json',
@@ -144,6 +183,23 @@ export class PlaceService {
         updatedUsers[updatedUserIndex] = new fbPostal(
           newName,
           oldPlace.postal,
+<<<<<<< Updated upstream
+=======
+          oldPlace.landArea,
+          oldPlace.grossFloorArea,
+          oldPlace.tenure,
+          oldPlace.numRooms,
+          oldPlace.numStorey,
+          oldPlace.askingPrice,
+          oldPlace.priceRoom,
+          oldPlace.GFA,
+          oldPlace.roomRate,
+          oldPlace.netOperatingProfit,
+          oldPlace.approvedUsage,
+          oldPlace.district,
+          oldPlace.locationMRT,
+          oldPlace.locationSch,
+>>>>>>> Stashed changes
           oldPlace.imageUrl
         );
         this.currPlace = updatedUsers[updatedUserIndex];
@@ -186,6 +242,23 @@ export class PlaceService {
         updatedPlaces[updatedPlaceIndex] = new fbPostal(
           oldPlace.name,
           oldPlace.postal,
+<<<<<<< Updated upstream
+=======
+          oldPlace.landArea,
+          oldPlace.grossFloorArea,
+          oldPlace.tenure,
+          oldPlace.numRooms,
+          oldPlace.numStorey,
+          oldPlace.askingPrice,
+          oldPlace.priceRoom,
+          oldPlace.GFA,
+          oldPlace.roomRate,
+          oldPlace.netOperatingProfit,
+          oldPlace.approvedUsage,
+          oldPlace.district,
+          oldPlace.locationMRT,
+          oldPlace.locationSch,
+>>>>>>> Stashed changes
           oldPlace.imageUrl,
           newUnitsArr
         );
@@ -224,6 +297,23 @@ export class PlaceService {
         updatedUsers[updatedUserIndex] = new fbPostal(
           oldPlace.name,
           oldPlace.postal,
+<<<<<<< Updated upstream
+=======
+          oldPlace.landArea,
+          oldPlace.grossFloorArea,
+          oldPlace.tenure,
+          oldPlace.numRooms,
+          oldPlace.numStorey,
+          oldPlace.askingPrice,
+          oldPlace.priceRoom,
+          oldPlace.GFA,
+          oldPlace.roomRate,
+          oldPlace.netOperatingProfit,
+          oldPlace.approvedUsage,
+          oldPlace.district,
+          oldPlace.locationMRT,
+          oldPlace.locationSch,
+>>>>>>> Stashed changes
           oldPlace.imageUrl,
           newFavArr
         );
@@ -276,6 +366,23 @@ export class PlaceService {
         updatedUsers[updatedUserIndex] = new fbPostal(
           oldPlace.name,
           oldPlace.postal,
+<<<<<<< Updated upstream
+=======
+          oldPlace.landArea,
+          oldPlace.grossFloorArea,
+          oldPlace.tenure,
+          oldPlace.numRooms,
+          oldPlace.numStorey,
+          oldPlace.askingPrice,
+          oldPlace.priceRoom,
+          oldPlace.GFA,
+          oldPlace.roomRate,
+          oldPlace.netOperatingProfit,
+          oldPlace.approvedUsage,
+          oldPlace.locationMRT,
+          oldPlace.locationSch,
+          oldPlace.district,
+>>>>>>> Stashed changes
           oldPlace.imageUrl,
           oldPlace.units
         );
