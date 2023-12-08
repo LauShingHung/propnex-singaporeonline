@@ -49,9 +49,19 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Filter</ion-label>
+            <ion-toggle type="string" [(ngModel)]="Filter" (ionChange)="handleFilterYes()"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      
   
       <!-- New row for displaying filtered results -->
-      <ion-row>
+      <ion-row *ngIf="allFiltersFilled()">
         <ion-col>
           <ion-list>
             <!-- Iterate over filteredFBPostals to display each postal -->

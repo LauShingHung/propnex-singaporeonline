@@ -66,6 +66,7 @@ export class BuyerPage implements OnInit {
   findRecs: string[];
   minPrice: number;
   maxPrice: number;
+  filter: string;
   approvedUsage: string;
   accommodationTypes = accommodationTypes;
   districtTypes =   districtTypes;
@@ -118,6 +119,21 @@ export class BuyerPage implements OnInit {
   handlePriceChange() {
     this.filterPostals();
   }
+
+  handleFilterYes() {
+    this.filter = 'true';
+  }
+
+  allFiltersFilled(): boolean {
+    return (
+      this.selectedAccommodationType !== undefined &&
+      this.selectedDistrict !== undefined &&
+      this.minPrice !== undefined &&
+      this.maxPrice !== undefined &&
+      this.filter === "true"
+      // Add more conditions if you have additional filters
+    );
+  }
   
   filterPostals() {
     this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
@@ -126,7 +142,10 @@ export class BuyerPage implements OnInit {
       (!this.maxPrice || postal.askingPrice <= this.maxPrice)
       // Add more conditions as needed
     );
+
+    return this.filteredFBPostals;
   }
+  
   
 
   // navigate to place details page
