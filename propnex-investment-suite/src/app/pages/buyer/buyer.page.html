@@ -26,9 +26,9 @@
         <ion-col size="12">
           <ion-item>
             <ion-label>Filter by District</ion-label>
-            <ion-select placeholder="Select Type" [(ngModel)]="selectedLocationMRT" (ionChange)="handleLocationMRTChange($event.detail.value)">
+            <ion-select placeholder="Select Type" [(ngModel)]="selectedDistrict" (ionChange)="handleDistrictChange($event.detail.value)">
               <ion-select-option value="">All Types</ion-select-option>
-              <ion-select-option *ngFor="let type of locationTypes" [value]="type">{{ type }}</ion-select-option>
+              <ion-select-option *ngFor="let type of districtTypes" [value]="type">{{ type }}</ion-select-option>
             </ion-select>            
           </ion-item>
         </ion-col>
@@ -63,7 +63,7 @@
                 <h2>{{ postal.name }}</h2>
                 <p>Singapore {{ postal.postal }}</p>
                 <p>Asking Price: {{ postal.askingPrice }}</p>
-                <p>District: {{ postal.locationMRT }}</p> <!-- Use the actual properties of your fbPostal object -->
+                <p>District: {{ postal.district }}</p> <!-- Use the actual properties of your fbPostal object -->
               </ion-label>
             </ion-item>
           </ion-list>

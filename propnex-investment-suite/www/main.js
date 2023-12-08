@@ -247,7 +247,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-menu side=\"start\">\r\n    <ion-header>\r\n      <ion-toolbar>\r\n        <ion-title>\r\n          Menu\r\n        </ion-title>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\r\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\r\n            <ion-label>Home</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/units\">\r\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\r\n            <ion-label>Find Individual Units</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/stats\">\r\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\r\n            <ion-label>View Statistical Insights</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\r\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\r\n            <ion-label>Logout</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n  <ion-router-outlet main></ion-router-outlet>\r\n</ion-app>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-menu side=\"start\">\r\n    <ion-header>\r\n      <ion-toolbar>\r\n        <ion-title>\r\n          Menu\r\n        </ion-title>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\r\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\r\n            <ion-label>Home</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/units\">\r\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\r\n            <ion-label> Seller Interface</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/buyer\">\r\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\r\n            <ion-label> Buyer Interface</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" routerLink=\"/stats\">\r\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\r\n            <ion-label>View Statistical Insights</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n        <ion-menu-toggle>\r\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\r\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\r\n            <ion-label>Logout</ion-label>\r\n          </ion-item>\r\n        </ion-menu-toggle>\r\n\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n  <ion-router-outlet main></ion-router-outlet>\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -311,7 +311,12 @@ var routes = [
     },
     {
         path: 'units',
-        loadChildren: function () { return Promise.all(/*! import() | pages-units-units-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-units-units-module~recommendations-recom~65a86ca3"), __webpack_require__.e("common"), __webpack_require__.e("pages-units-units-module")]).then(__webpack_require__.bind(null, /*! ./pages/units/units.module */ "./src/app/pages/units/units.module.ts")).then(function (m) { return m.UnitsPageModule; }); },
+        loadChildren: function () { return Promise.all(/*! import() | pages-units-units-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("pages-units-units-module")]).then(__webpack_require__.bind(null, /*! ./pages/units/units.module */ "./src/app/pages/units/units.module.ts")).then(function (m) { return m.UnitsPageModule; }); },
+        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
+    },
+    {
+        path: 'buyer',
+        loadChildren: function () { return Promise.all(/*! import() | pages-buyer-buyer-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("pages-buyer-buyer-module")]).then(__webpack_require__.bind(null, /*! ./pages/buyer/buyer.module */ "./src/app/pages/buyer/buyer.module.ts")).then(function (m) { return m.BuyerPageModule; }); },
         canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
     }
 ];
@@ -547,7 +552,7 @@ var fbUser = /** @class */ (function () {
 }());
 
 var fbPostal = /** @class */ (function () {
-    function fbPostal(name, postal, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT, locationSch, imageUrl, units) {
+    function fbPostal(name, postal, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT, locationSch, district, imageUrl, units) {
         this.name = name;
         this.postal = postal;
         this.landArea = landArea;
@@ -563,6 +568,7 @@ var fbPostal = /** @class */ (function () {
         this.approvedUsage = approvedUsage;
         this.locationMRT = locationMRT;
         this.locationSch = locationSch;
+        this.district = district;
         this.imageUrl = imageUrl;
         this.units = units;
     }

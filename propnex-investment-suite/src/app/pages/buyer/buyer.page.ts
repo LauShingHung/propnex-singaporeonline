@@ -16,10 +16,35 @@ export const accommodationTypes = [
     "Workers' Dormitories"
   ]; //accommodation types
 
-export const locationTypes = [
-    '0',
-    'Woodlands',
-    'Orchard'
+export const districtTypes = [ 
+    "District 01 - Raffles Place, Marina, Cecil",
+    'District 02 - Tanjong Pagar, Chinatown',
+    'District 03 - Tiong Bahru, Alexandra, Queenstown',
+    'District 04 - Mount Faber, Telok Blangah, Harbourfront',
+    'District 05 - Buona Vista, Pasir Panjang, Clementi',
+    'District 06 - Clarke Quay, City Hall',
+    'District 07 - Bugis, Beach Road, Golden Mile',
+    'District 08 - Little India, Farrer Park',
+    'District 09 - Orchard Road, River Valley',
+    'District 10 - Bukit Timah, Holland, Balmoral',
+    'District 11 - Novena, Newton, Thomson',
+    'District 12 - Toa Payoh, Serangoon, Balestier',
+    'District 13 - Macpherson, Braddell',
+    'District 14 - Geylang, Paya Lebar, Sims',
+    'District 15 - Joo Chiat, Marina Parade, Katong',
+    'District 16 - Bedok, Upper East Coast, Siglap',
+    'District 17 - Changi, Flora, Loyang',
+    'District 18 - Tampines, Pasir Ris',
+    'District 19 - Punggol, Sengkang, Serangoon Gardens',
+    'District 20 - Ang Mo Kio, Bishan, Thomson',
+    'District 21 - Upper Bukit Timah, Ulu Pandan, Clementi Park',
+    'District 22 - Boon Lay, Jurong, Tuas',
+    'District 23 - Choa Chu Kang, Diary Farm, Hillview, Bukit Panjang, Bukit Batok',
+    'District 24 - Kranji, Lim Chu Kang, Tengah',
+    'District 25 - Woodlands, Admiralty',
+    'District 26 - Upper Thomson, Mandai',
+    'District 27 - Sembawang, Yishun, Admiralty',
+    'District 28 - Yio Chu Kang, Seletar'
   ];
 
 @Component({
@@ -43,9 +68,9 @@ export class BuyerPage implements OnInit {
   maxPrice: number;
   approvedUsage: string;
   accommodationTypes = accommodationTypes;
-  locationTypes =   locationTypes;
+  districtTypes =   districtTypes;
   selectedAccommodationType: string = ''; //initially no filter
-  selectedLocationMRT: string = ''; //initially no filter
+  selectedDistrict: string = ''; //initially no filter
   filteredFBPostals: fbPostal[]; //hold filtered results
 
 
@@ -85,8 +110,8 @@ export class BuyerPage implements OnInit {
     this.filterPostals();
   }
   
-  handleLocationMRTChange(selectedType: string) {
-    this.selectedLocationMRT = selectedType;
+  handleLDistrictChange(selectedType: string) {
+    this.selectedDistrict = selectedType;
     this.filterPostals();
   }
 
@@ -97,7 +122,7 @@ export class BuyerPage implements OnInit {
   filterPostals() {
     this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
       (!this.selectedAccommodationType || postal.approvedUsage === this.selectedAccommodationType) &&
-      (!this.selectedLocationMRT ||  postal.locationMRT === this.selectedLocationMRT)&& (!this.minPrice || postal.askingPrice >= this.minPrice) &&
+      (!this.selectedDistrict ||  postal.district === this.selectedDistrict)&& (!this.minPrice || postal.askingPrice >= this.minPrice) &&
       (!this.maxPrice || postal.askingPrice <= this.maxPrice)
       // Add more conditions as needed
     );
