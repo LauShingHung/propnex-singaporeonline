@@ -37,7 +37,6 @@ export class BlockDetailPage implements OnInit {
     private alertController: AlertController
   ) { }
 
-
   ngOnInit() {
     this.currUser = this.authService.currFbUser;
     this.route.paramMap.subscribe(paramMap => {
@@ -45,9 +44,11 @@ export class BlockDetailPage implements OnInit {
         this.navCtrl.navigateBack('/units');
         return;
       }
-
-      this.currPlace = this.placeService.currPlace;
-      
+      const postalId = paramMap.get('postalId');
+      this.placeService.fetchPlaceDetail(postalId).subscribe(place => {
+        this.currPlace = place; // Now currPlace is set independently
+      });
+      //this.currPlace = this.placeService.currPlace;
     });
 
     this.fbRecsSub = this.placeService.fbRecs.subscribe(fbRecs => {
@@ -56,16 +57,37 @@ export class BlockDetailPage implements OnInit {
 
   }
 
-  ionViewWillEnter() {
-    this.currPlace = this.placeService.currPlace;
-    this.placeService.fetchFBPostals().subscribe(() => {
+  // ionViewWillEnter() {
+  //   this.currPlace = this.placeService.currPlace;
+  //   this.placeService.fetchFBPostals().subscribe(() => {
 
+  //   });
+  //   this.placeService.fetchFBRecs().subscribe(() => {
+
+  //   });
+
+  // }
+  ionViewWillEnter() {
+    this.route.paramMap.subscribe(paramMap => {
+      if (!paramMap.has('postalId')) {
+        // Handle missing postalId
+        return;
+      }
+      const postalId = paramMap.get('postalId');
+      this.placeService.fetchPlaceDetail(postalId).subscribe(place => {
+        this.currPlace = place; // Set currPlace based on the postalId
+      });
+    });
+  
+    // Fetch lists that are used for other parts of this page or for UI components
+    this.placeService.fetchFBPostals().subscribe(() => {
+      // Handle post-fetch logic if needed
     });
     this.placeService.fetchFBRecs().subscribe(() => {
-
+      // Handle post-fetch logic if needed
     });
-
   }
+  
 
   // retrieve unit using unit number
   handleChange(event) {

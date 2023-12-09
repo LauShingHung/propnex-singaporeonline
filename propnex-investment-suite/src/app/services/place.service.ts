@@ -89,6 +89,22 @@ export class PlaceService {
       );
   }
 
+  fetchPlaceDetail(postalId: string) {
+    return this.fbPostals.pipe(
+      take(1),
+      map(postals => {
+        const foundPostal = postals.find(p => p.postal === postalId);
+        if (!foundPostal) {
+          throw new Error(`Postal with ID ${postalId} not found`);
+        }
+        return foundPostal;
+      }),
+      tap(currPlace => {
+        this._currPlace = currPlace; // Set the current place
+      }),
+    );
+  }
+
   // fetch recommendation data
   fetchFBRecs() {
     return this.http
