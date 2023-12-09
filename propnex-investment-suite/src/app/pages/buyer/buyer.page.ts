@@ -64,9 +64,9 @@ export class BuyerPage implements OnInit {
   private fbRecsSub: Subscription;
   recItem: fbRec;
   findRecs: string[];
-  minPrice: number;
-  maxPrice: number;
-  filter: string;
+  minPrice: number = 0;
+  maxPrice: number = (100/0);
+  filter: boolean;
   approvedUsage: string;
   accommodationTypes = accommodationTypes;
   districtTypes =   districtTypes;
@@ -121,7 +121,12 @@ export class BuyerPage implements OnInit {
   }
 
   handleFilterYes() {
-    this.filter = 'true';
+    if (this.filter) {
+      
+    } else {
+      // Set additionalFilter to false when the toggle is switched off
+      this.filter = false;
+    }
   }
 
   allFiltersFilled(): boolean {
@@ -130,7 +135,7 @@ export class BuyerPage implements OnInit {
       this.selectedDistrict !== undefined &&
       this.minPrice !== undefined &&
       this.maxPrice !== undefined &&
-      this.filter === "true"
+      this.filter === true
       // Add more conditions if you have additional filters
     );
   }
