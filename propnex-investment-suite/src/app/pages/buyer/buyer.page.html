@@ -14,19 +14,34 @@
         <ion-col size="12">
           <ion-item>
             <ion-label>Filter by Accommodation Type</ion-label>
-            <ion-select placeholder="Select Type" [(ngModel)]="selectedAccommodationType" (ionChange)="handleAccommodationTypeChange($event.detail.value)">
+            <ion-select placeholder="Select Type" [(ngModel)]="selectedAccommodationType" (ionChange)="handleAccommodationTypeChange($event.detail.value)" multiple>
               <ion-select-option value="">All Types</ion-select-option>
               <ion-select-option *ngFor="let type of accommodationTypes" [value]="type">{{ type }}</ion-select-option>
             </ion-select>            
           </ion-item>
         </ion-col>
       </ion-row>
+      
+      <ion-row>
+        <ion-col size="12">
+          <!-- Other filters -->
+      
+          <!-- Accommodation type filter buttons -->
+          <ion-button (click)="setAccommodationType('Residential')">Residential</ion-button>
+          <ion-button (click)="setAccommodationType('Backpackers Hotel')">Backpackers' Hotel</ion-button>
+          <ion-button (click)="setAccommodationType('Students Hotel')">Students' Hotel</ion-button>
+          <ion-button (click)="setAccommodationType('Hotel')">Hotel</ion-button>
+          <ion-button (click)="setAccommodationType('Serviced Apartment')">Serviced Apartment</ion-button>
+          <ion-button (click)="setAccommodationType('Workers Dormitories')">Workers' Dormitories</ion-button>
+          <!-- Add more buttons as needed -->
+        </ion-col>
+      </ion-row>
 
       <ion-row>
         <ion-col size="12">
-          <ion-item>
+          <ion-item >
             <ion-label>Filter by District</ion-label>
-            <ion-select placeholder="Select Type" [(ngModel)]="selectedDistrict" (ionChange)="handleDistrictChange($event.detail.value)">
+            <ion-select placeholder="Select Type" [(ngModel)]="selectedDistrict" (ionChange)="handleDistrictChange($event.detail.value)" multiple>
               <ion-select-option value="">All Types</ion-select-option>
               <ion-select-option *ngFor="let type of districtTypes" [value]="type">{{ type }}</ion-select-option>
             </ion-select>            
@@ -47,6 +62,50 @@
             <ion-label>Max Budget</ion-label>
             <ion-input type="number" [(ngModel)]="maxPrice" (ionChange)="handlePriceChange()"></ion-input>
           </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <!-- Other filters -->
+      
+          <!-- Budget filter buttons -->
+          <ion-button (click)="setBudgetRange(0, 10000)">0-10,000</ion-button>
+          <ion-button (click)="setBudgetRange(10001, 20000)">10,001-20,000</ion-button>
+          <ion-button (click)="setBudgetRange(20001, 30000)">20,001-30,000</ion-button>
+          <ion-button (click)="setBudgetRange(30001, 40000)">30,001-40,000</ion-button>
+          <ion-button (click)="setBudgetRange(40001, 50000)">40,001-50,000</ion-button>
+          <ion-button (click)="setBudgetRange(50001, 60000)">50,001-60,000</ion-button>
+          <!-- Add more buttons as needed -->
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Min Number of Rooms</ion-label>
+            <ion-input type="number" [(ngModel)]="minRooms" (ionChange)="handleRoomChange()"></ion-input>
+          </ion-item>
+        </ion-col>
+      
+        <ion-col size="6">
+          <ion-item>
+            <ion-label>Max Number of Rooms</ion-label>
+            <ion-input type="number" [(ngModel)]="maxRooms" (ionChange)="handleRoomChange()"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <!-- Other filters -->
+      
+          <!-- Budget filter buttons -->
+          <ion-button (click)="setRoomRange(0, 10)">0-10</ion-button>
+          <ion-button (click)="setRoomRange(11, 30)">11-30</ion-button>
+          <ion-button (click)="setRoomRange(31, 40)">31-40</ion-button>
+          <ion-button (click)="setRoomRange(41, 60)">41-60</ion-button>
+          <!-- Add more buttons as needed -->
         </ion-col>
       </ion-row>
 

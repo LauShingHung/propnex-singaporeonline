@@ -17,7 +17,7 @@ export class fbPostal {
     public landArea: Float32Array,
     public grossFloorArea: Float32Array,
     public tenure: string,
-    public numRooms: Int16Array,
+    public numRooms: number,
     public numStorey: Int16Array,
     public askingPrice: number,
     public priceRoom: Float32Array,

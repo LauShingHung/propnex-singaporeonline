@@ -9,11 +9,11 @@ import { PlaceService } from '../../services/place.service';
 import { EditProfileComponent } from '../home/main/edit-profile/edit-profile.component';
 export const accommodationTypes = [
     'Residential',
-    "Backpackers' Hotel",
+    "Backpackers Hotel",
     'Hotel',
-    "Students' Hotel",
+    "Students Hotel",
     'Serviced Apartment',
-    "Workers' Dormitories"
+    "Workers Dormitories"
   ]; //accommodation types
 
 export const districtTypes = [ 
@@ -66,12 +66,14 @@ export class BuyerPage implements OnInit {
   findRecs: string[];
   minPrice: number = 0;
   maxPrice: number = (100/0);
+  minRooms: number = 0;
+  maxRooms: number = (100/0);
   filter: boolean;
   approvedUsage: string;
   accommodationTypes = accommodationTypes;
   districtTypes =   districtTypes;
-  selectedAccommodationType: string = ''; //initially no filter
-  selectedDistrict: string = ''; //initially no filter
+  selectedAccommodationType: any[] = []; //initially no filter
+  selectedDistrict: any[] = [];
   filteredFBPostals: fbPostal[]; //hold filtered results
 
 
@@ -106,17 +108,22 @@ export class BuyerPage implements OnInit {
 
   }
  
-  handleAccommodationTypeChange(selectedType: string) {
+  handleAccommodationTypeChange(selectedType: string[]) {
     this.selectedAccommodationType = selectedType;
     this.filterPostals();
   }
   
-  handleLDistrictChange(selectedType: string) {
-    this.selectedDistrict = selectedType;
+  handleLDistrictChange(selectedTypes: string[]) {
+    this.selectedDistrict = selectedTypes;
+    this.filterPostals();
+  }
+  
+
+  handlePriceChange() {
     this.filterPostals();
   }
 
-  handlePriceChange() {
+  handleRoomchange() {
     this.filterPostals();
   }
 
@@ -129,12 +136,25 @@ export class BuyerPage implements OnInit {
     }
   }
 
+  setBudgetRange(minValue: number, maxValue: number) {
+    this.minPrice = minValue;
+    this.maxPrice = maxValue;
+    this.filterPostals();
+  }
+
+  setRoomRange(minValue: number, maxValue: number) {
+    this.minRooms = minValue;
+    this.maxRooms = maxValue;
+    this.filterPostals();
+  }
+
+  setAccommodationType(type: string) {
+    this.selectedAccommodationType = [type]; // Convert to an array to match the expected format
+    this.filterPostals();
+  }
+
   allFiltersFilled(): boolean {
     return (
-      this.selectedAccommodationType !== undefined &&
-      this.selectedDistrict !== undefined &&
-      this.minPrice !== undefined &&
-      this.maxPrice !== undefined &&
       this.filter === true
       // Add more conditions if you have additional filters
     );
@@ -142,12 +162,14 @@ export class BuyerPage implements OnInit {
   
   filterPostals() {
     this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
-      (!this.selectedAccommodationType || postal.approvedUsage === this.selectedAccommodationType) &&
-      (!this.selectedDistrict ||  postal.district === this.selectedDistrict)&& (!this.minPrice || postal.askingPrice >= this.minPrice) &&
-      (!this.maxPrice || postal.askingPrice <= this.maxPrice)
+      (!this.selectedAccommodationType || this.selectedAccommodationType.includes(postal.approvedUsage)) &&
+      (!this.selectedDistrict || this.selectedDistrict.includes(postal.district)) &&
+      (!this.minPrice || postal.askingPrice >= this.minPrice) &&
+      (!this.maxPrice || postal.askingPrice <= this.maxPrice) &&
+      (!this.minRooms || postal.numRooms >= this.minRooms) &&
+      (!this.maxRooms || postal.numRooms <= this.maxRooms)
       // Add more conditions as needed
     );
-
     return this.filteredFBPostals;
   }
   
