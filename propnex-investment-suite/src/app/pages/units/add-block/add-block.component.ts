@@ -12,13 +12,13 @@ import { PlaceService } from '../../../services/place.service';
 export class AddBlockComponent implements OnInit {
 
   addBlockForm: FormGroup;
-
+  selectedFile: File = null;
+  imagePreview: string | ArrayBuffer = '';
 
   constructor(
     private modalCtrl: ModalController,
     private placeService: PlaceService
   ) { }
-
 
   ngOnInit() {
     this.addBlockForm = new FormGroup({
@@ -78,6 +78,18 @@ export class AddBlockComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
+  onFileChanged(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   // // submit add block form
   // submitAddBlock() {
   //   if (!this.addBlockForm.valid) {
@@ -124,6 +136,11 @@ export class AddBlockComponent implements OnInit {
 
   // upload place image
   uploadBlockImage() {
+    if (!this.selectedFile) {
+      console.error('No file selected!');
+      return;
+    }
     console.log("choose block image to upload")
   }
+
 }

@@ -57,16 +57,6 @@ export class BlockDetailPage implements OnInit {
 
   }
 
-  // ionViewWillEnter() {
-  //   this.currPlace = this.placeService.currPlace;
-  //   this.placeService.fetchFBPostals().subscribe(() => {
-
-  //   });
-  //   this.placeService.fetchFBRecs().subscribe(() => {
-
-  //   });
-
-  // }
   ionViewWillEnter() {
     this.route.paramMap.subscribe(paramMap => {
       if (!paramMap.has('postalId')) {
@@ -88,7 +78,6 @@ export class BlockDetailPage implements OnInit {
     });
   }
   
-
   // retrieve unit using unit number
   handleChange(event) {
     const query = event.target.value;

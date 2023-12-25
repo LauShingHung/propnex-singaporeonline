@@ -170,7 +170,7 @@
               ></ion-input>
             </ion-item>
 
-            <ion-row>
+            <!-- <ion-row>
               <ion-col>
                 <ion-button 
                 (click)="uploadBlockImage()" 
@@ -178,8 +178,22 @@
                 >Upload Place Image
                 </ion-button>
               </ion-col>
-            </ion-row>
+            </ion-row> -->
 
+            <ion-row>
+              <ion-col>
+                <input type="file" (change)="onFileChanged($event)" hidden #fileInput>
+                <ion-button (click)="fileInput.click()" expand="block">Upload Place Image</ion-button>
+              </ion-col>
+            </ion-row>
+        
+            <!-- Image Preview Section -->
+            <ion-row *ngIf="imagePreview">
+              <ion-col>
+                <img [src]="imagePreview" style="max-width: 100%; height: auto;">
+              </ion-col>
+            </ion-row>
+            
             <ion-row>
               <ion-col>
                 <ion-button 
