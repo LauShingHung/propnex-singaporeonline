@@ -15,12 +15,13 @@ export class AddBlockComponent implements OnInit {
   addBlockForm: FormGroup;
   postalCodeError: string = null;
 
+  selectedFile: File = null;
+  imagePreview: string | ArrayBuffer = '';
 
   constructor(
     private modalCtrl: ModalController,
     private placeService: PlaceService
   ) { }
-
 
   ngOnInit() {
     this.addBlockForm = new FormGroup({
@@ -83,6 +84,18 @@ export class AddBlockComponent implements OnInit {
   // cancel add place
   onCancel() {
     this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+  onFileChanged(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   // // submit add block form
@@ -178,6 +191,11 @@ hidePostalCodeWarning() {
 
   // upload place image
   uploadBlockImage() {
+    if (!this.selectedFile) {
+      console.error('No file selected!');
+      return;
+    }
     console.log("choose block image to upload")
   }
+
 }

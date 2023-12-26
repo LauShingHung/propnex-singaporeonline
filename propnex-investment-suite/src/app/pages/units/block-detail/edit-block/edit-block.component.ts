@@ -14,7 +14,8 @@ export class EditBlockComponent implements OnInit {
 
   editBlockForm: FormGroup;
   currPlace: fbPostal;
-
+  selectedFile: File = null;
+  imagePreview: string | ArrayBuffer = '';
 
   constructor(
     private modalCtrl: ModalController,
@@ -36,6 +37,18 @@ export class EditBlockComponent implements OnInit {
     this.modalCtrl.dismiss(null, 'cancel');
   }
 
+  onFileChanged(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   // submit edit place form
   submitEditBlock() {
     if (!this.editBlockForm.valid) {
@@ -53,6 +66,10 @@ export class EditBlockComponent implements OnInit {
 
   // upload place image
   uploadBlockImage() {
+    if (!this.selectedFile) {
+      console.error('No file selected!');
+      return;
+    }
     console.log("choose block image to upload")
   }
 
