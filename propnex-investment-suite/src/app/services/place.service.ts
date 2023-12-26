@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { fbPostal, fbRec, fbUnit } from '../pages/auth/firebase.model';
 
@@ -44,6 +45,13 @@ export class PlaceService {
   constructor(
     private http: HttpClient
   ) { }
+
+  checkPostalCodeExists(postal: string): Observable<boolean> {
+    return this.fbPostals.pipe(
+      take(1),
+      map(postals => postals.some(place => place.postal === postal))
+    );
+  }
 
 
   // fetch place data

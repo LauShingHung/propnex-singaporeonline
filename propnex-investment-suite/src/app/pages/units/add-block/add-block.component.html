@@ -29,7 +29,11 @@
               <ion-input 
                 type="text"
                 formControlName="postalCode"
+                (input)="showPostalCodeWarning()"
+                (blur)="hidePostalCodeWarning()"
               ></ion-input>
+              <ion-icon *ngIf="showWarning" name="warning" color="warning"></ion-icon>
+              <ion-text color="warning" *ngIf="showWarning">Please enter a 6-digit numerical postal code.</ion-text>
             </ion-item>
 
             <ion-item>
@@ -182,6 +186,9 @@
 
             <ion-row>
               <ion-col>
+                <div *ngIf="postalCodeError" class="error-message">
+                  {{ postalCodeError }}
+                </div>
                 <ion-button 
                 type="submit" 
                 (click)="submitAddBlock()" 
