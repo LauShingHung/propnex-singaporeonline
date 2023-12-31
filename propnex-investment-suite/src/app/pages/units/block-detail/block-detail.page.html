@@ -165,8 +165,8 @@
       <ion-col class="ion-text-center ion-no-padding">
         <ion-list>
           <ion-item>
-            <!-- Replace "1234567890" with the actual WhatsApp phone number -->
-            <a href="https://wa.me/6591520660" target="_blank">Contact our agent: WhatsApp Link</a>
+            <!-- Inside your component template -->
+            <a [href]="generateWhatsAppLink()" target="_blank">Contact our agent via WhatsApp</a>
           </ion-item>
         </ion-list>
       </ion-col>

@@ -24,7 +24,7 @@ export class BlockDetailPage implements OnInit {
   private fbRecsSub: Subscription;
   recItem: fbRec;
   findRecs: string[];
-
+  whatsappLink: string;
 
   constructor(
     private authService: AuthService,
@@ -189,6 +189,29 @@ export class BlockDetailPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  generateWhatsAppLink(): string {
+    const messageTemplate = `Hello Jared,
+  
+I am [Your Name]. I came across the listing [Insert Link to Property] and am interested in learning more about it. Here are my requirements:
+  
+  1. Accommodation Type: [Insert Accommodation Type]
+  2. Preferred District/Area: [Insert District Type]
+  3. Budget Range: [Insert Budget]
+  4. Number of Rooms Required: [Insert Number of Rooms]
+  5. Tenure Type (e.g., leasehold, freehold): [Insert Tenure Type]
+  
+  Please feel free to contact me by replying to this message for further discussion. Looking forward to hearing from you!
+  
+  Best regards,
+  [Your Name]`;
+  
+    // URL encode the message
+    const encodedMessage = encodeURIComponent(messageTemplate);
+    const whatsappLink = `https://wa.me/6591520660?text=${encodedMessage}`;
+  
+    return whatsappLink;
   }
 
   ngOnDestroy() {
