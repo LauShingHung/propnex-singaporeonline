@@ -47,6 +47,12 @@ export const districtTypes = [
     'District 28 - Yio Chu Kang, Seletar'
   ];
 
+export const tenureTypes = [
+    '99 Years',
+    '60 Years',
+    'Freehold'
+  ]; //tenure types
+
 @Component({
   selector: 'app-buyer',
   templateUrl: './buyer.page.html',
@@ -69,9 +75,11 @@ export class BuyerPage implements OnInit {
   filter: boolean;
   approvedUsage: string;
   accommodationTypes = accommodationTypes;
+  tenureTypes = tenureTypes;
   districtTypes =   districtTypes;
   selectedAccommodationType: string = ''; //initially no filter
   selectedDistrict: string = ''; //initially no filter
+  selectedTenure: string = ''; //initially no filter
   filteredFBPostals: fbPostal[]; //hold filtered results
 
 
@@ -119,6 +127,12 @@ export class BuyerPage implements OnInit {
   handlePriceChange() {
     this.filterPostals();
   }
+  
+  handleTenureChange(selectedType: string) {
+    this.selectedTenure = selectedType;
+    this.filterPostals();
+  }
+  
 
   handleFilterYes() {
     if (this.filter) {
@@ -135,6 +149,7 @@ export class BuyerPage implements OnInit {
       this.selectedDistrict !== undefined &&
       this.minPrice !== undefined &&
       this.maxPrice !== undefined &&
+      this.selectedTenure !== undefined &&
       this.filter === true
       // Add more conditions if you have additional filters
     );
@@ -144,7 +159,8 @@ export class BuyerPage implements OnInit {
     this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
       (!this.selectedAccommodationType || postal.approvedUsage === this.selectedAccommodationType) &&
       (!this.selectedDistrict ||  postal.district === this.selectedDistrict)&& (!this.minPrice || postal.askingPrice >= this.minPrice) &&
-      (!this.maxPrice || postal.askingPrice <= this.maxPrice)
+      (!this.maxPrice || postal.askingPrice <= this.maxPrice) &&
+      (!this.selectedTenure || postal.tenure === this.selectedTenure)
       // Add more conditions as needed
     );
 
