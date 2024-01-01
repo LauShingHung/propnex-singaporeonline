@@ -76,6 +76,9 @@ export class AddBlockComponent implements OnInit {
       }),
       district: new FormControl(null, {
         updateOn: 'blur',
+      }),
+      region: new FormControl(null, {
+        updateOn: 'blur',
       })
     });
     
@@ -145,11 +148,12 @@ submitAddBlock() {
       const locationMRT = this.addBlockForm.value.locationMRT;
       const locationSch = this.addBlockForm.value.locationSch;
       const district = this.addBlockForm.value.district;
+      const region = this.addBlockForm.value.region;
 
       // Proceed to add the block if the postal code is unique
       this.placeService.addBlock(
         projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey,
-        askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage,
+        askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage,region,
         locationMRT, locationSch, district
       ).subscribe(() => {
         // Handle success if needed

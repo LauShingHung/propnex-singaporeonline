@@ -164,6 +164,14 @@
     <ion-row>
       <ion-col class="ion-text-center ion-no-padding">
         <ion-list>
+          <ion-item>Region: {{currPlace.region}}</ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center ion-no-padding">
+        <ion-list>
           <ion-item>
             <!-- Inside your component template -->
             <a [href]="generateWhatsAppLink()" target="_blank">Contact our agent via WhatsApp</a>

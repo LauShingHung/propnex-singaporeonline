@@ -53,6 +53,12 @@ export const tenureTypes = [
     'Freehold'
   ]; //tenure types
 
+export const regionTypes = [
+    'RCR',
+    'CCR',
+    'OCR'
+  ];  
+
 @Component({
   selector: 'app-buyer',
   templateUrl: './buyer.page.html',
@@ -76,10 +82,12 @@ export class BuyerPage implements OnInit {
   approvedUsage: string;
   accommodationTypes = accommodationTypes;
   tenureTypes = tenureTypes;
+  regionTypes = regionTypes;
   districtTypes =   districtTypes;
   selectedAccommodationType: string = ''; //initially no filter
   selectedDistrict: string = ''; //initially no filter
   selectedTenure: string = ''; //initially no filter
+  selectedRegion: string = ''; //initially no filter
   filteredFBPostals: fbPostal[]; //hold filtered results
 
 
@@ -132,6 +140,11 @@ export class BuyerPage implements OnInit {
     this.selectedTenure = selectedType;
     this.filterPostals();
   }
+
+  handleRegionChange(selectedType: string) {
+    this.selectedRegion = selectedType;
+    this.filterPostals();
+  }
   
 
   handleFilterYes() {
@@ -150,6 +163,7 @@ export class BuyerPage implements OnInit {
       this.minPrice !== undefined &&
       this.maxPrice !== undefined &&
       this.selectedTenure !== undefined &&
+      this.selectedRegion !== undefined &&
       this.filter === true
       // Add more conditions if you have additional filters
     );
@@ -160,7 +174,8 @@ export class BuyerPage implements OnInit {
       (!this.selectedAccommodationType || postal.approvedUsage === this.selectedAccommodationType) &&
       (!this.selectedDistrict ||  postal.district === this.selectedDistrict)&& (!this.minPrice || postal.askingPrice >= this.minPrice) &&
       (!this.maxPrice || postal.askingPrice <= this.maxPrice) &&
-      (!this.selectedTenure || postal.tenure === this.selectedTenure)
+      (!this.selectedTenure || postal.tenure === this.selectedTenure) &&
+      (!this.selectedRegion || postal.region === this.selectedRegion)
       // Add more conditions as needed
     );
 

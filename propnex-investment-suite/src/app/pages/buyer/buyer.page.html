@@ -39,6 +39,27 @@
 
       <ion-row>
         <ion-col size="12">
+          <ion-item>
+            <ion-label>Filter by Region</ion-label>
+            <ion-select placeholder="Select Region" [(ngModel)]="selectedRegion" (ionChange)="handleRegionChange($event.detail.value)"multiple>
+              <ion-select-option value="">All Types</ion-select-option>
+              <ion-select-option *ngFor="let type of regionTypes" [value]="type">{{ type }}</ion-select-option>
+            </ion-select>            
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col size="12">
+          <!-- Tenure type filter buttons -->
+          <ion-button (click)="setRegion('OCR')">OCR</ion-button>
+          <ion-button (click)="setRegion('CCR')">CCR</ion-button>
+          <ion-button (click)="setRegion('RCR')">RCR</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
           <ion-item >
             <ion-label>Filter by District</ion-label>
             <ion-select placeholder="Select Type" [(ngModel)]="selectedDistrict" (ionChange)="handleDistrictChange($event.detail.value)" multiple>
@@ -135,6 +156,15 @@
           <ion-item>
             <ion-label>Filter</ion-label>
             <ion-toggle [(ngModel)]="filter" (ionChange)="handleFilterYes()"></ion-toggle>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- New row for displaying the number of results -->
+      <ion-row *ngIf="allFiltersFilled()" class="result-count-row">
+        <ion-col>
+          <ion-item lines="none" class="result-count-item">
+            <ion-label>Total Results: {{ filteredFBPostals.length }}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
