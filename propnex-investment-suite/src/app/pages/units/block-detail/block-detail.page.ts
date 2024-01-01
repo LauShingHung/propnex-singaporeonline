@@ -7,6 +7,7 @@ import { PlaceService } from '../../../services/place.service';
 import { AddUnitComponent } from './add-unit/add-unit.component';
 import { EditBlockComponent } from './edit-block/edit-block.component';
 import { Subscription } from 'rxjs';
+import { FilterService } from '../../filter.service';
 
 @Component({
   selector: 'app-block-detail',
@@ -24,7 +25,8 @@ export class BlockDetailPage implements OnInit {
   private fbRecsSub: Subscription;
   recItem: fbRec;
   findRecs: string[];
-
+  whatsappLink: string;
+  savedFilters: any;
 
   constructor(
     private authService: AuthService,
@@ -34,6 +36,7 @@ export class BlockDetailPage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private modalCtrl: ModalController,
     private placeService: PlaceService,
+    private filterService: FilterService,
     private alertController: AlertController
   ) { }
 
@@ -54,6 +57,11 @@ export class BlockDetailPage implements OnInit {
     this.fbRecsSub = this.placeService.fbRecs.subscribe(fbRecs => {
       this.loadedFBRecs = fbRecs;
     })
+
+    this.savedFilters = this.filterService.getFilters();
+
+    // Now you can use this.savedFilters in this component
+    console.log(this.savedFilters);
 
   }
 
@@ -200,6 +208,41 @@ export class BlockDetailPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  generateWhatsAppLink(): string {
+    // Get saved filters from the FilterService
+    const savedFilters = this.filterService.getFilters();
+
+    // Extract values from saved filters
+    const accommodationType = savedFilters.selectedAccommodationType || 'N/A';
+    const districtType = savedFilters.selectedDistrict || 'N/A';
+    const budgetRange = `(${savedFilters.minPrice} - ${savedFilters.maxPrice})`;
+    const numberOfRooms = `(${savedFilters.minRooms} - ${savedFilters.maxRooms})`;
+    const username = savedFilters.username;
+    const propertyname = this.currPlace.name;
+    const tenure = savedFilters.tenure;
+
+    const messageTemplate = `Hello Jared,
+  
+  I am ${username}. I came across this property, ${propertyname} and am interested in learning more about it. Here are my requirements:
+  
+  1. Accommodation Type: ${accommodationType}
+  2. Preferred District/Area: ${districtType}
+  3. Budget Range: ${budgetRange}
+  4. Number of Rooms Required: ${numberOfRooms}
+  5. Tenure Type (e.g., leasehold, freehold): ${tenure}
+  
+  Please feel free to contact me by replying to this message for further discussion. Looking forward to hearing from you!
+  
+  Best regards,
+  [Your Name]`;
+
+    // URL encode the message
+    const encodedMessage = encodeURIComponent(messageTemplate);
+    const whatsappLink = `https://wa.me/6591520660?text=${encodedMessage}`;
+
+    return whatsappLink;
   }
 
   ngOnDestroy() {

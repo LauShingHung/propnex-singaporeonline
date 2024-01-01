@@ -27,13 +27,13 @@
           <!-- Other filters -->
       
           <!-- Accommodation type filter buttons -->
-          <ion-button (click)="setAccommodationType('Residential')">Residential</ion-button>
-          <ion-button (click)="setAccommodationType('Backpackers Hotel')">Backpackers' Hotel</ion-button>
-          <ion-button (click)="setAccommodationType('Students Hotel')">Students' Hotel</ion-button>
-          <ion-button (click)="setAccommodationType('Hotel')">Hotel</ion-button>
-          <ion-button (click)="setAccommodationType('Serviced Apartment')">Serviced Apartment</ion-button>
-          <ion-button (click)="setAccommodationType('Workers Dormitories')">Workers' Dormitories</ion-button>
-          <!-- Add more buttons as needed -->
+          <ion-button (click)="toggleAccommodationType('Residential')">Residential</ion-button>
+          <ion-button (click)="toggleAccommodationType('Backpackers Hotel')">Backpackers' Hotel</ion-button>
+          <ion-button (click)="toggleAccommodationType('Students Hotel')">Students' Hotel</ion-button>
+          <ion-button (click)="toggleAccommodationType('Hotel')">Hotel</ion-button>
+          <ion-button (click)="toggleAccommodationType('Serviced Apartment')">Serviced Apartment</ion-button>
+          <ion-button (click)="toggleAccommodationType('Workers Dormitories')">Workers' Dormitories</ion-button>
+                  <!-- Add more buttons as needed -->
         </ion-col>
       </ion-row>
 
@@ -106,6 +106,27 @@
           <ion-button (click)="setRoomRange(31, 40)">31-40</ion-button>
           <ion-button (click)="setRoomRange(41, 60)">41-60</ion-button>
           <!-- Add more buttons as needed -->
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Filter by Tenure</ion-label>
+            <ion-select placeholder="Select Tenure" [(ngModel)]="selectedTenure" (ionChange)="handleTenureChange($event.detail.value)">
+              <ion-select-option value="">All Types</ion-select-option>
+              <ion-select-option *ngFor="let type of tenureTypes" [value]="type">{{ type }}</ion-select-option>
+            </ion-select>            
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <!-- Tenure type filter buttons -->
+          <ion-button (click)="setTenureType('99 Years')">99 Years</ion-button>
+          <ion-button (click)="setTenureType('60 Years')">60 Years</ion-button>
+          <ion-button (click)="setTenureType('Freehold')">Freehold / 999 Years</ion-button>
         </ion-col>
       </ion-row>
 

@@ -7,6 +7,8 @@ import { fbPostal, fbRec, fbUser } from '../auth/firebase.model';
 import { AddBlockComponent } from '../units/add-block/add-block.component';
 import { PlaceService } from '../../services/place.service';
 import { EditProfileComponent } from '../home/main/edit-profile/edit-profile.component';
+import { FilterService } from '../../pages/filter.service'; // Import the FilterService
+
 export const accommodationTypes = [
     'Residential',
     "Backpackers Hotel",
@@ -16,6 +18,11 @@ export const accommodationTypes = [
     "Workers Dormitories"
   ]; //accommodation types
 
+export const tenureTypes = [
+    '99 Years',
+    '60 Years',
+    'Freehold'
+]; //tenure types
 export const districtTypes = [ 
     "District 01 - Raffles Place, Marina, Cecil",
     'District 02 - Tanjong Pagar, Chinatown',
@@ -71,9 +78,11 @@ export class BuyerPage implements OnInit {
   filter: boolean;
   approvedUsage: string;
   accommodationTypes = accommodationTypes;
+  tenureTypes = tenureTypes;
   districtTypes =   districtTypes;
-  selectedAccommodationType: any[] = []; //initially no filter
+  selectedAccommodationType: string[] = []; //initially no filter
   selectedDistrict: any[] = [];
+  selectedTenure: any[] = []; //initially no filter
   filteredFBPostals: fbPostal[]; //hold filtered results
 
 
@@ -81,6 +90,7 @@ export class BuyerPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private modalCtrl: ModalController,
+    private filterService: FilterService, 
     private placeService: PlaceService
   ) { }
 
@@ -127,6 +137,11 @@ export class BuyerPage implements OnInit {
     this.filterPostals();
   }
 
+  handleTenureChange(selectedType: string[]) {
+    this.selectedTenure = selectedType;
+    this.filterPostals();
+  }
+
   handleFilterYes() {
     if (this.filter) {
       
@@ -148,8 +163,25 @@ export class BuyerPage implements OnInit {
     this.filterPostals();
   }
 
-  setAccommodationType(type: string) {
-    this.selectedAccommodationType = [type]; // Convert to an array to match the expected format
+  toggleAccommodationType(type: string) {
+    const index = this.selectedAccommodationType.indexOf(type);
+  
+    if (index !== -1) {
+      // Type is already in the array, remove it
+      this.selectedAccommodationType.splice(index, 1);
+    } else {
+      // Type is not in the array, add it
+      this.selectedAccommodationType.push(type);
+    }
+  
+    console.log(this.selectedAccommodationType); // Log the array to check its contents
+    this.filterPostals();
+  }
+  
+  
+
+  setTenureType(type: string) {
+    this.selectedTenure = [type]; // Convert to an array to match the expected format
     this.filterPostals();
   }
 
@@ -161,13 +193,27 @@ export class BuyerPage implements OnInit {
   }
   
   filterPostals() {
+
+    this.filterService.setFilters({
+      selectedAccommodationType: this.selectedAccommodationType,
+      selectedDistrict: this.selectedDistrict,
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      minRooms: this.minRooms,
+      maxRooms: this.maxRooms,
+      username: this.currUser.name,
+      tenure: this.selectedTenure
+      // Add other filters as needed
+    });
+
     this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
       (!this.selectedAccommodationType || this.selectedAccommodationType.includes(postal.approvedUsage)) &&
       (!this.selectedDistrict || this.selectedDistrict.includes(postal.district)) &&
       (!this.minPrice || postal.askingPrice >= this.minPrice) &&
       (!this.maxPrice || postal.askingPrice <= this.maxPrice) &&
       (!this.minRooms || postal.numRooms >= this.minRooms) &&
-      (!this.maxRooms || postal.numRooms <= this.maxRooms)
+      (!this.maxRooms || postal.numRooms <= this.maxRooms) &&
+      (!this.selectedTenure || this.selectedTenure.includes(postal.tenure))
       // Add more conditions as needed
     );
     return this.filteredFBPostals;
