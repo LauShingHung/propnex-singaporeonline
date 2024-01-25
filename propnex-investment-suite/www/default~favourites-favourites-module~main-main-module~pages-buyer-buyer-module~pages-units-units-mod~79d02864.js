@@ -94,7 +94,7 @@ var PlaceService = /** @class */ (function () {
     PlaceService.prototype.fetchFBPostals = function () {
         var _this = this;
         return this.http
-            .get("https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json")
+            .get("https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/.json")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (resData) {
             var postals = [];
             for (var key in resData) {
@@ -123,7 +123,7 @@ var PlaceService = /** @class */ (function () {
     PlaceService.prototype.fetchFBRecs = function () {
         var _this = this;
         return this.http
-            .get("https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json")
+            .get("https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/.json")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (resData) {
             var places = [];
             for (var key in resData) {
@@ -141,7 +141,7 @@ var PlaceService = /** @class */ (function () {
         var _this = this;
         var newBlock = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](name, postal, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, region, LocationMRT, LocationSch, district);
         return this.http
-            .post('https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newBlock))
+            .post('https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newBlock))
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (resData) {
             return _this.fbPostals;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (fbUsers) {
@@ -165,7 +165,7 @@ var PlaceService = /** @class */ (function () {
             var oldPlace = updatedUsers[updatedUserIndex];
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](newName, oldPlace.postal, oldPlace.landArea, oldPlace.grossFloorArea, oldPlace.tenure, oldPlace.numRooms, oldPlace.numStorey, oldPlace.askingPrice, oldPlace.priceRoom, oldPlace.GFA, oldPlace.roomRate, oldPlace.netOperatingProfit, oldPlace.approvedUsage, oldPlace.region, oldPlace.locationMRT, oldPlace.locationSch, oldPlace.imageUrl);
             _this.currPlace = updatedUsers[updatedUserIndex];
-            return _this.http.put("https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedUsers);
         }));
@@ -191,7 +191,7 @@ var PlaceService = /** @class */ (function () {
             updatedPlaces[updatedPlaceIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](oldPlace.name, oldPlace.postal, oldPlace.landArea, oldPlace.grossFloorArea, oldPlace.tenure, oldPlace.numRooms, oldPlace.numStorey, oldPlace.askingPrice, oldPlace.priceRoom, oldPlace.GFA, oldPlace.roomRate, oldPlace.netOperatingProfit, oldPlace.approvedUsage, oldPlace.region, oldPlace.locationMRT, oldPlace.locationSch, oldPlace.district, oldPlace.imageUrl, newUnitsArr);
             _this.currPlace = updatedPlaces[updatedPlaceIndex];
             _this.currUnit = newUnit;
-            return _this.http.put("https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedPlaceIndex + ".json", __assign({}, updatedPlaces[updatedPlaceIndex]));
+            return _this.http.put("https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedPlaceIndex + ".json", __assign({}, updatedPlaces[updatedPlaceIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedPlaces);
         }));
@@ -217,7 +217,7 @@ var PlaceService = /** @class */ (function () {
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](oldPlace.name, oldPlace.postal, oldPlace.landArea, oldPlace.grossFloorArea, oldPlace.tenure, oldPlace.numRooms, oldPlace.numStorey, oldPlace.askingPrice, oldPlace.priceRoom, oldPlace.GFA, oldPlace.roomRate, oldPlace.netOperatingProfit, oldPlace.approvedUsage, oldPlace.region, oldPlace.locationMRT, oldPlace.locationSch, oldPlace.district, oldPlace.imageUrl, newFavArr);
             _this.currPlace = updatedUsers[updatedUserIndex];
             _this.currUnit = newUnit;
-            return _this.http.put("https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedUsers);
         }));
@@ -255,7 +255,7 @@ var PlaceService = /** @class */ (function () {
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbPostal"](oldPlace.name, oldPlace.postal, oldPlace.landArea, oldPlace.grossFloorArea, oldPlace.tenure, oldPlace.numRooms, oldPlace.numStorey, oldPlace.askingPrice, oldPlace.priceRoom, oldPlace.GFA, oldPlace.roomRate, oldPlace.netOperatingProfit, oldPlace.approvedUsage, oldPlace.region, oldPlace.locationMRT, oldPlace.locationSch, oldPlace.district, oldPlace.imageUrl, oldPlace.units);
             _this.currPlace = updatedUsers[updatedUserIndex];
             _this.currUnit = oldPlace.units[oldUnitIndex];
-            return _this.http.put("https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbPostals.next(updatedUsers);
         }));
