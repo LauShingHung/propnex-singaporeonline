@@ -58,7 +58,7 @@ export class PlaceService {
   fetchFBPostals() {
     return this.http
       .get(
-        `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
+        `https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
       )
       .pipe(
         map(resData => {
@@ -118,7 +118,7 @@ export class PlaceService {
   fetchFBRecs() {
     return this.http
       .get(
-        `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
+        `https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
       )
       .pipe(
         map(resData => {
@@ -166,7 +166,7 @@ export class PlaceService {
       
     );
     return this.http
-      .post('https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
+      .post('https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
       { ...newBlock })
       .pipe(
         switchMap(resData => {
@@ -216,7 +216,7 @@ export class PlaceService {
         );
         this.currPlace = updatedUsers[updatedUserIndex];
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -276,7 +276,7 @@ export class PlaceService {
         this.currPlace = updatedPlaces[updatedPlaceIndex];
         this.currUnit = newUnit;
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedPlaceIndex}.json`,
+          `https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedPlaceIndex}.json`,
           { ...updatedPlaces[updatedPlaceIndex] }
         );
       }),
@@ -329,7 +329,7 @@ export class PlaceService {
         this.currPlace = updatedUsers[updatedUserIndex];
         this.currUnit = newUnit;
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -396,7 +396,7 @@ export class PlaceService {
         this.currPlace = updatedUsers[updatedUserIndex];
         this.currUnit = oldPlace.units[oldUnitIndex];
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexpostals-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),

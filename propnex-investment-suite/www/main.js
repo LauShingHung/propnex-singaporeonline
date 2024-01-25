@@ -552,7 +552,7 @@ var fbUser = /** @class */ (function () {
 }());
 
 var fbPostal = /** @class */ (function () {
-    function fbPostal(name, postal, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, locationMRT, locationSch, district, imageUrl, units) {
+    function fbPostal(name, postal, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, region, locationMRT, locationSch, district, imageUrl, units) {
         this.name = name;
         this.postal = postal;
         this.landArea = landArea;
@@ -566,6 +566,7 @@ var fbPostal = /** @class */ (function () {
         this.roomRate = roomRate;
         this.netOperatingProfit = netOperatingProfit;
         this.approvedUsage = approvedUsage;
+        this.region = region;
         this.locationMRT = locationMRT;
         this.locationSch = locationSch;
         this.district = district;
@@ -687,7 +688,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.fetchFBUsers = function () {
         var _this = this;
         return this.http
-            .get('https://propnexusers-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
+            .get('https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (resData) {
             var users = [];
             for (var key in resData) {
@@ -705,7 +706,7 @@ var AuthService = /** @class */ (function () {
         var _this = this;
         var newUser = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](email, [], [], name, password, [], 'user');
         return this.http
-            .post('https://propnexusers-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newUser))
+            .post('https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newUser))
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () {
             return _this.fbUsers;
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (fbUsers) {
@@ -729,7 +730,7 @@ var AuthService = /** @class */ (function () {
             var oldPlace = updatedUsers[updatedUserIndex];
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](oldPlace.email, oldPlace.favourites, oldPlace.generalRec, newName, newPassword, oldPlace.personalRec, oldPlace.userType);
             _this.currFbUser = updatedUsers[updatedUserIndex];
-            return _this.http.put("https://propnexusers-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbUsers.next(updatedUsers);
         }));
@@ -758,7 +759,7 @@ var AuthService = /** @class */ (function () {
             var uniqueRecArr = Array.from(new Set(newRecArr));
             updatedUsers[updatedUserIndex] = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](oldPlace.email, newFavArr, oldPlace.generalRec, oldPlace.name, oldPlace.password, uniqueRecArr, oldPlace.userType);
             _this.currFbUser = updatedUsers[updatedUserIndex];
-            return _this.http.put("https://propnexusers-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
+            return _this.http.put("https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/" + updatedUserIndex + ".json", __assign({}, updatedUsers[updatedUserIndex]));
         }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function () {
             _this._fbUsers.next(updatedUsers);
         }));
@@ -766,7 +767,7 @@ var AuthService = /** @class */ (function () {
     // remove place from users' favourites
     AuthService.prototype.removeFav = function (userInd, placeInd) {
         return this.http
-            .delete("https://propnexusers-default-rtdb.asia-southeast1.firebasedatabase.app/" + userInd + "/favourites/" + placeInd + ".json");
+            .delete("https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/" + userInd + "/favourites/" + placeInd + ".json");
     };
     AuthService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }
