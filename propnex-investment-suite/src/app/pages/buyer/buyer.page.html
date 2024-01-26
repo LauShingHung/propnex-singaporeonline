@@ -24,8 +24,6 @@
       
       <ion-row>
         <ion-col size="12">
-          <!-- Other filters -->
-      
           <!-- Accommodation type filter buttons -->
           <ion-button (click)="toggleAccommodationType('Residential')">Residential</ion-button>
           <ion-button (click)="toggleAccommodationType('Backpackers Hotel')">Backpackers' Hotel</ion-button>
@@ -34,6 +32,36 @@
           <ion-button (click)="toggleAccommodationType('Serviced Apartment')">Serviced Apartment</ion-button>
           <ion-button (click)="toggleAccommodationType('Workers Dormitories')">Workers' Dormitories</ion-button>
                   <!-- Add more buttons as needed -->
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Selected Accommodation Type: </ion-label>
+            <ion-note>{{ selectedAccommodationType.join(', ') || 'None' }}</ion-note>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Filter by Region</ion-label>
+            <ion-select placeholder="Select Region" [(ngModel)]="selectedRegion" (ionChange)="handleRegionChange($event.detail.value)"multiple>
+              <ion-select-option value="">All Types</ion-select-option>
+              <ion-select-option *ngFor="let type of regionTypes" [value]="type">{{ type }}</ion-select-option>
+            </ion-select>            
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <!-- Tenure type filter buttons -->
+          <ion-button (click)="setRegion('OCR')">OCR</ion-button>
+          <ion-button (click)="setRegion('CCR')">CCR</ion-button>
+          <ion-button (click)="setRegion('RCR')">RCR</ion-button>
         </ion-col>
       </ion-row>
 
@@ -70,13 +98,22 @@
           <!-- Other filters -->
       
           <!-- Budget filter buttons -->
-          <ion-button (click)="setBudgetRange(0, 10000)">0-10,000</ion-button>
-          <ion-button (click)="setBudgetRange(10001, 20000)">10,001-20,000</ion-button>
-          <ion-button (click)="setBudgetRange(20001, 30000)">20,001-30,000</ion-button>
-          <ion-button (click)="setBudgetRange(30001, 40000)">30,001-40,000</ion-button>
-          <ion-button (click)="setBudgetRange(40001, 50000)">40,001-50,000</ion-button>
-          <ion-button (click)="setBudgetRange(50001, 60000)">50,001-60,000</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 0, max: 1000000 })" [class.selected]="isBudgetRangeSelected({ min: 0, max: 1000000 })">0-1mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 1000001, max: 5000000 })" [class.selected]="isBudgetRangeSelected({ min: 1000001, max: 5000000 })">1mil-5mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 5000001, max: 10000000 })" [class.selected]="isBudgetRangeSelected({ min: 5000001, max: 10000000 })">5mil-10mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 10000001, max: 30000001 })" [class.selected]="isBudgetRangeSelected({ min: 10000001, max: 30000001 })">10mil-30mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 30000001, max: 50000000 })" [class.selected]="isBudgetRangeSelected({ min: 30000001, max: 50000000 })">30mil-50mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 50000001, max: 99999999999 })" [class.selected]="isBudgetRangeSelected({ min: 50000001, max: 99999999999 })">>50mil</ion-button>
           <!-- Add more buttons as needed -->
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label>Selected Budget Ranges:</ion-label>
+            <ion-note>{{ getSelectedBudgetRanges() || 'None' }}</ion-note>
+          </ion-item>
         </ion-col>
       </ion-row>
 
@@ -157,6 +194,15 @@
               </ion-label>
             </ion-item>
           </ion-list>
+        </ion-col>
+      </ion-row>
+
+            <!-- New row for displaying the number of results -->
+      <ion-row *ngIf="allFiltersFilled()" class="result-count-row">
+        <ion-col>
+          <ion-item lines="none" class="result-count-item">
+            <ion-label>Total Results: {{ filteredFBPostals.length }}</ion-label>
+          </ion-item>
         </ion-col>
       </ion-row>
   

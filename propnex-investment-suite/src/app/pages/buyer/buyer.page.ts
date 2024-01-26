@@ -8,6 +8,7 @@ import { AddBlockComponent } from '../units/add-block/add-block.component';
 import { PlaceService } from '../../services/place.service';
 import { EditProfileComponent } from '../home/main/edit-profile/edit-profile.component';
 import { FilterService } from '../../pages/filter.service'; // Import the FilterService
+import { SelectedHotelsService } from '../../services/TrackHotel.service'; // Replace with the correct path
 
 export const accommodationTypes = [
     'Residential',
@@ -23,6 +24,35 @@ export const tenureTypes = [
     '60 Years',
     'Freehold'
 ]; //tenure types
+
+export const regionTypes = [
+  'RCR',
+  'CCR',
+  'OCR'
+];  
+
+export const regionDistrictMapping = {
+  'RCR': [
+    'District 01 - Raffles Place, Marina, Cecil', 'District 02 - Tanjong Pagar, Chinatown',
+    'District 03 - Tiong Bahru, Alexandra, Queenstown', 'District 04 - Mount Faber, Telok Blangah, Harbourfront',
+    'District 06 - Clarke Quay, City Hall', 'District 16 - Bedok, Upper East Coast, Siglap',
+    'District 17 - Changi, Flora, Loyang', 'District 18 - Tampines, Pasir Ris',
+    'District 19 - Punggol, Sengkang, Serangoon Gardens', 'District 21 - Upper Bukit Timah, Ulu Pandan, Clementi Park',
+    'District 22 - Boon Lay, Jurong, Tuas', 'District 23 - Choa Chu Kang, Diary Farm, Hillview, Bukit Panjang, Bukit Batok',
+    'District 24 - Kranji, Lim Chu Kang, Tengah', 'District 25 - Woodlands, Admiralty',
+    'District 26 - Upper Thomson, Mandai', 'District 27 - Sembawang, Yishun, Admiralty',
+    'District 28 - Yio Chu Kang, Seletar',
+  ],
+  'CCR': [
+    'District 09 - Orchard Road, River Valley', 'District 10 - Bukit Timah, Holland, Balmoral',
+    'District 11 - Novena, Newton, Thomson',
+  ],
+  'OCR': [
+    'District 05 - Buona Vista, Pasir Panjang, Clementi', 'District 14 - Geylang, Paya Lebar, Sims',
+    'District 15 - Joo Chiat, Marina Parade, Katong', 'District 20 - Ang Mo Kio, Bishan, Thomson',
+  ],
+};
+
 export const districtTypes = [ 
     "District 01 - Raffles Place, Marina, Cecil",
     'District 02 - Tanjong Pagar, Chinatown',
@@ -84,6 +114,11 @@ export class BuyerPage implements OnInit {
   selectedDistrict: any[] = [];
   selectedTenure: any[] = []; //initially no filter
   filteredFBPostals: fbPostal[]; //hold filtered results
+  regionTypes = regionTypes;
+  selectedRegions: string[] = [];
+  selectedBudgetRanges: { min: number, max: number }[] = [];
+  selectedDistricts: string[] = [];
+  availableDistricts: string[] = [];
 
 
   constructor(
@@ -91,7 +126,8 @@ export class BuyerPage implements OnInit {
     private router: Router,
     private modalCtrl: ModalController,
     private filterService: FilterService, 
-    private placeService: PlaceService
+    private placeService: PlaceService,
+    private selectedHotelsService: SelectedHotelsService
   ) { }
 
 
@@ -127,6 +163,38 @@ export class BuyerPage implements OnInit {
     this.selectedDistrict = selectedTypes;
     this.filterPostals();
   }
+
+  handleRegionChange(selectedRegion: string) {
+    if (this.selectedRegions.includes(selectedRegion)) {
+      // Remove the region if it's already selected
+      this.selectedRegions = this.selectedRegions.filter((r) => r !== selectedRegion);
+    } else {
+      // Add the region if it's not selected
+      this.selectedRegions.push(selectedRegion);
+    }
+  
+    // Update the selectedDistricts based on all selected regions
+    this.selectedDistricts = this.getSelectedDistricts();
+  
+    this.filterPostals();
+  }
+
+  getSelectedDistricts(): string[] {
+    const districts: string[] = [];
+    for (const region of this.selectedRegions) {
+      districts.push(...(regionDistrictMapping[region] || []));
+    }
+    return districts;
+  }
+  
+  getDistrictsForRegion(region: string): string[] {
+    return regionDistrictMapping[region] || [];
+  }
+  
+  handleDistrictChange() {
+    this.filterPostals();
+  }
+
   
 
   handlePriceChange() {
@@ -151,10 +219,26 @@ export class BuyerPage implements OnInit {
     }
   }
 
-  setBudgetRange(minValue: number, maxValue: number) {
-    this.minPrice = minValue;
-    this.maxPrice = maxValue;
+  toggleBudgetRange(range: { min: number, max: number }) {
+    const index = this.selectedBudgetRanges.findIndex(r => r.min === range.min && r.max === range.max);
+  
+    if (index !== -1) {
+      // Range is already selected, remove it
+      this.selectedBudgetRanges.splice(index, 1);
+    } else {
+      // Range is not selected, add it
+      this.selectedBudgetRanges.push(range);
+    }
+  
     this.filterPostals();
+  }
+  
+  isBudgetRangeSelected(range: { min: number, max: number }): boolean {
+    return this.selectedBudgetRanges.some(r => r.min === range.min && r.max === range.max);
+  }
+
+  getSelectedBudgetRanges(): string {
+    return this.selectedBudgetRanges.map(range => `${range.min}-${range.max}`).join(', ');
   }
 
   setRoomRange(minValue: number, maxValue: number) {
@@ -175,6 +259,11 @@ export class BuyerPage implements OnInit {
     }
   
     console.log(this.selectedAccommodationType); // Log the array to check its contents
+    this.filterPostals();
+  }
+  
+  setAccommodationType(type: string[]) {
+    this.selectedAccommodationType = type;
     this.filterPostals();
   }
   
@@ -209,8 +298,7 @@ export class BuyerPage implements OnInit {
     this.filteredFBPostals = this.loadedFBPostals.filter(postal =>
       (!this.selectedAccommodationType || this.selectedAccommodationType.includes(postal.approvedUsage)) &&
       (!this.selectedDistrict || this.selectedDistrict.includes(postal.district)) &&
-      (!this.minPrice || postal.askingPrice >= this.minPrice) &&
-      (!this.maxPrice || postal.askingPrice <= this.maxPrice) &&
+      this.checkPriceInRange(postal.askingPrice) &&
       (!this.minRooms || postal.numRooms >= this.minRooms) &&
       (!this.maxRooms || postal.numRooms <= this.maxRooms) &&
       (!this.selectedTenure || this.selectedTenure.includes(postal.tenure))
@@ -219,13 +307,28 @@ export class BuyerPage implements OnInit {
     return this.filteredFBPostals;
   }
   
+  isSelectedRegion(postalRegion: string): boolean {
+    return (
+      !this.selectedRegions.length ||
+      this.selectedRegions.includes(postalRegion)
+    );
+  }
   
-
-  // navigate to place details page
+  
+  checkPriceInRange(price: number): boolean {
+    if (this.selectedBudgetRanges.length > 0) {
+      return this.selectedBudgetRanges.some(range =>
+        price >= range.min && price <= range.max
+      );
+    } else {
+      return (!this.minPrice || price >= this.minPrice) && (!this.maxPrice || price <= this.maxPrice);
+    }
+  }
+  
   onSelectPlace(postal: fbPostal) {
     this.router.navigate(['/', 'units', postal.postal]);
+    this.selectedHotelsService.addSelectedHotel(postal);
   }
-
 
   // navigate to edit user profile form
   onEditProfile() {
