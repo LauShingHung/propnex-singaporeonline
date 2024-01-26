@@ -50,7 +50,7 @@ export class PlaceService {
   fetchFBPostals() {
     return this.http
       .get(
-        `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
+        `https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
       )
       .pipe(
         map(resData => {
@@ -72,6 +72,7 @@ export class PlaceService {
                   resData[key].roomRate,
                   resData[key].netOperatingProfit,
                   resData[key].approvedUsage,
+                  resData[key].region,
                   resData[key].locationMRT,
                   resData[key].locationSch,
                   resData[key].district,
@@ -109,7 +110,7 @@ export class PlaceService {
   fetchFBRecs() {
     return this.http
       .get(
-        `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
+        `https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
       )
       .pipe(
         map(resData => {
@@ -135,7 +136,7 @@ export class PlaceService {
   }
 
   // add new place
-  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: number, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, LocationMRT: string, LocationSch: string, district: string) {
+  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: number, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, region: string, LocationMRT: string, LocationSch: string, district: string) {
     const newBlock = new fbPostal(
       name,
       postal,
@@ -150,12 +151,13 @@ export class PlaceService {
       roomRate,
       netOperatingProfit,
       approvedUsage,
+      region,
       LocationMRT,
       LocationSch,
       district
     );
     return this.http
-      .post('https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
+      .post('https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
       { ...newBlock })
       .pipe(
         switchMap(resData => {
@@ -198,13 +200,14 @@ export class PlaceService {
           oldPlace.roomRate,
           oldPlace.netOperatingProfit,
           oldPlace.approvedUsage,
+          oldPlace.region,
           oldPlace.locationMRT,
           oldPlace.locationSch,
           oldPlace.imageUrl
         );
         this.currPlace = updatedUsers[updatedUserIndex];
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -254,6 +257,7 @@ export class PlaceService {
           oldPlace.roomRate,
           oldPlace.netOperatingProfit,
           oldPlace.approvedUsage,
+          oldPlace.region,
           oldPlace.locationMRT,
           oldPlace.locationSch,
           oldPlace.district,
@@ -263,7 +267,7 @@ export class PlaceService {
         this.currPlace = updatedPlaces[updatedPlaceIndex];
         this.currUnit = newUnit;
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedPlaceIndex}.json`,
+          `https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedPlaceIndex}.json`,
           { ...updatedPlaces[updatedPlaceIndex] }
         );
       }),
@@ -306,6 +310,7 @@ export class PlaceService {
           oldPlace.roomRate,
           oldPlace.netOperatingProfit,
           oldPlace.approvedUsage,
+          oldPlace.region,
           oldPlace.locationMRT,
           oldPlace.locationSch,
           oldPlace.district,
@@ -315,7 +320,7 @@ export class PlaceService {
         this.currPlace = updatedUsers[updatedUserIndex];
         this.currUnit = newUnit;
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -372,6 +377,7 @@ export class PlaceService {
           oldPlace.roomRate,
           oldPlace.netOperatingProfit,
           oldPlace.approvedUsage,
+          oldPlace.region,
           oldPlace.locationMRT,
           oldPlace.locationSch,
           oldPlace.district,
@@ -381,7 +387,7 @@ export class PlaceService {
         this.currPlace = updatedUsers[updatedUserIndex];
         this.currUnit = oldPlace.units[oldUnitIndex];
         return this.http.put(
-          `https://propnexpostals-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexpostals-b7ebd-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),

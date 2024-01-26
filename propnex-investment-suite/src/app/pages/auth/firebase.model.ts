@@ -25,6 +25,7 @@ export class fbPostal {
     public roomRate: Float32Array,
     public netOperatingProfit: Float32Array,
     public approvedUsage: string,
+    public region: string,
     public locationMRT: string,
     public locationSch: string,
     public district: string,

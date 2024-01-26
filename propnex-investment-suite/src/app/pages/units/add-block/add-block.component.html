@@ -29,7 +29,11 @@
               <ion-input 
                 type="text"
                 formControlName="postalCode"
+                (input)="showPostalCodeWarning()"
+                (blur)="hidePostalCodeWarning()"
               ></ion-input>
+              <ion-icon *ngIf="showWarning" name="warning" color="warning"></ion-icon>
+              <ion-text color="warning" *ngIf="showWarning">Please enter a 6-digit numerical postal code.</ion-text>
             </ion-item>
 
             <ion-item>
@@ -121,6 +125,15 @@
             </ion-item>
 
             <ion-item>
+              <ion-label position="floating">Region</ion-label>
+              <ion-select formControlName="region" single="true">
+                <ion-select-option value="OCR">OCR</ion-select-option>
+                <ion-select-option value="CCR">CCR</ion-select-option>
+                <ion-select-option value="RCR">RCR</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
               <ion-label position="floating">Location(MRT)</ion-label>
               <ion-input 
                 type="text"
@@ -170,7 +183,7 @@
               ></ion-input>
             </ion-item>
 
-            <ion-row>
+            <!-- <ion-row>
               <ion-col>
                 <ion-button 
                 (click)="uploadBlockImage()" 
@@ -178,8 +191,25 @@
                 >Upload Place Image
                 </ion-button>
               </ion-col>
-            </ion-row>
+            </ion-row> -->
 
+            <ion-row>
+              <ion-col>
+                <div *ngIf="postalCodeError" class="error-message">
+                  {{ postalCodeError }}
+                </div>
+                <input type="file" (change)="onFileChanged($event)" hidden #fileInput>
+                <ion-button (click)="fileInput.click()" expand="block">Upload Place Image</ion-button>
+              </ion-col>
+            </ion-row>
+        
+            <!-- Image Preview Section -->
+            <ion-row *ngIf="imagePreview">
+              <ion-col>
+                <img [src]="imagePreview" style="max-width: 100%; height: auto;">
+              </ion-col>
+            </ion-row>
+            
             <ion-row>
               <ion-col>
                 <ion-button 

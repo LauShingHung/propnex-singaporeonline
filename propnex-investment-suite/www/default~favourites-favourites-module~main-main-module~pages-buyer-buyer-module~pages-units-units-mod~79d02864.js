@@ -104,6 +104,18 @@ var PlaceService = /** @class */ (function () {
             _this._fbPostals.next(postals);
         }));
     };
+    PlaceService.prototype.fetchPlaceDetail = function (postalId) {
+        var _this = this;
+        return this.fbPostals.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (postals) {
+            var foundPostal = postals.find(function (p) { return p.postal === postalId; });
+            if (!foundPostal) {
+                throw new Error("Postal with ID " + postalId + " not found");
+            }
+            return foundPostal;
+        }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["tap"])(function (currPlace) {
+            _this._currPlace = currPlace; // Set the current place
+        }));
+    };
     // fetch recommendation data
     PlaceService.prototype.fetchFBRecs = function () {
         var _this = this;
