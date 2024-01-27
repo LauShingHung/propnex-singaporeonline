@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["block-detail-block-detail-module"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~block-detail-block-detail-module~units-block-detail-block-detail-module"],{
 
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/units/block-detail/add-unit/add-unit.component.html":
 /*!*****************************************************************************************************************!*\
@@ -275,6 +275,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_place_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/place.service */ "./src/app/services/place.service.ts");
 /* harmony import */ var _add_unit_add_unit_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./add-unit/add-unit.component */ "./src/app/pages/units/block-detail/add-unit/add-unit.component.ts");
 /* harmony import */ var _edit_block_edit_block_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit-block/edit-block.component */ "./src/app/pages/units/block-detail/edit-block/edit-block.component.ts");
+/* harmony import */ var _filter_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../filter.service */ "./src/app/pages/filter.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -330,8 +331,9 @@ var __importDefault = (undefined && undefined.__importDefault) || function (mod)
 
 
 
+
 var BlockDetailPage = /** @class */ (function () {
-    function BlockDetailPage(authService, navCtrl, route, router, actionSheetCtrl, modalCtrl, placeService, alertController) {
+    function BlockDetailPage(authService, navCtrl, route, router, actionSheetCtrl, modalCtrl, placeService, filterService, alertController) {
         this.authService = authService;
         this.navCtrl = navCtrl;
         this.route = route;
@@ -339,6 +341,7 @@ var BlockDetailPage = /** @class */ (function () {
         this.actionSheetCtrl = actionSheetCtrl;
         this.modalCtrl = modalCtrl;
         this.placeService = placeService;
+        this.filterService = filterService;
         this.alertController = alertController;
     }
     BlockDetailPage.prototype.ngOnInit = function () {
@@ -358,7 +361,17 @@ var BlockDetailPage = /** @class */ (function () {
         this.fbRecsSub = this.placeService.fbRecs.subscribe(function (fbRecs) {
             _this.loadedFBRecs = fbRecs;
         });
+        this.savedFilters = this.filterService.getFilters();
+        // Now you can use this.savedFilters in this component
+        console.log(this.savedFilters);
     };
+    // ionViewWillEnter() {
+    //   this.currPlace = this.placeService.currPlace;
+    //   this.placeService.fetchFBPostals().subscribe(() => {
+    //   });
+    //   this.placeService.fetchFBRecs().subscribe(() => {
+    //   });
+    // }
     BlockDetailPage.prototype.ionViewWillEnter = function () {
         var _this = this;
         this.route.paramMap.subscribe(function (paramMap) {
@@ -499,7 +512,17 @@ var BlockDetailPage = /** @class */ (function () {
         });
     };
     BlockDetailPage.prototype.generateWhatsAppLink = function () {
-        var messageTemplate = "Hello Jared,\n  \nI am [Your Name]. I came across the listing [Insert Link to Property] and am interested in learning more about it. Here are my requirements:\n  \n  1. Accommodation Type: [Insert Accommodation Type]\n  2. Preferred District/Area: [Insert District Type]\n  3. Budget Range: [Insert Budget]\n  4. Number of Rooms Required: [Insert Number of Rooms]\n  5. Tenure Type (e.g., leasehold, freehold): [Insert Tenure Type]\n  \n  Please feel free to contact me by replying to this message for further discussion. Looking forward to hearing from you!\n  \n  Best regards,\n  [Your Name]";
+        // Get saved filters from the FilterService
+        var savedFilters = this.filterService.getFilters();
+        // Extract values from saved filters
+        var accommodationType = savedFilters.selectedAccommodationType || 'N/A';
+        var districtType = savedFilters.selectedDistrict || 'N/A';
+        var budgetRange = "(" + savedFilters.minPrice + " - " + savedFilters.maxPrice + ")";
+        var numberOfRooms = "(" + savedFilters.minRooms + " - " + savedFilters.maxRooms + ")";
+        var username = savedFilters.username;
+        var propertyname = this.currPlace.name;
+        var tenure = savedFilters.tenure;
+        var messageTemplate = "Hello Jared,\n  \n  I am " + username + ". I came across this property, " + propertyname + " and am interested in learning more about it. Here are my requirements:\n  \n  1. Accommodation Type: " + accommodationType + "\n  2. Preferred District/Area: " + districtType + "\n  3. Budget Range: " + budgetRange + "\n  4. Number of Rooms Required: " + numberOfRooms + "\n  5. Tenure Type (e.g., leasehold, freehold): " + tenure + "\n  \n  Please feel free to contact me by replying to this message for further discussion. Looking forward to hearing from you!\n  \n  Best regards,\n  [Your Name]";
         // URL encode the message
         var encodedMessage = encodeURIComponent(messageTemplate);
         var whatsappLink = "https://wa.me/6591520660?text=" + encodedMessage;
@@ -518,6 +541,7 @@ var BlockDetailPage = /** @class */ (function () {
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ActionSheetController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
         { type: _services_place_service__WEBPACK_IMPORTED_MODULE_4__["PlaceService"] },
+        { type: _filter_service__WEBPACK_IMPORTED_MODULE_7__["FilterService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
     ]; };
     BlockDetailPage = __decorate([
@@ -533,6 +557,7 @@ var BlockDetailPage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ActionSheetController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
             _services_place_service__WEBPACK_IMPORTED_MODULE_4__["PlaceService"],
+            _filter_service__WEBPACK_IMPORTED_MODULE_7__["FilterService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
     ], BlockDetailPage);
     return BlockDetailPage;
@@ -655,4 +680,4 @@ var EditBlockComponent = /** @class */ (function () {
 /***/ })
 
 }]);
-//# sourceMappingURL=block-detail-block-detail-module.js.map
+//# sourceMappingURL=default~block-detail-block-detail-module~units-block-detail-block-detail-module.js.map

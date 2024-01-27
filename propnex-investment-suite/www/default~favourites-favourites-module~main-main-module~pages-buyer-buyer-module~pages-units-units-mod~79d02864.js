@@ -87,9 +87,6 @@ var PlaceService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    PlaceService.prototype.checkPostalCodeExists = function (postal) {
-        return this.fbPostals.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (postals) { return postals.some(function (place) { return place.postal === postal; }); }));
-    };
     // fetch place data
     PlaceService.prototype.fetchFBPostals = function () {
         var _this = this;

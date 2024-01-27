@@ -316,7 +316,7 @@ var routes = [
     },
     {
         path: 'buyer',
-        loadChildren: function () { return Promise.all(/*! import() | pages-buyer-buyer-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("pages-buyer-buyer-module")]).then(__webpack_require__.bind(null, /*! ./pages/buyer/buyer.module */ "./src/app/pages/buyer/buyer.module.ts")).then(function (m) { return m.BuyerPageModule; }); },
+        loadChildren: function () { return Promise.all(/*! import() | pages-buyer-buyer-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-buyer-buyer-module")]).then(__webpack_require__.bind(null, /*! ./pages/buyer/buyer.module */ "./src/app/pages/buyer/buyer.module.ts")).then(function (m) { return m.BuyerPageModule; }); },
         canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
     }
 ];

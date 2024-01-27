@@ -236,7 +236,7 @@ export class BlockDetailPage implements OnInit {
   Please feel free to contact me by replying to this message for further discussion. Looking forward to hearing from you!
   
   Best regards,
-  [Your Name]`;
+  ${username}`;
 
     // URL encode the message
     const encodedMessage = encodeURIComponent(messageTemplate);

@@ -153,7 +153,7 @@ var routes = [
     },
     {
         path: ':postalId',
-        loadChildren: function () { return __webpack_require__.e(/*! import() | src-app-pages-units-block-detail-block-detail-module */ "block-detail-block-detail-module").then(__webpack_require__.bind(null, /*! src/app/pages/units/block-detail/block-detail.module */ "./src/app/pages/units/block-detail/block-detail.module.ts")).then(function (m) { return m.BlockDetailPageModule; }); }
+        loadChildren: function () { return Promise.all(/*! import() | src-app-pages-units-block-detail-block-detail-module */[__webpack_require__.e("default~block-detail-block-detail-module~units-block-detail-block-detail-module"), __webpack_require__.e("common")]).then(__webpack_require__.bind(null, /*! src/app/pages/units/block-detail/block-detail.module */ "./src/app/pages/units/block-detail/block-detail.module.ts")).then(function (m) { return m.BlockDetailPageModule; }); }
     }
 ];
 var MainPageRoutingModule = /** @class */ (function () {
