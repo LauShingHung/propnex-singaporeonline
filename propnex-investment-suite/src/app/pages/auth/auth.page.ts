@@ -49,6 +49,7 @@ export class AuthPage implements OnInit, OnDestroy {
     const email = form.value.email;
     const password = form.value.password;
     const name = form.value.name;
+    const userType = form.value.userType;
 
     form.reset();
 
@@ -74,7 +75,7 @@ export class AuthPage implements OnInit, OnDestroy {
       }
     } else {
       // signup
-      this.authService.addUser(email, name, password).subscribe(() => {
+      this.authService.addUser(email, name, password, userType).subscribe(() => {
 
       });
       this.isLogin = true;

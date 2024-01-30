@@ -75,6 +75,15 @@
               ></ion-input>
             </ion-item>
 
+            <ion-item>
+              <ion-label position="floating">User Type</ion-label>
+              <ion-select ngModel name="userType" required>
+                <ion-select-option value="propertyAgent">Property Agent</ion-select-option>
+                <ion-select-option value="broker">Broker</ion-select-option>
+                <ion-select-option value="regularUser">Regular User</ion-select-option>
+              </ion-select>
+            </ion-item>
+
             <ion-item 
               *ngIf="!nameCtrl.valid && nameCtrl.touched"
               lines="none"

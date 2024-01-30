@@ -702,9 +702,9 @@ var AuthService = /** @class */ (function () {
         }));
     };
     // add new user
-    AuthService.prototype.addUser = function (email, name, password) {
+    AuthService.prototype.addUser = function (email, name, password, userType) {
         var _this = this;
-        var newUser = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](email, [], [], name, password, [], 'user');
+        var newUser = new _pages_auth_firebase_model__WEBPACK_IMPORTED_MODULE_4__["fbUser"](email, [], [], name, password, [], userType);
         return this.http
             .post('https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json', __assign({}, newUser))
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function () {

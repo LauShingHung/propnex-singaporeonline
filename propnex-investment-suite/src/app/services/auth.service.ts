@@ -79,7 +79,7 @@ export class AuthService {
   }
 
   // add new user
-  addUser(email: string, name: string, password: string) {
+  addUser(email: string, name: string, password: string, userType: string) {
     const newUser = new fbUser(
       email,
       [],
@@ -87,7 +87,7 @@ export class AuthService {
       name,
       password,
       [],
-      'user'
+      userType
     );
     return this.http
       .post('https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
