@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { PlaceService } from '../../../services/place.service';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-block',
@@ -12,6 +13,7 @@ import { PlaceService } from '../../../services/place.service';
 export class AddBlockComponent implements OnInit {
 
   addBlockForm: FormGroup;
+  postalCodeError: string = null;
 
 
   constructor(
@@ -26,7 +28,11 @@ export class AddBlockComponent implements OnInit {
         updateOn: 'blur',
       }), 
       postalCode: new FormControl(null, {
-        updateOn: 'blur',
+        updateOn: 'change',
+        validators: [
+          Validators.required,
+          Validators.pattern(/^\d{6}$/), // Ensure it's numeric and exactly 6 digits
+        ]
       }),
       landArea: new FormControl(null, {
         updateOn: 'blur',
@@ -101,8 +107,18 @@ export class AddBlockComponent implements OnInit {
     if (!this.addBlockForm.valid) {
       return;
     }
-    const projectName = this.addBlockForm.value.projectName;
+
     const postalCode = this.addBlockForm.value.postalCode;
+
+    this.placeService.checkPostalCodeExists(postalCode).subscribe((exists: boolean) => {
+      if (exists) {
+        // Postal code already exists, handle accordingly (e.g., show an error message)
+        this.postalCodeError = "Postal code already exists. Please choose a unique postal code.";
+      } else {
+        this.postalCodeError = null;  // Clear any previous error
+        // Postal code is unique, proceed with adding the new block
+    
+    const projectName = this.addBlockForm.value.projectName;
     const landArea = this.addBlockForm.value.landArea;
     const grossFloorArea = this.addBlockForm.value.grossFloorArea;
     const tenure = this.addBlockForm.value.tenure;
@@ -119,15 +135,38 @@ export class AddBlockComponent implements OnInit {
     const district = this.addBlockForm.value.district;
     const region = this.addBlockForm.value.region;
     
-    this.placeService.addBlock(projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, region, locationMRT,locationSch, district).subscribe(() => {
-
+    this.placeService.addBlock(
+      projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey,
+      askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage,region,
+      locationMRT, locationSch, district
+    ).subscribe(() => {
+      // Handle success if needed
+      this.showSuccess("Place added successfully.");
     });
     this.addBlockForm.reset();
-    this.modalCtrl.dismiss();
-  }
+      this.modalCtrl.dismiss();
+    }
 
-  // upload place image
-  uploadBlockImage() {
-    console.log("choose block image to upload")
-  }
+  })
+    }
+    private showSuccess(message: string) {
+      // Implement your success handling logic here
+      console.log(message); // You can log the success message to the console
+      // You can also display the success message to the user using a toast, alert, or any other UI component.
+    }
+    
+    showWarning: boolean = false;
+    
+    showPostalCodeWarning() {
+      this.showWarning = true;
+    }
+    
+    hidePostalCodeWarning() {
+      const postalCodeControl = this.addBlockForm.get('postalCode');
+    
+      if (postalCodeControl.valid) {
+        this.showWarning = false;
+      }
+    }
+
 }
