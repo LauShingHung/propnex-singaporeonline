@@ -4,6 +4,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { fbPostal, fbRec, fbUnit } from '../pages/auth/firebase.model';
 import { Observable } from 'rxjs';
+import { combineLatest} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -46,12 +47,76 @@ export class PlaceService {
     private http: HttpClient
   ) { }
 
-  checkPostalCodeExists(postal: string): Observable<boolean> {
+  checkPostalCodeExists(postal: string, newListing: fbPostal): Observable<{ errorMessage: string | null, similarity: number }> {
     return this.fbPostals.pipe(
       take(1),
-      map(postals => postals.some(place => place.postal === postal))
+      switchMap(postals => {
+        const exactMatch = postals.some(place => place.postal === postal);
+        if (exactMatch) {
+          // If exact match found, return an error message for duplicate postal
+          return of({ errorMessage: 'A listing with the same postal code already exists.', similarity: null });
+        } else {
+          // Calculate cosine similarity for other attribute values
+          const cosineSimilarityThreshold = 0.8; // Set your threshold here
+          const similarityChecks = postals.map(place => this.calculateCosineSimilarity(newListing, place));
+          return combineLatest(similarityChecks).pipe(
+            map(similarities => {
+              const maxSimilarity = Math.max(...similarities);
+              if (maxSimilarity > cosineSimilarityThreshold) {
+                // If similarity is above threshold, return an error message for high similarity
+                return {
+                  errorMessage: `A listing with similar attributes already exists. Please review. Similarity: ${maxSimilarity}`,
+                  similarity: maxSimilarity
+                };
+              } else {
+                // Otherwise, return null to indicate no error
+                return { errorMessage: null, similarity: null };
+              }
+            })
+          );
+        }
+      })
     );
   }
+  
+  
+
+
+
+calculateCosineSimilarity(listing1: fbPostal, listing2: fbPostal): number {
+  // Calculate dot product
+  let dotProduct = 0;
+  for (const key in listing1) {
+    if (listing1.hasOwnProperty(key) && listing2.hasOwnProperty(key)) {
+      if (typeof listing1[key] === 'number' && typeof listing2[key] === 'number') {
+        dotProduct += listing1[key] * listing2[key];
+      }
+    }
+  }
+
+  // Calculate magnitude of each vector
+  let magnitude1 = 0;
+  let magnitude2 = 0;
+  for (const key in listing1) {
+    if (listing1.hasOwnProperty(key) && typeof listing1[key] === 'number') {
+      magnitude1 += Math.pow(listing1[key], 2);
+    }
+  }
+  for (const key in listing2) {
+    if (listing2.hasOwnProperty(key) && typeof listing2[key] === 'number') {
+      magnitude2 += Math.pow(listing2[key], 2);
+    }
+  }
+  magnitude1 = Math.sqrt(magnitude1);
+  magnitude2 = Math.sqrt(magnitude2);
+
+  // Calculate cosine similarity
+  let similarity = dotProduct / (magnitude1 * magnitude2);
+
+  // Return similarity score
+  return similarity;
+}
+
 
 
   // fetch place data
