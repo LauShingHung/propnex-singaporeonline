@@ -247,7 +247,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu side=\"start\">\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>\n          Menu\n        </ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list>\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n            <ion-label>Home</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/units\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label> Seller Interface</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/buyer\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label> Buyer Interface</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/stats\">\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\n            <ion-label>View Statistical Insights</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n            <ion-label>Logout</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet main></ion-router-outlet>\n</ion-app>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu side=\"start\">\n    <ion-header>\n      <ion-toolbar>\n        <ion-title>\n          Menu\n        </ion-title>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list>\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/home/tabs/main\">\n            <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n            <ion-label>Home</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/units\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label>Seller Interface</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/buyer\">\n            <ion-icon name=\"business\" slot=\"start\"></ion-icon>\n            <ion-label> Buyer Interface</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" routerLink=\"/stats\">\n            <ion-icon name=\"bar-chart\" slot=\"start\"></ion-icon>\n            <ion-label>View Statistical Insights</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n        <ion-menu-toggle>\n          <ion-item lines=\"none\" (click)=\"onLogout()\" button>\n            <ion-icon name=\"exit\" slot=\"start\"></ion-icon>\n            <ion-label>Logout</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet main></ion-router-outlet>\n</ion-app>\n");
 
 /***/ }),
 
@@ -286,7 +286,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm5/router.js");
-/* harmony import */ var _pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/auth/auth.guard */ "./src/app/pages/auth/auth.guard.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/auth/auth.guard */ "./src/app/pages/auth/auth.guard.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -296,28 +297,33 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
+    {
+        path: '',
+        component: _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]
+    },
     { path: '', redirectTo: 'auth', pathMatch: 'full' },
     { path: 'auth', loadChildren: function () { return __webpack_require__.e(/*! import() | pages-auth-auth-module */ "pages-auth-auth-module").then(__webpack_require__.bind(null, /*! ./pages/auth/auth.module */ "./src/app/pages/auth/auth.module.ts")).then(function (m) { return m.AuthPageModule; }); } },
     {
         path: 'home',
         loadChildren: function () { return __webpack_require__.e(/*! import() | pages-home-home-module */ "pages-home-home-module").then(__webpack_require__.bind(null, /*! ./pages/home/home.module */ "./src/app/pages/home/home.module.ts")).then(function (m) { return m.HomePageModule; }); },
-        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
+        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     },
     {
         path: 'stats',
         loadChildren: function () { return __webpack_require__.e(/*! import() | pages-stats-stats-module */ "pages-stats-stats-module").then(__webpack_require__.bind(null, /*! ./pages/stats/stats.module */ "./src/app/pages/stats/stats.module.ts")).then(function (m) { return m.StatsPageModule; }); },
-        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
+        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     },
     {
         path: 'units',
         loadChildren: function () { return Promise.all(/*! import() | pages-units-units-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("pages-units-units-module")]).then(__webpack_require__.bind(null, /*! ./pages/units/units.module */ "./src/app/pages/units/units.module.ts")).then(function (m) { return m.UnitsPageModule; }); },
-        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
+        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     },
     {
         path: 'buyer',
         loadChildren: function () { return Promise.all(/*! import() | pages-buyer-buyer-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("default~pages-buyer-buyer-module~pages-units-units-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-buyer-buyer-module")]).then(__webpack_require__.bind(null, /*! ./pages/buyer/buyer.module */ "./src/app/pages/buyer/buyer.module.ts")).then(function (m) { return m.BuyerPageModule; }); },
-        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_2__["AuthGuard"]]
+        canLoad: [_pages_auth_auth_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuard"]]
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -379,6 +385,12 @@ var AppComponent = /** @class */ (function () {
         this.router = router;
         this.initializeApp();
     }
+    AppComponent.prototype.ngOnInit = function () {
+        this.currUser = this.authService.currFbUser;
+    };
+    AppComponent.prototype.ionViewWillEnter = function () {
+        this.currUser = this.authService.currFbUser;
+    };
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
@@ -428,12 +440,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm5/core.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm5/platform-browser.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm5/router.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm5/ionic-angular.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm5/http.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm5/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm5/ionic-angular.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm5/http.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -449,20 +463,22 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
-            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
+            declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]],
             entryComponents: [],
-            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"]],
+            imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"]],
             providers: [
-                _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
-                _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
-                { provide: _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicRouteStrategy"] }
+                _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"],
+                _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_6__["SplashScreen"],
+                { provide: _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"] }
             ],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]]
+            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
         })
     ], AppModule);
     return AppModule;

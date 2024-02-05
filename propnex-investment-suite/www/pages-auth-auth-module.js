@@ -181,7 +181,7 @@ var AuthPage = /** @class */ (function () {
                 if (this.result.password === password) {
                     this.authService.currFbUser = this.result;
                     this.authService.login();
-                    this.router.navigateByUrl('/units');
+                    this.router.navigateByUrl('/home');
                 }
                 else {
                     // incorrect password

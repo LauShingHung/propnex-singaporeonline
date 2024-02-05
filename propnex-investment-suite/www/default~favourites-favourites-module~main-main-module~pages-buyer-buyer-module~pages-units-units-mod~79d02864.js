@@ -47,6 +47,7 @@ var __spreadArrays = (undefined && undefined.__spreadArrays) || function () {
 
 
 
+
 var PlaceService = /** @class */ (function () {
     function PlaceService(http) {
         this.http = http;
@@ -87,6 +88,65 @@ var PlaceService = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    PlaceService.prototype.checkPostalCodeExists = function (postal, newListing) {
+        var _this = this;
+        return this.fbPostals.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["take"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["switchMap"])(function (postals) {
+            var exactMatch = postals.some(function (place) { return place.postal === postal; });
+            if (exactMatch) {
+                // If exact match found, return an error message for duplicate postal
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])({ errorMessage: 'A listing with the same postal code already exists.', similarity: null });
+            }
+            else {
+                // Calculate cosine similarity for other attribute values
+                var cosineSimilarityThreshold_1 = 0.8; // Set your threshold here
+                var similarityChecks = postals.map(function (place) { return _this.calculateCosineSimilarity(newListing, place); });
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["combineLatest"])(similarityChecks).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (similarities) {
+                    var maxSimilarity = Math.max.apply(Math, similarities);
+                    if (maxSimilarity > cosineSimilarityThreshold_1) {
+                        // If similarity is above threshold, return an error message for high similarity
+                        return {
+                            errorMessage: "A listing with similar attributes already exists. Please review. Similarity: " + maxSimilarity,
+                            similarity: maxSimilarity
+                        };
+                    }
+                    else {
+                        // Otherwise, return null to indicate no error
+                        return { errorMessage: null, similarity: null };
+                    }
+                }));
+            }
+        }));
+    };
+    PlaceService.prototype.calculateCosineSimilarity = function (listing1, listing2) {
+        // Calculate dot product
+        var dotProduct = 0;
+        for (var key in listing1) {
+            if (listing1.hasOwnProperty(key) && listing2.hasOwnProperty(key)) {
+                if (typeof listing1[key] === 'number' && typeof listing2[key] === 'number') {
+                    dotProduct += listing1[key] * listing2[key];
+                }
+            }
+        }
+        // Calculate magnitude of each vector
+        var magnitude1 = 0;
+        var magnitude2 = 0;
+        for (var key in listing1) {
+            if (listing1.hasOwnProperty(key) && typeof listing1[key] === 'number') {
+                magnitude1 += Math.pow(listing1[key], 2);
+            }
+        }
+        for (var key in listing2) {
+            if (listing2.hasOwnProperty(key) && typeof listing2[key] === 'number') {
+                magnitude2 += Math.pow(listing2[key], 2);
+            }
+        }
+        magnitude1 = Math.sqrt(magnitude1);
+        magnitude2 = Math.sqrt(magnitude2);
+        // Calculate cosine similarity
+        var similarity = dotProduct / (magnitude1 * magnitude2);
+        // Return similarity score
+        return similarity;
+    };
     // fetch place data
     PlaceService.prototype.fetchFBPostals = function () {
         var _this = this;
