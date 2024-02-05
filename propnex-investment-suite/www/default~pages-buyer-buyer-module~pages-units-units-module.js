@@ -167,13 +167,10 @@ var __importDefault = (undefined && undefined.__importDefault) || function (mod)
 
 
 
-
 var AddBlockComponent = /** @class */ (function () {
     function AddBlockComponent(modalCtrl, placeService) {
         this.modalCtrl = modalCtrl;
         this.placeService = placeService;
-        this.postalCodeError = null;
-        this.showWarning = false;
     }
     AddBlockComponent.prototype.ngOnInit = function () {
         this.addBlockForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"]({
@@ -181,11 +178,7 @@ var AddBlockComponent = /** @class */ (function () {
                 updateOn: 'blur',
             }),
             postalCode: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
-                updateOn: 'change',
-                validators: [
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required,
-                    _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].pattern(/^\d{6}$/),
-                ]
+                updateOn: 'blur',
             }),
             landArea: new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"](null, {
                 updateOn: 'blur',
@@ -252,59 +245,34 @@ var AddBlockComponent = /** @class */ (function () {
     // }
     // submit add hotel form
     AddBlockComponent.prototype.submitAddBlock = function () {
-        var _this = this;
         if (!this.addBlockForm.valid) {
             return;
         }
+        var projectName = this.addBlockForm.value.projectName;
         var postalCode = this.addBlockForm.value.postalCode;
-        this.placeService.checkPostalCodeExists(postalCode, this.addBlockForm.value).subscribe(function (result) {
-            var errorMessage = result.errorMessage, similarity = result.similarity;
-            if (errorMessage) {
-                // Error message received, handle accordingly
-                _this.postalCodeError = errorMessage;
-            }
-            else {
-                // No error, proceed with adding the new block
-                // Reset any previous error
-                _this.postalCodeError = null;
-                var projectName = _this.addBlockForm.value.projectName;
-                var landArea = _this.addBlockForm.value.landArea;
-                var grossFloorArea = _this.addBlockForm.value.grossFloorArea;
-                var tenure = _this.addBlockForm.value.tenure;
-                var numRooms = _this.addBlockForm.value.numRooms;
-                var numStorey = _this.addBlockForm.value.numStorey;
-                var askingPrice = _this.addBlockForm.value.askingPrice;
-                var priceRoom = _this.addBlockForm.value.priceRoom;
-                var GFA = _this.addBlockForm.value.GFA;
-                var roomRate = _this.addBlockForm.value.roomRate;
-                var netOperatingProfit = _this.addBlockForm.value.netOperatingProfit;
-                var approvedUsage = _this.addBlockForm.value.approvedUsage;
-                var locationMRT = _this.addBlockForm.value.locationMRT;
-                var locationSch = _this.addBlockForm.value.locationSch;
-                var district = _this.addBlockForm.value.district;
-                var region = _this.addBlockForm.value.region;
-                _this.placeService.addBlock(projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, region, locationMRT, locationSch, district).subscribe(function () {
-                    // Handle success if needed
-                    _this.showSuccess("Place added successfully.");
-                });
-                _this.addBlockForm.reset();
-                _this.modalCtrl.dismiss();
-            }
+        var landArea = this.addBlockForm.value.landArea;
+        var grossFloorArea = this.addBlockForm.value.grossFloorArea;
+        var tenure = this.addBlockForm.value.tenure;
+        var numRooms = this.addBlockForm.value.numRooms;
+        var numStorey = this.addBlockForm.value.numStorey;
+        var askingPrice = this.addBlockForm.value.askingPrice;
+        var priceRoom = this.addBlockForm.value.priceRoom;
+        var GFA = this.addBlockForm.value.GFA;
+        var roomRate = this.addBlockForm.value.roomRate;
+        var netOperatingProfit = this.addBlockForm.value.netOperatingProfit;
+        var approvedUsage = this.addBlockForm.value.approvedUsage;
+        var locationMRT = this.addBlockForm.value.locationMRT;
+        var locationSch = this.addBlockForm.value.locationSch;
+        var district = this.addBlockForm.value.district;
+        var region = this.addBlockForm.value.region;
+        this.placeService.addBlock(projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey, askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, region, locationMRT, locationSch, district).subscribe(function () {
         });
+        this.addBlockForm.reset();
+        this.modalCtrl.dismiss();
     };
-    AddBlockComponent.prototype.showSuccess = function (message) {
-        // Implement your success handling logic here
-        console.log(message); // You can log the success message to the console
-        // You can also display the success message to the user using a toast, alert, or any other UI component.
-    };
-    AddBlockComponent.prototype.showPostalCodeWarning = function () {
-        this.showWarning = true;
-    };
-    AddBlockComponent.prototype.hidePostalCodeWarning = function () {
-        var postalCodeControl = this.addBlockForm.get('postalCode');
-        if (postalCodeControl.valid) {
-            this.showWarning = false;
-        }
+    // upload place image
+    AddBlockComponent.prototype.uploadBlockImage = function () {
+        console.log("choose block image to upload");
     };
     AddBlockComponent.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
