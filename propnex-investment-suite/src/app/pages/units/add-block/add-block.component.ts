@@ -110,50 +110,45 @@ export class AddBlockComponent implements OnInit {
 
     const postalCode = this.addBlockForm.value.postalCode;
 
-    this.placeService.checkPostalCodeExists(postalCode, this.addBlockForm.value).subscribe((result: { errorMessage: string | null, similarity: number }) => {
-      const { errorMessage, similarity } = result;
-      if (errorMessage) {
-        // Error message received, handle accordingly
-        this.postalCodeError = errorMessage;
+    this.placeService.checkPostalCodeExists(postalCode).subscribe((exists: boolean) => {
+      if (exists) {
+        // Postal code already exists, handle accordingly (e.g., show an error message)
+        this.postalCodeError = "Postal code already exists. Please choose a unique postal code.";
       } else {
-        // No error, proceed with adding the new block
+        this.postalCodeError = null;  // Clear any previous error
+        // Postal code is unique, proceed with adding the new block
     
-        // Reset any previous error
-        this.postalCodeError = null;
+    const projectName = this.addBlockForm.value.projectName;
+    const landArea = this.addBlockForm.value.landArea;
+    const grossFloorArea = this.addBlockForm.value.grossFloorArea;
+    const tenure = this.addBlockForm.value.tenure;
+    const numRooms = this.addBlockForm.value.numRooms;
+    const numStorey = this.addBlockForm.value.numStorey;
+    const askingPrice = this.addBlockForm.value.askingPrice;
+    const priceRoom = this.addBlockForm.value.priceRoom;
+    const GFA = this.addBlockForm.value.GFA;
+    const roomRate = this.addBlockForm.value.roomRate;
+    const netOperatingProfit = this.addBlockForm.value.netOperatingProfit;
+    const approvedUsage = this.addBlockForm.value.approvedUsage;
+    const locationMRT = this.addBlockForm.value.locationMRT;
+    const locationSch = this.addBlockForm.value.locationSch;
+    const district = this.addBlockForm.value.district;
+    const region = this.addBlockForm.value.region;
     
-        const projectName = this.addBlockForm.value.projectName;
-        const landArea = this.addBlockForm.value.landArea;
-        const grossFloorArea = this.addBlockForm.value.grossFloorArea;
-        const tenure = this.addBlockForm.value.tenure;
-        const numRooms = this.addBlockForm.value.numRooms;
-        const numStorey = this.addBlockForm.value.numStorey;
-        const askingPrice = this.addBlockForm.value.askingPrice;
-        const priceRoom = this.addBlockForm.value.priceRoom;
-        const GFA = this.addBlockForm.value.GFA;
-        const roomRate = this.addBlockForm.value.roomRate;
-        const netOperatingProfit = this.addBlockForm.value.netOperatingProfit;
-        const approvedUsage = this.addBlockForm.value.approvedUsage;
-        const locationMRT = this.addBlockForm.value.locationMRT;
-        const locationSch = this.addBlockForm.value.locationSch;
-        const district = this.addBlockForm.value.district;
-        const region = this.addBlockForm.value.region;
-    
-        this.placeService.addBlock(
-          projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey,
-          askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage, region,
-          locationMRT, locationSch, district
-        ).subscribe(() => {
-          // Handle success if needed
-          this.showSuccess("Place added successfully.");
-        });
-    
-        this.addBlockForm.reset();
-        this.modalCtrl.dismiss();
-      }
+    this.placeService.addBlock(
+      projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey,
+      askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage,region,
+      locationMRT, locationSch, district
+    ).subscribe(() => {
+      // Handle success if needed
+      this.showSuccess("Place added successfully.");
     });
-  }
-    
-  
+    this.addBlockForm.reset();
+      this.modalCtrl.dismiss();
+    }
+
+  })
+    }
     private showSuccess(message: string) {
       // Implement your success handling logic here
       console.log(message); // You can log the success message to the console
