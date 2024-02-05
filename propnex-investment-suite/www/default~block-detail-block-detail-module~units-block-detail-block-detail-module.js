@@ -522,7 +522,7 @@ var BlockDetailPage = /** @class */ (function () {
         var username = savedFilters.username;
         var propertyname = this.currPlace.name;
         var tenure = savedFilters.tenure;
-        var messageTemplate = "Hello Jared,\n  \n  I am " + username + ". I came across this property, " + propertyname + " and am interested in learning more about it. Here are my requirements:\n  \n  1. Accommodation Type: " + accommodationType + "\n  2. Preferred District/Area: " + districtType + "\n  3. Budget Range: " + budgetRange + "\n  4. Number of Rooms Required: " + numberOfRooms + "\n  5. Tenure Type (e.g., leasehold, freehold): " + tenure + "\n  \n  Please feel free to contact me by replying to this message for further discussion. Looking forward to hearing from you!\n  \n  Best regards,\n  [Your Name]";
+        var messageTemplate = "Hello Jared,\n  \n  I am " + username + ". I came across this property, " + propertyname + " and am interested in learning more about it. Here are my requirements:\n  \n  1. Accommodation Type: " + accommodationType + "\n  2. Preferred District/Area: " + districtType + "\n  3. Budget Range: " + budgetRange + "\n  4. Number of Rooms Required: " + numberOfRooms + "\n  5. Tenure Type (e.g., leasehold, freehold): " + tenure + "\n  \n  Please feel free to contact me by replying to this message for further discussion. Looking forward to hearing from you!\n  \n  Best regards,\n  " + username;
         // URL encode the message
         var encodedMessage = encodeURIComponent(messageTemplate);
         var whatsappLink = "https://wa.me/6591520660?text=" + encodedMessage;
