@@ -68,6 +68,7 @@ export class PlaceService {
               postals.push(
                 new fbPostal(
                   resData[key].name, 
+                  resData[key].address, 
                   resData[key].postal,
                   resData[key].landArea,
                   resData[key].grossFloorArea,
@@ -144,9 +145,10 @@ export class PlaceService {
   }
 
   // add new place
-  addBlock(name: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: number, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, region: string, LocationMRT: string, LocationSch: string, district: string) {
+  addBlock(name: string, address: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: number, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, region: string, LocationMRT: string, LocationSch: string, district: string) {
     const newBlock = new fbPostal(
       name,
+      address,
       postal,
       landArea,
       grossFloorArea,
@@ -196,6 +198,7 @@ export class PlaceService {
         const oldPlace = updatedUsers[updatedUserIndex];
         updatedUsers[updatedUserIndex] = new fbPostal(
           newName,
+          oldPlace.address,
           oldPlace.postal,
           oldPlace.landArea,
           oldPlace.grossFloorArea,
@@ -253,6 +256,7 @@ export class PlaceService {
         
         updatedPlaces[updatedPlaceIndex] = new fbPostal(
           oldPlace.name,
+          oldPlace.address,
           oldPlace.postal,
           oldPlace.landArea,
           oldPlace.grossFloorArea,
@@ -306,6 +310,7 @@ export class PlaceService {
         let newFavArr = oldPlace.units;
         updatedUsers[updatedUserIndex] = new fbPostal(
           oldPlace.name,
+          oldPlace.address,
           oldPlace.postal,
           oldPlace.landArea,
           oldPlace.grossFloorArea,
@@ -373,6 +378,7 @@ export class PlaceService {
 
         updatedUsers[updatedUserIndex] = new fbPostal(
           oldPlace.name,
+          oldPlace.address,
           oldPlace.postal,
           oldPlace.landArea,
           oldPlace.grossFloorArea,

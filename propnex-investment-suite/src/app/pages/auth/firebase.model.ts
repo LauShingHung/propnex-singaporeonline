@@ -13,6 +13,7 @@ export class fbUser {
 export class fbPostal {
   constructor(
     public name: string,
+    public address: string,
     public postal: string,
     public landArea: Float32Array,
     public grossFloorArea: Float32Array,

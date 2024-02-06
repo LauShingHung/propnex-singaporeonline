@@ -27,6 +27,9 @@ export class AddBlockComponent implements OnInit {
       projectName: new FormControl(null, {
         updateOn: 'blur',
       }), 
+      address: new FormControl(null, {
+        updateOn: 'blur',
+      }), 
       postalCode: new FormControl(null, {
         updateOn: 'change',
         validators: [
@@ -119,6 +122,7 @@ export class AddBlockComponent implements OnInit {
         // Postal code is unique, proceed with adding the new block
     
     const projectName = this.addBlockForm.value.projectName;
+    const address = this.addBlockForm.value.address;
     const landArea = this.addBlockForm.value.landArea;
     const grossFloorArea = this.addBlockForm.value.grossFloorArea;
     const tenure = this.addBlockForm.value.tenure;
@@ -136,7 +140,7 @@ export class AddBlockComponent implements OnInit {
     const region = this.addBlockForm.value.region;
     
     this.placeService.addBlock(
-      projectName, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey,
+      projectName, address, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey,
       askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage,region,
       locationMRT, locationSch, district
     ).subscribe(() => {
