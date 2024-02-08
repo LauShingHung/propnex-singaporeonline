@@ -31,7 +31,16 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('./recommendations/recommendations.module').then( m => m.RecommendationsPageModule)
-          },
+          }
+        ]
+      },
+      {
+        path: 'admin',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+          }
         ]
       },
       {

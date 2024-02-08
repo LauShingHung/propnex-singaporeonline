@@ -4,13 +4,13 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
 
-    <ion-title>Seller Interface</ion-title>
+    <ion-title *ngIf="currUser && currUser.userType === 'propertyAgent' || currUser.userType === 'admin'">Upload Listings</ion-title>
+    <ion-title *ngIf="currUser && currUser.userType === 'regularUser' || currUser.userType === 'broker'">For Agents Only</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="currUser && currUser.userType === 'propertyAgent' || currUser.userType === 'admin'; else notAuthorized">
   <ion-grid>
-
     <ion-row>
       <ion-col>
         <ion-searchbar 
@@ -86,11 +86,37 @@
 </ion-content>
 
 <ng-template #notAuthorized>
-  <ion-row class="ion-justify-content-center ion-align-items-start" style="height: 100vh;">
-    <ion-col>
-      <ion-text class="ion-text-center">
-        <h2 class="ion-text-uppercase ion-text-bold ion-text-italic" style="font-size: 1.5em;">Only accessible by property agents</h2>
-      </ion-text>
-    </ion-col>
-  </ion-row>
+  <ion-content class="ion-padding unauthorized-content">
+    <div class="unauthorized-container">
+      <h2 class="unauthorized-heading">Interested in Selling Property?</h2>
+      <p class="unauthorized-text">
+        To access our seller interface and list properties, we invite you to register as a property agent.<br>
+        Our team will be ready to assist you with the registration process and support you on your journey!
+      </p>
+      <ion-button routerLink="/auth" class="ion-margin-top">Register as Agent</ion-button>
+    </div>
+  </ion-content>
 </ng-template>
+
+<style>
+  .unauthorized-content {
+    --background: #f5f5f5; /* Change the background color if needed */
+  }
+  .unauthorized-container {
+    max-width: 800px; /* or your preferred max-width */
+    margin: 0 auto; /* centers the div */
+    margin-top: 4%;
+    text-align: center; /* centers the text */
+    padding: 40px; /* Adds padding inside the container */
+  }
+  .unauthorized-heading {
+    margin-bottom: 20px; /* Adds space below the heading */
+  }
+  .unauthorized-text {
+    line-height: 1.6; /* Adjusts space between lines */
+    margin-bottom: 20px; /* Adds space below the paragraph */
+  }
+</style>
+
+
+

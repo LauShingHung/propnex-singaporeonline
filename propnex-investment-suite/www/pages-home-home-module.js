@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-tabs>\r\n    <ion-tab-bar slot=\"bottom\">\r\n      <ion-tab-button tab=\"favourites\">\r\n        <ion-label>Favourites</ion-label>\r\n        <ion-icon name=\"star\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"main\">\r\n        <ion-label>Home</ion-label>\r\n        <ion-icon name=\"home\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"recommendations\">\r\n        <ion-label>Discover</ion-label>\r\n        <ion-icon name=\"compass\"></ion-icon>\r\n      </ion-tab-button>\r\n    </ion-tab-bar>\r\n  </ion-tabs>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-tabs>\r\n\r\n    <ion-tab-bar slot=\"bottom\">\r\n\r\n      <ion-tab-button tab=\"admin\">\r\n        <ion-label>Admin</ion-label>\r\n        <ion-icon name=\"hammer\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"favourites\">\r\n        <ion-label>Favourites</ion-label>\r\n        <ion-icon name=\"star\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"main\">\r\n        <ion-label>Home</ion-label>\r\n        <ion-icon name=\"home\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"recommendations\">\r\n        <ion-label>Discover</ion-label>\r\n        <ion-icon name=\"compass\"></ion-icon>\r\n      </ion-tab-button>\r\n      \r\n    </ion-tab-bar>\r\n  </ion-tabs>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -45,7 +45,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | favourites-favourites-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("favourites-favourites-module")]).then(__webpack_require__.bind(null, /*! ./favourites/favourites.module */ "./src/app/pages/home/favourites/favourites.module.ts")).then(function (m) { return m.FavouritesPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | favourites-favourites-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("favourites-favourites-module")]).then(__webpack_require__.bind(null, /*! ./favourites/favourites.module */ "./src/app/pages/home/favourites/favourites.module.ts")).then(function (m) { return m.FavouritesPageModule; }); }
                     },
                 ]
             },
@@ -54,7 +54,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
                     }
                 ]
             },
@@ -63,8 +63,17 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | recommendations-recommendations-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("recommendations-recommendations-module")]).then(__webpack_require__.bind(null, /*! ./recommendations/recommendations.module */ "./src/app/pages/home/recommendations/recommendations.module.ts")).then(function (m) { return m.RecommendationsPageModule; }); }
-                    },
+                        loadChildren: function () { return Promise.all(/*! import() | recommendations-recommendations-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("recommendations-recommendations-module")]).then(__webpack_require__.bind(null, /*! ./recommendations/recommendations.module */ "./src/app/pages/home/recommendations/recommendations.module.ts")).then(function (m) { return m.RecommendationsPageModule; }); }
+                    }
+                ]
+            },
+            {
+                path: 'admin',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () { return Promise.all(/*! import() | admin-admin-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "./src/app/pages/home/admin/admin.module.ts")).then(function (m) { return m.AdminPageModule; }); }
+                    }
                 ]
             },
             {
