@@ -50,7 +50,7 @@ export class AuthService {
   fetchFBUsers() {
     return this.http
       .get(
-        'https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json'
+        'https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/.json'
       )
       .pipe(
         map(resData => {
@@ -90,7 +90,7 @@ export class AuthService {
       userType
     );
     return this.http
-      .post('https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
+      .post('https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
       { ...newUser })
       .pipe(
         switchMap(() => {
@@ -130,7 +130,7 @@ export class AuthService {
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(
-          `https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -177,7 +177,7 @@ export class AuthService {
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(
-          `https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
+          `https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/${updatedUserIndex}.json`,
           { ...updatedUsers[updatedUserIndex] }
         );
       }),
@@ -191,7 +191,7 @@ export class AuthService {
   removeFav(userInd: number, placeInd: number) {
     return this.http
       .delete(
-        `https://propnexusers-1e3f9-default-rtdb.asia-southeast1.firebasedatabase.app/${userInd}/favourites/${placeInd}.json`
+        `https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/${userInd}/favourites/${placeInd}.json`
       );
   }
 }
