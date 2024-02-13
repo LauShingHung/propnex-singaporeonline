@@ -50,6 +50,7 @@ export class AuthPage implements OnInit, OnDestroy {
     const password = form.value.password;
     const name = form.value.name;
     const userType = form.value.userType;
+    const isVerified = false;
 
     form.reset();
 
@@ -62,7 +63,12 @@ export class AuthPage implements OnInit, OnDestroy {
           
           this.authService.currFbUser = this.result;
           this.authService.login();
-          this.router.navigateByUrl('/home');
+          if (this.result.isVerified === true){
+            this.router.navigateByUrl('/home');
+          }
+          else{
+            this.router.navigateByUrl('/verification');
+          }
         } else {
           // incorrect password
           this.authService.currFbUser = this.result;
@@ -75,7 +81,7 @@ export class AuthPage implements OnInit, OnDestroy {
       }
     } else {
       // signup
-      this.authService.addUser(email, name, password, userType).subscribe(() => {
+      this.authService.addUser(email, name, password, userType, isVerified).subscribe(() => {
 
       });
       this.isLogin = true;

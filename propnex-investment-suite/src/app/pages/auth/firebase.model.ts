@@ -6,7 +6,8 @@ export class fbUser {
     public name: string,
     public password: string,
     public personalRec: string[],
-    public userType: string
+    public userType: string,
+    public isVerified: boolean
   ) {}
 }
 

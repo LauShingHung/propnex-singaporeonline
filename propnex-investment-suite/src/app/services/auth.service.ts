@@ -66,6 +66,7 @@ export class AuthService {
                   resData[key].password,
                   resData[key].personalRec,
                   resData[key].userType,
+                  resData[key].isVerified
                 )
               );
             }
@@ -79,7 +80,7 @@ export class AuthService {
   }
 
   // add new user
-  addUser(email: string, name: string, password: string, userType: string) {
+  addUser(email: string, name: string, password: string, userType: string, isVerified: boolean) {
     const newUser = new fbUser(
       email,
       [],
@@ -87,7 +88,8 @@ export class AuthService {
       name,
       password,
       [],
-      userType
+      userType,
+      isVerified
     );
     return this.http
       .post('https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
@@ -126,7 +128,8 @@ export class AuthService {
           newName,
           newPassword,
           oldPlace.personalRec,
-          oldPlace.userType
+          oldPlace.userType,
+          oldPlace.isVerified
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(
@@ -173,7 +176,8 @@ export class AuthService {
           oldPlace.name,
           oldPlace.password,
           uniqueRecArr,
-          oldPlace.userType
+          oldPlace.userType,
+          oldPlace.isVerified
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(

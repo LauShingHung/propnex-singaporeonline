@@ -25,6 +25,11 @@ const routes: Routes = [
     path: 'buyer',
     loadChildren: () => import('./pages/buyer/buyer.module').then( m => m.BuyerPageModule),
     canLoad: [AuthGuard] 
+  },
+  {
+    path: 'verification',
+    loadChildren: () => import('./pages/auth/verification/verification.module').then( m => m.VerificationPageModule),
+    canLoad: [AuthGuard] 
   }
 ];
 
