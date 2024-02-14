@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="padding: 16px;">
+<ion-content style="padding: 16px; display: flex; flex-direction: column; height: 100%;">
   <h2 style="font-size: 20px; margin-bottom: 20px; text-align: center;">Please enter your details for verification</h2>
     
   <ion-item>
@@ -12,21 +12,40 @@
     <ion-input type="text" required style="font-size: 18px;"></ion-input>
   </ion-item>
   
-  <ion-item>
+  <ion-item *ngIf="currUser && currUser.userType === 'propertyAgent'">
     <ion-label position="floating" style="font-size: 18px;">License Number</ion-label>
     <ion-input type="text" required style="font-size: 18px;"></ion-input>
   </ion-item>
   
-  <ion-item>
+  <ion-item *ngIf="currUser && currUser.userType === 'propertyAgent'">
     <ion-label position="floating" style="font-size: 18px;">Agency Name</ion-label>
     <ion-input type="text" required style="font-size: 18px;"></ion-input>
   </ion-item>
   
+  <ion-item *ngIf="currUser && (currUser.userType === 'broker' || currUser.userType === 'regularUser')">
+    <ion-label position="floating" style="font-size: 18px;">Company UEN</ion-label>
+    <ion-input type="text" required style="font-size: 18px;"></ion-input>
+  </ion-item>
+
+  <ion-item *ngIf="currUser && currUser.userType === 'regularUser'">
+    <ion-label position="floating" style="font-size: 18px;">Individual Identification Number (Confidential)</ion-label>
+    <ion-input type="text" required style="font-size: 18px;"></ion-input>
+  </ion-item>
+
   <ion-item>
     <ion-label position="floating" style="font-size: 18px;">Phone Number</ion-label>
     <ion-input type="tel" required style="font-size: 18px;"></ion-input>
   </ion-item>
   
   <ion-button (click)="verifyUser()" expand="block">Submit Verification</ion-button>
-  
+
+  <div style="flex: 1;"></div>
+
+  <div style="width: 100%; display: flex; justify-content: flex-end;">
+    <ion-item lines="none" (click)="onLogout()" button>
+      <ion-icon name="exit" slot="start"></ion-icon>
+      <ion-label>Logout</ion-label>
+    </ion-item>
+  </div>
 </ion-content>
+

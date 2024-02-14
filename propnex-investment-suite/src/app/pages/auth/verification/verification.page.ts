@@ -39,4 +39,9 @@ export class VerificationPage implements OnInit {
     });
   }
 
+  onLogout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/auth');
+  }
+
 }
