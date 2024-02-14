@@ -12,6 +12,7 @@ import { fbUser } from '../firebase.model';
 export class VerificationPage implements OnInit {
 
   currUser: fbUser;
+  isVerified = false;
 
   constructor(
     private authService: AuthService,
@@ -23,4 +24,19 @@ export class VerificationPage implements OnInit {
   ngOnInit() {
     this.currUser = this.authService.currFbUser;
   }
+
+  verifyUser() {
+    this.authService.updateUserVerification(this.currUser.email, true).subscribe({
+      next: () => {
+        // Handle the successful verification here
+        this.router.navigateByUrl('/home');
+      },
+      error: (error) => {
+        // Handle the error here
+        console.error('Verification failed', error);
+        this.router.navigateByUrl('/auth');
+      }
+    });
+  }
+
 }

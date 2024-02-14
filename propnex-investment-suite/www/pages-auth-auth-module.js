@@ -173,6 +173,7 @@ var AuthPage = /** @class */ (function () {
         var password = form.value.password;
         var name = form.value.name;
         var userType = form.value.userType;
+        var isVerified = false;
         form.reset();
         if (this.isLogin) {
             // login
@@ -181,7 +182,12 @@ var AuthPage = /** @class */ (function () {
                 if (this.result.password === password) {
                     this.authService.currFbUser = this.result;
                     this.authService.login();
-                    this.router.navigateByUrl('/home');
+                    if (this.result.isVerified === true) {
+                        this.router.navigateByUrl('/home');
+                    }
+                    else {
+                        this.router.navigateByUrl('/verification');
+                    }
                 }
                 else {
                     // incorrect password
@@ -195,7 +201,7 @@ var AuthPage = /** @class */ (function () {
         }
         else {
             // signup
-            this.authService.addUser(email, name, password, userType).subscribe(function () {
+            this.authService.addUser(email, name, password, userType, isVerified).subscribe(function () {
             });
             this.isLogin = true;
             this.router.navigateByUrl('/auth');
