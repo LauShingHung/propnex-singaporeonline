@@ -35,7 +35,8 @@
               <p>Singapore {{ postal.postal }}</p>
               <p>Asking Price: {{ postal.askingPrice }}</p>
               <p>District: {{ postal.number }}</p> <!-- Use the actual properties of your fbPostal object -->
-              <ion-button color="danger" (click)="removePostal(postal.number)">Remove</ion-button>
+              <ion-button color="success" (click)="approvePostal(postal.number)">Approve</ion-button>
+              <ion-button color="danger" (click)="removePostal(postal.number)">Reject</ion-button>
             </ion-label>
           </ion-item>
         </ion-list>
