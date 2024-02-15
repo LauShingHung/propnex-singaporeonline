@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>View Listings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-center ion-margin-top" style="font-size: larger;">The following are the repeated records of properties entered</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>        
+        
+      </ion-col>
+    </ion-row>
+    <!-- New row for displaying filtered results -->
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <!-- Iterate over filteredFBPostals to display each postal -->
+          <ion-item *ngFor="let postal of loadedFBPostals">
+            <ion-thumbnail slot="start">
+              <ion-img [src]="postal.imageUrl || 'assets/placeholders/property.jpeg'"></ion-img>
+            </ion-thumbnail>
+            <ion-label *ngIf="postal.name !== undefined">
+              <h2>{{ postal.name }}</h2>
+              <p>Singapore {{ postal.postal }}</p>
+              <p>Asking Price: {{ postal.askingPrice }}</p>
+              <p>District: {{ postal.number }}</p> <!-- Use the actual properties of your fbPostal object -->
+              <ion-button color="danger" (click)="removePostal(postal.number)">Remove</ion-button>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

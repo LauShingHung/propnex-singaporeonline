@@ -104,6 +104,51 @@ export class PlaceService {
       );
   }
 
+  fetchFBERs() {
+    return this.http
+      .get(
+        `https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/.json`
+      )
+      .pipe(
+        map(resData => {
+          const postals: fbER[] = [];
+          for (const key in resData) {
+            if (resData.hasOwnProperty(key)) {
+              postals.push(
+                new fbER(
+                  resData[key].name, 
+                  resData[key].address, 
+                  resData[key].postal,
+                  resData[key].landArea,
+                  resData[key].grossFloorArea,
+                  resData[key].tenure,
+                  resData[key].numRooms,
+                  resData[key].numStorey,
+                  resData[key].askingPrice,
+                  resData[key].priceRoom,
+                  resData[key].GFA,
+                  resData[key].roomRate,
+                  resData[key].netOperatingProfit,
+                  resData[key].approvedUsage,
+                  resData[key].region,
+                  resData[key].locationMRT,
+                  resData[key].locationSch,
+                  resData[key].district,
+                  resData[key].number,
+                  resData[key].imageUrl,
+                  resData[key].units
+                )
+              );
+            }
+          }
+          return postals;
+        }),
+        tap(postals => {
+          this._fbERs.next(postals);
+        })
+      );
+  }
+
     // fetch place data
     
 
@@ -226,18 +271,10 @@ export class PlaceService {
 
   removeER(number: string) {
     return this.http
-      .delete(`https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/${number}.json`)
-      .pipe(
-        switchMap(() => {
-          return this.fbERs;
-        }),
-        take(1),
-        tap(fbUsers => {
-          const updatedERs = fbUsers.filter(er => er.number !== number);
-          this._fbERs.next(updatedERs);
-        })
-      );
-  }
+    .delete(
+      `https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/${number}.json`
+    );
+}
 
 
   // edit existing place
