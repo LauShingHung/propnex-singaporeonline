@@ -15,7 +15,7 @@
       <ion-col>
         <ion-card>
           <ion-card-header>
-            <ion-card-subtitle class="ion-text-center ion-margin-top" style="font-size: larger;">The following are the repeated records of properties entered</ion-card-subtitle>
+            <ion-card-subtitle class="ion-text-center ion-margin-top" style="font-size: larger;">The following are the repeated records of properties entered. Please reject or approve the input of listing after verification.</ion-card-subtitle>
           </ion-card-header>
         </ion-card>        
         
@@ -33,8 +33,7 @@
             <ion-label *ngIf="postal.name !== undefined">
               <h2>{{ postal.name }}</h2>
               <p>Singapore {{ postal.postal }}</p>
-              <p>Asking Price: {{ postal.askingPrice }}</p>
-              <p>District: {{ postal.number }}</p> <!-- Use the actual properties of your fbPostal object -->
+              <p>Seller's Number: {{ postal.number }}</p> <!-- Use the actual properties of your fbPostal object -->
               <ion-button color="success" (click)="approvePostal(postal.number)">Approve</ion-button>
               <ion-button color="danger" (click)="removePostal(postal.number)">Reject</ion-button>
             </ion-label>
