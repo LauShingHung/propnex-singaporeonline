@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
-import { fbPostal, fbRec, fbUser } from '../auth/firebase.model';
-import { PlaceService } from '../../services/place.service';
-import { EditProfileComponent } from '../home/main/edit-profile/edit-profile.component';
+import { AuthService } from '../../../services/auth.service';
+import { fbPostal, fbRec, fbUser } from '../../auth/firebase.model';
+import { PlaceService } from '../../../services/place.service';
+import { EditProfileComponent } from '../main/edit-profile/edit-profile.component';
 
 @Component({
   selector: 'app-admin',

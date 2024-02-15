@@ -1,6 +1,12 @@
 <ion-content>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
+
+      <ion-tab-button *ngIf="currUser && currUser.userType === 'admin'" tab="admin">
+        <ion-label>Admin</ion-label>
+        <ion-icon name="hammer"></ion-icon>
+      </ion-tab-button>
+
       <ion-tab-button tab="favourites">
         <ion-label>Favourites</ion-label>
         <ion-icon name="star"></ion-icon>

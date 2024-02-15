@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-tabs>\r\n    <ion-tab-bar slot=\"bottom\">\r\n      <ion-tab-button tab=\"favourites\">\r\n        <ion-label>Favourites</ion-label>\r\n        <ion-icon name=\"star\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"main\">\r\n        <ion-label>Home</ion-label>\r\n        <ion-icon name=\"home\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"recommendations\">\r\n        <ion-label>Discover</ion-label>\r\n        <ion-icon name=\"compass\"></ion-icon>\r\n      </ion-tab-button>\r\n    </ion-tab-bar>\r\n  </ion-tabs>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-tabs>\r\n    <ion-tab-bar slot=\"bottom\">\r\n\r\n      <ion-tab-button *ngIf=\"currUser && currUser.userType === 'admin'\" tab=\"admin\">\r\n        <ion-label>Admin</ion-label>\r\n        <ion-icon name=\"hammer\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"favourites\">\r\n        <ion-label>Favourites</ion-label>\r\n        <ion-icon name=\"star\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"main\">\r\n        <ion-label>Home</ion-label>\r\n        <ion-icon name=\"home\"></ion-icon>\r\n      </ion-tab-button>\r\n\r\n      <ion-tab-button tab=\"recommendations\">\r\n        <ion-label>Discover</ion-label>\r\n        <ion-icon name=\"compass\"></ion-icon>\r\n      </ion-tab-button>\r\n    </ion-tab-bar>\r\n  </ion-tabs>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -45,7 +45,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | favourites-favourites-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("favourites-favourites-module")]).then(__webpack_require__.bind(null, /*! ./favourites/favourites.module */ "./src/app/pages/home/favourites/favourites.module.ts")).then(function (m) { return m.FavouritesPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | favourites-favourites-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("favourites-favourites-module")]).then(__webpack_require__.bind(null, /*! ./favourites/favourites.module */ "./src/app/pages/home/favourites/favourites.module.ts")).then(function (m) { return m.FavouritesPageModule; }); }
                     },
                 ]
             },
@@ -54,7 +54,7 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
+                        loadChildren: function () { return Promise.all(/*! import() | main-main-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("main-main-module")]).then(__webpack_require__.bind(null, /*! ./main/main.module */ "./src/app/pages/home/main/main.module.ts")).then(function (m) { return m.MainPageModule; }); }
                     }
                 ]
             },
@@ -63,8 +63,17 @@ var routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: function () { return Promise.all(/*! import() | recommendations-recommendations-module */[__webpack_require__.e("default~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pages-units-units-mod~79d02864"), __webpack_require__.e("recommendations-recommendations-module")]).then(__webpack_require__.bind(null, /*! ./recommendations/recommendations.module */ "./src/app/pages/home/recommendations/recommendations.module.ts")).then(function (m) { return m.RecommendationsPageModule; }); }
-                    },
+                        loadChildren: function () { return Promise.all(/*! import() | recommendations-recommendations-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("recommendations-recommendations-module")]).then(__webpack_require__.bind(null, /*! ./recommendations/recommendations.module */ "./src/app/pages/home/recommendations/recommendations.module.ts")).then(function (m) { return m.RecommendationsPageModule; }); }
+                    }
+                ]
+            },
+            {
+                path: 'admin',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () { return Promise.all(/*! import() | admin-admin-module */[__webpack_require__.e("default~admin-admin-module~favourites-favourites-module~main-main-module~pages-buyer-buyer-module~pa~08a4fd0f"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "./src/app/pages/home/admin/admin.module.ts")).then(function (m) { return m.AdminPageModule; }); }
+                    }
                 ]
             },
             {
@@ -169,6 +178,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomePage", function() { return HomePage; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm5/core.js");
+/* harmony import */ var src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/auth.service */ "./src/app/services/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -182,24 +192,24 @@ var __importDefault = (undefined && undefined.__importDefault) || function (mod)
   return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 
-//import { AuthService } from '../../services/auth.service';
-//import { User } from '../auth/user.model';
+
 var HomePage = /** @class */ (function () {
-    //currUser: User;
-    function HomePage(
-    //private authService: AuthService,
-    ) {
+    function HomePage(authService) {
+        this.authService = authService;
     }
     HomePage.prototype.ngOnInit = function () {
-        //this.currUser = this.authService.currentUser;
+        this.currUser = this.authService.currFbUser;
     };
+    HomePage.ctorParameters = function () { return [
+        { type: src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"] }
+    ]; };
     HomePage = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-home',
             template: __importDefault(__webpack_require__(/*! raw-loader!./home.page.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/pages/home/home.page.html")).default,
             styles: [__importDefault(__webpack_require__(/*! ./home.page.scss */ "./src/app/pages/home/home.page.scss")).default]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [src_app_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
     ], HomePage);
     return HomePage;
 }());

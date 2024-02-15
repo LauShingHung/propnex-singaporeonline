@@ -66,6 +66,7 @@ export class AuthService {
                   resData[key].password,
                   resData[key].personalRec,
                   resData[key].userType,
+                  resData[key].isVerified
                 )
               );
             }
@@ -79,7 +80,7 @@ export class AuthService {
   }
 
   // add new user
-  addUser(email: string, name: string, password: string, userType: string) {
+  addUser(email: string, name: string, password: string, userType: string, isVerified: boolean) {
     const newUser = new fbUser(
       email,
       [],
@@ -87,7 +88,8 @@ export class AuthService {
       name,
       password,
       [],
-      userType
+      userType,
+      isVerified
     );
     return this.http
       .post('https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
@@ -126,7 +128,8 @@ export class AuthService {
           newName,
           newPassword,
           oldPlace.personalRec,
-          oldPlace.userType
+          oldPlace.userType,
+          oldPlace.isVerified
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(
@@ -173,7 +176,8 @@ export class AuthService {
           oldPlace.name,
           oldPlace.password,
           uniqueRecArr,
-          oldPlace.userType
+          oldPlace.userType,
+          oldPlace.isVerified
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(
@@ -194,4 +198,46 @@ export class AuthService {
         `https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/${userInd}/favourites/${placeInd}.json`
       );
   }
+
+  // Method to update the user verification status
+  updateUserVerification(email: string, isVerified: boolean) {
+    let updateUser: fbUser[];
+    return this.fbUsers.pipe(
+      take(1),
+      switchMap(users => {
+        if (!users || users.length <= 0) {
+          return this.fetchFBUsers();
+        } else {
+          return of(users);
+        }
+      }),
+      switchMap(users => {
+        const updateUserIndex = users.findIndex(u => u.email === email);
+        if (updateUserIndex === -1) {
+          throw new Error('User not found!');
+        }
+        updateUser = [...users];
+        const currentUser = updateUser[updateUserIndex];
+        updateUser[updateUserIndex] = new fbUser(
+          currentUser.email,
+          currentUser.favourites,
+          currentUser.generalRec,
+          currentUser.name,
+          currentUser.password,
+          currentUser.personalRec,
+          currentUser.userType,
+          isVerified // Set the new verification status
+        );
+        // Update the database entry for this user
+        return this.http.put(
+          `https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/${updateUserIndex}.json`,
+          { ...updateUser[updateUserIndex] }
+        );
+      }),
+      tap(() => {
+        this._fbUsers.next(updateUser);
+      })
+    );
+  }
+
 }

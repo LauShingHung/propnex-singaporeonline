@@ -7,7 +7,6 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <ion-grid>
     <ion-row>
@@ -20,6 +19,7 @@
             <ion-card-subtitle *ngIf="currUser.userType === 'propertyAgent'">Property Agent</ion-card-subtitle>
             <ion-card-subtitle *ngIf="currUser.userType === 'broker'">Broker</ion-card-subtitle>
             <ion-card-subtitle *ngIf="currUser.userType === 'regularUser'">Regular User</ion-card-subtitle>
+            <ion-card-subtitle *ngIf="currUser.userType === 'admin'">Admin</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content class="ion-text-center">
             <ion-button fill="clear" color="tertiary" (click)="onEditProfile()">Edit Profile</ion-button>

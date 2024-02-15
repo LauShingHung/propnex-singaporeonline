@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import { AuthService } from '../../services/auth.service';
-//import { User } from '../auth/user.model';
+import { fbUser } from '../auth/firebase.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class HomePage implements OnInit {
-  //currUser: User;
+  currUser: fbUser;
 
   constructor(
-    //private authService: AuthService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
-    //this.currUser = this.authService.currentUser;
+    this.currUser = this.authService.currFbUser;
   }
 
 }

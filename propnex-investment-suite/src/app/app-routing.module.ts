@@ -12,11 +12,6 @@ const routes: Routes = [
     canLoad: [AuthGuard] 
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule),
-    canLoad: [AuthGuard] 
-  },
-  {
     path: 'stats',
     loadChildren: () => import('./pages/stats/stats.module').then( m => m.StatsPageModule),
     canLoad: [AuthGuard] 
@@ -29,6 +24,11 @@ const routes: Routes = [
   {
     path: 'buyer',
     loadChildren: () => import('./pages/buyer/buyer.module').then( m => m.BuyerPageModule),
+    canLoad: [AuthGuard] 
+  },
+  {
+    path: 'verification',
+    loadChildren: () => import('./pages/auth/verification/verification.module').then( m => m.VerificationPageModule),
     canLoad: [AuthGuard] 
   }
 ];
