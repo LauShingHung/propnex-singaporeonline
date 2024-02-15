@@ -15,13 +15,6 @@ import { EditProfileComponent } from '../home/main/edit-profile/edit-profile.com
 export class AdminPage implements OnInit {
 
   currUser: fbUser;
-  loadedFBPostals: fbPostal[];
-  private fbPostalsSub: Subscription;
-  result: fbPostal;
-  loadedFBRecs: fbRec[];
-  private fbRecsSub: Subscription;
-  recItem: fbRec;
-  findRecs: string[];
 
 
   constructor(
@@ -35,71 +28,6 @@ export class AdminPage implements OnInit {
   ngOnInit() {
     this.currUser = this.authService.currFbUser;
 
-    this.fbPostalsSub = this.placeService.fbPostals.subscribe(fbPostals => {
-      this.loadedFBPostals = fbPostals;
-    })
-
-    this.fbRecsSub = this.placeService.fbRecs.subscribe(fbRecs => {
-      this.loadedFBRecs = fbRecs;
-    })
   }
-
-  ionViewWillEnter() {
-    this.placeService.fetchFBPostals().subscribe(() => {
-
-    });
-
-    this.placeService.fetchFBRecs().subscribe(() => {
-
-    });
-
-  }
-
-  // retrieve place using postal
-  handleChange(event) {
-    const query = event.target.value;
-    this.result  = this.loadedFBPostals.find(p => p.postal === query);
-
-    if (this.result) {
-      this.placeService.currPlace = this.result;
-      this.recItem = this.loadedFBRecs.find(p => p.place === this.placeService.currPlace.name);
-      if (this.recItem) {
-        this.findRecs = [this.recItem.rec1, this.recItem.rec2, this.recItem.rec3];
-      } else {
-        this.findRecs = []
-      }
-      
-    }
-
-  }
-
-  // navigate to place details page
-  onSelectPlace() {
-    this.router.navigate(['/', 'admin', this.result.postal]);
-  }
-
-  // navigate to edit user profile form
-  onEditProfile() {
-    this.modalCtrl
-      .create({ component: EditProfileComponent })
-      .then(modalEl => {
-        modalEl.present();
-        return modalEl.onDidDismiss();
-      })
-      .then(resultData => {
-        if (resultData.role === 'confirm') {
-          this.ionViewWillEnter();
-        }
-      });
-  }
-
-
-  ngOnDestroy() {
-    if (this.fbPostalsSub) {
-      this.fbPostalsSub.unsubscribe();
-    }
-    if (this.fbRecsSub) {
-      this.fbRecsSub.unsubscribe();
-    }
-  }
+ 
 }

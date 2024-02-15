@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { fbPostal, fbRec, fbUnit } from '../pages/auth/firebase.model';
+import { fbPostal, fbRec, fbUnit, fbER } from '../pages/auth/firebase.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 export class PlaceService {
 
   private _fbPostals = new BehaviorSubject<fbPostal[]>([]);
+  private _fbERs = new BehaviorSubject<fbER[]>([]);
   private _fbRecs = new BehaviorSubject<fbRec[]>([]);
   private _currPlace: fbPostal;
   private _currUnit: fbUnit;
@@ -19,6 +20,10 @@ export class PlaceService {
 
   get fbPostals() {
     return this._fbPostals.asObservable();
+  }
+
+  get fbERs() {
+    return this._fbERs.asObservable();
   }
 
   get fbRecs() {
@@ -182,6 +187,58 @@ export class PlaceService {
         })
       );
   }
+
+  addER(name: string, address: string, postal: string, landArea: Float32Array, grossFloorArea: Float32Array, tenure: string, numRooms: number, numStorey: Int16Array, askingPrice: number, priceRoom: Float32Array, GFA: string, roomRate: Float32Array, netOperatingProfit: Float32Array, approvedUsage: string, region: string, LocationMRT: string, LocationSch: string, district: string, number: string) {
+    const newER = new fbER(
+      name,
+      address,
+      postal,
+      landArea,
+      grossFloorArea,
+      tenure,
+      numRooms,
+      numStorey,
+      askingPrice,
+      priceRoom,
+      GFA,
+      roomRate,
+      netOperatingProfit,
+      approvedUsage,
+      region,
+      LocationMRT,
+      LocationSch,
+      district,
+      number
+    );
+    return this.http
+      .post('https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
+      { ...newER })
+      .pipe(
+        switchMap(resData => {
+          return this.fbERs;
+        }),
+        take(1),
+        tap(fbUsers => {
+          this._fbERs.next(fbUsers.concat(newER));
+        })
+      );
+  }
+
+  removeER(number: string) {
+    return this.http
+      .delete(`https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/${number}.json`)
+      .pipe(
+        switchMap(() => {
+          return this.fbERs;
+        }),
+        take(1),
+        tap(fbUsers => {
+          const updatedERs = fbUsers.filter(er => er.number !== number);
+          this._fbERs.next(updatedERs);
+        })
+      );
+  }
+
 
   // edit existing place
   editBlock(targetPostal: string, newName: string) {
