@@ -6,6 +6,7 @@ import { BlockDetailPageRoutingModule } from './block-detail-routing.module';
 import { BlockDetailPage } from './block-detail.page';
 import { AddUnitComponent } from './add-unit/add-unit.component';
 import { EditBlockComponent } from './edit-block/edit-block.component';
+import { ContactFormModule } from '../../contact-form/contact-form.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { EditBlockComponent } from './edit-block/edit-block.component';
     FormsModule,
     IonicModule,
     BlockDetailPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ContactFormModule
   ],
   declarations: [BlockDetailPage, AddUnitComponent, EditBlockComponent]
 })
