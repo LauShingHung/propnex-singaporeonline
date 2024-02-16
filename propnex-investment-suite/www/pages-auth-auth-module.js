@@ -182,12 +182,16 @@ var AuthPage = /** @class */ (function () {
                 if (this.result.password === password) {
                     this.authService.currFbUser = this.result;
                     this.authService.login();
+<<<<<<< Updated upstream
                     if (this.result.isVerified === true) {
                         this.router.navigateByUrl('/home');
                     }
                     else {
                         this.router.navigateByUrl('/verification');
                     }
+=======
+                    this.router.navigateByUrl('/home');
+>>>>>>> Stashed changes
                 }
                 else {
                     // incorrect password
