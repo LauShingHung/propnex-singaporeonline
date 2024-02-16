@@ -66,6 +66,9 @@ export class AuthPage implements OnInit, OnDestroy {
           if (this.result.isVerified === true){
             this.router.navigateByUrl('/home');
           }
+          else if (this.authService.currFbUser.userType === 'admin'){
+            this.router.navigateByUrl('/home');
+          }
           else{
             this.router.navigateByUrl('/verification');
           }
