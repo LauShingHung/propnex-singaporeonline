@@ -15,6 +15,7 @@ import { fbUser } from './firebase.model';
 export class AuthPage implements OnInit, OnDestroy {
 
   isLogin = true;
+  selectedUserType: string;
 
   result: fbUser;
 
