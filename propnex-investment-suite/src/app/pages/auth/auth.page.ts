@@ -118,7 +118,7 @@ export class AuthPage implements OnInit, OnDestroy {
         this.router.navigateByUrl('/auth');
       }
       else {
-        alert(mobile);
+        alert("Verification Unsuccessful");
       }
   }
   }
