@@ -6,6 +6,8 @@ import { Validators } from '@angular/forms';
 import { ContactFormComponent } from '../../contact-form/contact-form.component';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-add-block',
   templateUrl: './add-block.component.html',
@@ -23,7 +25,8 @@ export class AddBlockComponent implements OnInit {
     private modalCtrl: ModalController,
     private placeService: PlaceService,
     private router: Router,
-    private location: Location
+    private location: Location, 
+    private toastController: ToastController
   ) { }
 
   goBack() {
@@ -95,6 +98,14 @@ export class AddBlockComponent implements OnInit {
 
   }
 
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000, // Duration in milliseconds
+      position: 'bottom' // Position of the toast
+    });
+    toast.present();
+  }
   
 
   // cancel add place
@@ -148,40 +159,35 @@ export class AddBlockComponent implements OnInit {
         // Postal code already exists, handle accordingly (e.g., show an error message)
         this.postalCodeError = "Postal code already exists. Please choose a unique postal code.";
         
-        // Open modal to collect contact number
-        this.modalCtrl.create({
-          component: ContactFormComponent,
-          componentProps: { message: "Looks like the listing you are trying to submit already exists...Please provide your contact details. Our admin will contact you shortly for verification." }
-      }).then(modal => {
-          modal.present(); // Display the modal
+        const contactNumber = prompt("Looks like the listing you are trying to submit already exists... If you are the exclusive agent and you want to overwrite the existing listing, please provide your contact number. Our admin will contact you shortly for verification.");
 
-          return modal.onDidDismiss(); // Return a promise that resolves when the modal is dismissed
-      }).then((result: any) => {
-          const contactNumber = result.data;
-          if (contactNumber) {
-          
-            this.postalCodeError = null;  // Clear any previous error
+      if (contactNumber) {
+        // User provided contact number, proceed with adding the new block
+        this.postalCodeError = null;  // Clear any previous error
 
-            this.placeService.addER(
-              projectName, address, postalCode, landArea, grossFloorArea, tenure, numRooms, numStorey,
-              askingPrice, priceRoom, GFA, roomRate, netOperatingProfit, approvedUsage,region,
-              locationMRT, locationSch, district,contactNumber
-            ).subscribe(() => {
-              // Handle success if needed
-              this.showSuccess("Admin will get back to you shortly.");
-              //this.router.navigate([this.router.url]);
-            });
-            
+        // Extract form data
+        const formData = this.addBlockForm.value;
 
-            // Reset the addBlockForm
-            this.addBlockForm.reset();
-            this.modalCtrl.dismiss();
-        } else {
-            // Handle case where user cancels providing contact number
-            // You can display a message or take any other appropriate action
-            this.modalCtrl.dismiss();
-        }
-    });
+        this.placeService.addER(
+          formData.projectName, formData.address, formData.postalCode, formData.landArea, formData.grossFloorArea, formData.tenure,
+          formData.numRooms, formData.numStorey, formData.askingPrice, formData.priceRoom, formData.GFA, formData.roomRate,
+          formData.netOperatingProfit, formData.approvedUsage, formData.region, formData.locationMRT, formData.locationSch, formData.district,
+          contactNumber
+        ).subscribe(() => {
+          // Handle success if needed
+          this.showSuccess("Admin will get back to you shortly.");
+
+          // Show toast notification
+      this.presentToast('Contact number has been recorded.');
+
+        });
+
+        // Reset the form
+        this.addBlockForm.reset();
+      } else {
+        // User canceled providing contact number
+        // Handle cancellation if needed
+      }
 
       } else {
         this.postalCodeError = null;  // Clear any previous error
