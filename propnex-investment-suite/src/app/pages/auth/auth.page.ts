@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { fbUser } from './firebase.model';
-
+import { fbUser, fbLicense } from './firebase.model';
+import { HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
@@ -18,26 +19,38 @@ export class AuthPage implements OnInit, OnDestroy {
   selectedUserType: string;
 
   result: fbUser;
+  resultL: fbLicense;
 
   loadedFBUsers: fbUser[];
   private fbUsersSub: Subscription;
-
+  private fbLicenseSub: Subscription;
+  private excelData: any;
+  loadedFBLicenses: fbLicense[];
 
   constructor(
     private authService: AuthService, 
     private router: Router,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private http: HttpClient
   ) { }
 
 
   ngOnInit() {
     this.fbUsersSub = this.authService.fbUsers.subscribe(fbUsers => {
       this.loadedFBUsers = fbUsers;
-    })
+    });
+    this.fbLicenseSub = this.authService.fbLicenses.subscribe(fbLicenses => {
+      this.loadedFBLicenses = fbLicenses;
+    });
   }
+  
 
   ionViewWillEnter() {
     this.authService.fetchFBUsers().subscribe(() => {
+
+    });
+
+    this.authService.fetchFBLicense().subscribe(() => {
 
     });
   }
@@ -52,6 +65,17 @@ export class AuthPage implements OnInit, OnDestroy {
     const name = form.value.name;
     const userType = form.value.userType;
     const isVerified = false;
+    let licenseNumber;
+    let mobile; // Declare licenseNumber variable
+
+    // Extract license number value if the userType is propertyAgent
+    if (userType === 'propertyAgent') {
+      licenseNumber = form.value.licenseNumber;
+    }
+    if (userType === 'propertyAgent') {
+      mobile = form.value.mobile;
+      
+    }
 
     form.reset();
 
@@ -84,14 +108,24 @@ export class AuthPage implements OnInit, OnDestroy {
         
       }
     } else {
-      // signup
-      this.authService.addUser(email, name, password, userType, isVerified).subscribe(() => {
+      this.resultL = this.loadedFBLicenses.find(u => u.Mobile === mobile);
+      if (this.resultL) {
+        alert('Verification successful.');
+        this.authService.addUser(email, name, password, userType, isVerified, licenseNumber).subscribe(() => {
 
-      });
-      this.isLogin = true;
-      this.router.navigateByUrl('/auth');
-    }
+        });
+        this.isLogin = true;
+        this.router.navigateByUrl('/auth');
+      }
+      else {
+        alert(mobile);
+      }
   }
+  }
+
+      
+
+  
 
   // present invalid email alert
   async presentEmailAlert() {

@@ -1,0 +1,10 @@
+{
+  "name": "John Doe",
+  "CEA NO": 30,
+  "email": "john.doe@example.com",
+  "address": {
+    "city": "New York",
+    "country": "USA"
+  },
+  "tags": ["javascript", "angular", "typescript"]
+}

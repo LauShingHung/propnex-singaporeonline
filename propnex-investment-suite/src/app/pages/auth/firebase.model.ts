@@ -7,7 +7,20 @@ export class fbUser {
     public password: string,
     public personalRec: string[],
     public userType: string,
-    public isVerified: boolean
+    public isVerified: boolean,
+    public licenseNumber: string
+  ) {}
+}
+
+export class fbLicense {
+  constructor(
+    public AgencyLicense: string,
+    public CEA: string,
+    public Company: string,
+    public Email: string,
+    public Mobile: Number,
+    public Name: string,
+    public RegDate: string
   ) {}
 }
 

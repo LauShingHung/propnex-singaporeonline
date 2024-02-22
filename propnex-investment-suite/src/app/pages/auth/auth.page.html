@@ -29,6 +29,11 @@
 
             <!-- Conditional fields based on user type -->
             <ion-item *ngIf="selectedUserType === 'propertyAgent' && !isLogin">
+              <ion-label position="floating">Mobile Number</ion-label>
+              <ion-input type="Number" ngModel name="mobile" required></ion-input>
+            </ion-item>
+
+            <ion-item *ngIf="selectedUserType === 'propertyAgent' && !isLogin">
               <ion-label position="floating">License Number</ion-label>
               <ion-input type="text" ngModel name="licenseNumber" required></ion-input>
             </ion-item>

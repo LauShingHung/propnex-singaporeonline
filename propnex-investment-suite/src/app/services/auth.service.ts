@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { take, map, tap, switchMap } from 'rxjs/operators';
-import { fbPostal, fbUser } from '../pages/auth/firebase.model';
+import { fbPostal, fbUser, fbLicense } from '../pages/auth/firebase.model';
 
 
 @Injectable({
@@ -13,7 +13,9 @@ export class AuthService {
 
   private _userIsAuthenticated = false;
   private _currFbUser: fbUser;
+  private _currFbLicense: fbLicense;
   private _fbUsers = new BehaviorSubject<fbUser[]>([]);
+  private _fbLicenses = new BehaviorSubject<fbLicense[]>([]);
 
   
   get currFbUser() {
@@ -26,6 +28,10 @@ export class AuthService {
 
   get fbUsers() {
     return this._fbUsers.asObservable();
+  }
+
+  get fbLicenses() {
+    return this._fbLicenses.asObservable();
   }
 
   set currFbUser(currFbUser: fbUser) {
@@ -66,7 +72,8 @@ export class AuthService {
                   resData[key].password,
                   resData[key].personalRec,
                   resData[key].userType,
-                  resData[key].isVerified
+                  resData[key].isVerified,
+                  resData[key].licenseNumber
                 )
               );
             }
@@ -79,8 +86,39 @@ export class AuthService {
       );
   }
 
+  fetchFBLicense() {
+    return this.http
+      .get(
+        'https://propertagents-c4754-default-rtdb.asia-southeast1.firebasedatabase.app/.json'
+      )
+      .pipe(
+        map(resData => {
+          const users = [];
+          for (const key in resData) {
+            if (resData.hasOwnProperty(key)) {  
+              users.push(
+                new fbLicense(
+                  resData[key].AgencyLicense,
+                  resData[key].CEA,
+                  resData[key].Company,
+                  resData[key].Email,
+                  resData[key].Mobile,
+                  resData[key].Name,
+                  resData[key].RegDate
+                )
+              );
+            }
+          }
+          return users;
+        }),
+        tap(users => {
+          this._fbLicenses.next(users);
+        })
+      );
+  }
+
   // add new user
-  addUser(email: string, name: string, password: string, userType: string, isVerified: boolean) {
+  addUser(email: string, name: string, password: string, userType: string, isVerified: boolean, licenseNumber: string) {
     const newUser = new fbUser(
       email,
       [],
@@ -89,7 +127,8 @@ export class AuthService {
       password,
       [],
       userType,
-      isVerified
+      isVerified,
+      licenseNumber
     );
     return this.http
       .post('https://propnexusers-e6189-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
@@ -129,7 +168,8 @@ export class AuthService {
           newPassword,
           oldPlace.personalRec,
           oldPlace.userType,
-          oldPlace.isVerified
+          oldPlace.isVerified,
+          oldPlace.licenseNumber
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(
@@ -177,7 +217,8 @@ export class AuthService {
           oldPlace.password,
           uniqueRecArr,
           oldPlace.userType,
-          oldPlace.isVerified
+          oldPlace.isVerified,
+          oldPlace.licenseNumber
         );
         this.currFbUser = updatedUsers[updatedUserIndex];
         return this.http.put(
@@ -226,7 +267,9 @@ export class AuthService {
           currentUser.password,
           currentUser.personalRec,
           currentUser.userType,
-          isVerified // Set the new verification status
+          isVerified,
+          currentUser.licenseNumber
+           // Set the new verification status
         );
         // Update the database entry for this user
         return this.http.put(
