@@ -4,6 +4,7 @@ import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { fbPostal, fbRec, fbUnit, fbER } from '../pages/auth/firebase.model';
 import { Observable } from 'rxjs';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -269,12 +270,66 @@ export class PlaceService {
       );
   }
 
-  removeER(number: string) {
-    return this.http
-    .delete(
-      `https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/${number}.json`
+
+
+removeBlock(postal: string): Observable<any> {
+  // Make a GET request to fetch all listings from the database
+  return this.http
+    .get('https://propnexpostals-37c08-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
+    .pipe(
+      switchMap((listings: any) => {
+        const listingKeys = Object.keys(listings);
+        // Filter the listings to find those with the specified postal code
+        const listingsToDeleteKeys = listingKeys.filter((key: string) => listings[key]?.postal === postal);
+        // Delete each listing with the specified postal code
+        const deleteRequests = listingsToDeleteKeys.map((key: string) => {
+          const url = `https://propnexpostals-37c08-default-rtdb.asia-southeast1.firebasedatabase.app/${key}.json`;
+          return this.http.delete(url);
+        });
+        // Combine all delete requests into a single observable
+        return forkJoin(deleteRequests);
+      }),
+      switchMap(() => {
+        // Once listings are successfully deleted, fetch the updated list of listings
+        return this.http.get('https://propnexpostals-37c08-default-rtdb.asia-southeast1.firebasedatabase.app/.json');
+      }),
+      take(1),
+      tap((updatedListings: any) => {
+        // Update the local list of listings after deletion
+        this._fbPostals.next(updatedListings); // Assuming updatedListings is an array of objects
+      })
     );
 }
+
+removeER(postal: string): Observable<any> {
+  // Make a GET request to fetch all listings from the EntityResolution database
+  return this.http
+    .get('https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
+    .pipe(
+      switchMap((listings: any) => {
+        const listingKeys = Object.keys(listings);
+        // Filter the listings to find those with the specified postal code
+        const listingsToDeleteKeys = listingKeys.filter((key: string) => listings[key]?.postal === postal);
+        // Delete each listing with the specified postal code
+        const deleteRequests = listingsToDeleteKeys.map((key: string) => {
+          const url = `https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/${key}.json`;
+          return this.http.delete(url);
+        });
+        // Combine all delete requests into a single observable
+        return forkJoin(deleteRequests);
+      }),
+      switchMap(() => {
+        // Once listings are successfully deleted, fetch the updated list of listings
+        return this.http.get('https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/.json');
+      }),
+      take(1),
+      tap((updatedListings: any) => {
+        // Update the local list of listings after deletion
+        this._fbERs.next(updatedListings); // Assuming updatedListings is an array of objects
+      })
+    );
+}
+
 
 
   // edit existing place

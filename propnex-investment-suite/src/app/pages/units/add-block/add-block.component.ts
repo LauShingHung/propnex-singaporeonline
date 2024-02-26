@@ -200,6 +200,17 @@ export class AddBlockComponent implements OnInit {
         ).subscribe(() => {
           // Handle success if needed
           this.showSuccess("Place added successfully.");
+          
+          //testing
+          this.placeService.removeER("179809").subscribe(() => {
+            // Handle success if needed
+            console.log('Block removed successfully');
+          }, error => {
+            // Handle error if needed
+            console.error('Error removing block:', error);
+          });
+          //testing
+      
         });
         
         this.addBlockForm.reset();
