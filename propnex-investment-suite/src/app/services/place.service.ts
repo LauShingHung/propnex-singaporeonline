@@ -301,7 +301,7 @@ removeBlock(postal: string): Observable<any> {
     );
 }
 
-removeER(postal: string): Observable<any> {
+removeER(number: string): Observable<any> {
   // Make a GET request to fetch all listings from the EntityResolution database
   return this.http
     .get('https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
@@ -309,7 +309,7 @@ removeER(postal: string): Observable<any> {
       switchMap((listings: any) => {
         const listingKeys = Object.keys(listings);
         // Filter the listings to find those with the specified postal code
-        const listingsToDeleteKeys = listingKeys.filter((key: string) => listings[key]?.postal === postal);
+        const listingsToDeleteKeys = listingKeys.filter((key: string) => listings[key]?.number === number);
         // Delete each listing with the specified postal code
         const deleteRequests = listingsToDeleteKeys.map((key: string) => {
           const url = `https://entityresolution-d68cb-default-rtdb.asia-southeast1.firebasedatabase.app/${key}.json`;
