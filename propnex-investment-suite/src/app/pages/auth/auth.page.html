@@ -30,15 +30,15 @@
             <!-- Conditional fields based on user type -->
             <ion-item *ngIf="selectedUserType === 'propertyAgent' && !isLogin">
               <ion-label position="floating">Mobile Number</ion-label>
-              <ion-input type="Number" ngModel name="mobile" required></ion-input>
+              <ion-input type="Number" ngModel name="mobile" required (ionfocus)="update(mobile,form)"></ion-input>
             </ion-item>
 
-            <ion-item *ngIf="selectedUserType === 'propertyAgent' && !isLogin">
+            <ion-item *ngIf="selectedUserType === 'propertyAgent'  && !isLogin && showField">
               <ion-label position="floating">License Number</ion-label>
               <ion-input type="text" ngModel name="licenseNumber" required></ion-input>
             </ion-item>
             
-            <ion-item *ngIf="selectedUserType === 'propertyAgent' && !isLogin">
+            <ion-item *ngIf="selectedUserType === 'propertyAgent'  && !isLogin && showField">
               <ion-label position="floating">Agency Name</ion-label>
               <ion-input type="text" ngModel name="agencyName" required></ion-input>
             </ion-item>

@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { fbUser, fbLicense } from './firebase.model';
 import { HttpClient } from '@angular/common/http';
-import * as XLSX from 'xlsx';
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
@@ -17,6 +18,7 @@ export class AuthPage implements OnInit, OnDestroy {
 
   isLogin = true;
   selectedUserType: string;
+  showField: boolean = false;
 
   result: fbUser;
   resultL: fbLicense;
@@ -31,7 +33,8 @@ export class AuthPage implements OnInit, OnDestroy {
     private authService: AuthService, 
     private router: Router,
     private alertController: AlertController,
-    private http: HttpClient
+    private http: HttpClient,
+    private toastController: ToastController
   ) { }
 
 
@@ -56,7 +59,19 @@ export class AuthPage implements OnInit, OnDestroy {
   }
 
   // submit login / signup form
-  onSubmit(form: NgForm) {
+  update(mobile: number, form: NgForm) {
+    this.resultL = this.loadedFBLicenses.find(u => u.Mobile === mobile);
+    if (this.resultL) {
+      // Get the license number from the found user
+      const licenseNumber = this.resultL.CEA;
+  
+      // Update the license number value in the form
+      this.presentToast(licenseNumber);
+      form.form.patchValue({ licenseNumber: licenseNumber });
+    }
+  }
+
+  async onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
     }
@@ -66,61 +81,99 @@ export class AuthPage implements OnInit, OnDestroy {
     const userType = form.value.userType;
     const isVerified = false;
     let licenseNumber;
+    let AgencyName;
     let mobile; // Declare licenseNumber variable
-
-    // Extract license number value if the userType is propertyAgent
-    if (userType === 'propertyAgent') {
-      licenseNumber = form.value.licenseNumber;
-    }
+    let agencyName;
     if (userType === 'propertyAgent') {
       mobile = form.value.mobile;
-      
+      licenseNumber = form.value.licenseNumber;
+      agencyName = form.value.agencyName;
     }
 
     form.reset();
 
     if (this.isLogin) {
-      // login
-      this.result = this.loadedFBUsers.find(u => u.email === email);
-      if (this.result) {
-        
-        if (this.result.password === password) {
-          
-          this.authService.currFbUser = this.result;
-          this.authService.login();
-          if (this.result.isVerified === true){
-            this.router.navigateByUrl('/home');
-          }
-          else if (this.authService.currFbUser.userType === 'admin'){
-            this.router.navigateByUrl('/home');
-          }
-          else{
-            this.router.navigateByUrl('/verification');
-          }
-        } else {
-          // incorrect password
-          this.authService.currFbUser = this.result;
-          
-        }
-      } else {
-        // invalid email
-        this.authService.currFbUser = this.result;
-        
-      }
+         // login
+         this.result = this.loadedFBUsers.find(u => u.email === email);
+         if (this.result) {
+           
+           if (this.result.password === password) {
+             
+             this.authService.currFbUser = this.result;
+             this.authService.login();
+             this.router.navigateByUrl('/home');
+             if (this.result.isVerified === true){
+               this.router.navigateByUrl('/home');
+             }
+             else if (this.authService.currFbUser.userType === 'admin'){
+               this.router.navigateByUrl('/home');
+             }
+           } else {
+             // incorrect password
+             this.authService.currFbUser = this.result;
+             
+           }
+         } else {
+           // invalid email
+           this.authService.currFbUser = this.result;
+           
+         }
     } else {
-      this.resultL = this.loadedFBLicenses.find(u => u.Mobile === mobile);
-      if (this.resultL) {
-        alert('Verification successful.');
-        this.authService.addUser(email, name, password, userType, isVerified, licenseNumber).subscribe(() => {
+      // Sign up process...
 
+      this.resultL = this.loadedFBLicenses.find(u => u.Mobile === mobile);
+
+      if (this.showField === true) {
+        this.authService.addUser(email, name, password, userType, isVerified, licenseNumber).subscribe(() => {
+          // Sign up successful
         });
-        this.isLogin = true;
-        this.router.navigateByUrl('/auth');
       }
-      else {
-        alert("Verification Unsuccessful");
+      if (this.resultL) {
+        // If the license number is found, confirm it with the user
+        licenseNumber = this.resultL.CEA;
+        AgencyName = this.resultL.Company;
+        const alert = await this.alertController.create({
+          header: 'Please Check Whether Your License Number And Agency Name is Accurate.',
+          message: 'License number: ' + licenseNumber + '\nAgency Name: ' + AgencyName,
+          buttons: [
+            {
+              text: 'No',
+              role: 'cancel',
+              handler: () => {
+                this.presentToast('Please enter correct license number and Agency Name');
+                this.showField = true;
+              }
+            }, {
+              text: 'Yes',
+              handler: () => {
+                // Proceed with sign up
+                this.presentToast('Verification successful');
+                this.authService.addUser(email, name, password, userType, isVerified, licenseNumber).subscribe(() => {
+                  // Sign up successful
+                });
+                this.isLogin = true;
+                this.result.isVerified === true;
+                this.router.navigateByUrl('/auth');
+              }
+            }
+          ]
+        });
+        await alert.present();
+        this.showField = false;
+      } else {
+        // If the license number is not found, display an error message
+        this.presentToast("Verification Unsuccessful");
       }
+    }
   }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000, // Display the toast for 3 seconds
+      position: 'top' // Display the toast at the top of the screen
+    });
+    toast.present();
   }
 
       
