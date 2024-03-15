@@ -12,6 +12,13 @@ export class fbUser {
   ) {}
 }
 
+export class fbApriori {
+  constructor(
+    public postal: string,
+    public userID: string
+  ) {}
+}
+
 export class fbLicense {
   constructor(
     public AgencyLicense: string,

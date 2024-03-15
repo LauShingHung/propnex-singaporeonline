@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 import { UnitsPageRoutingModule } from './units-routing.module';
 import { UnitsPage } from './units.page';
 import { AddBlockComponent } from './add-block/add-block.component';
-import { ContactFormModule } from '../contact-form/contact-form.module';
 
 @NgModule({
   imports: [
@@ -13,10 +12,9 @@ import { ContactFormModule } from '../contact-form/contact-form.module';
     FormsModule,
     IonicModule,
     UnitsPageRoutingModule,
-    ReactiveFormsModule,
-    ContactFormModule
+    ReactiveFormsModule
   ],
-  declarations: [UnitsPage, AddBlockComponent,ContactFormModule]
+  declarations: [UnitsPage, AddBlockComponent]
 })
 
 export class UnitsPageModule {}

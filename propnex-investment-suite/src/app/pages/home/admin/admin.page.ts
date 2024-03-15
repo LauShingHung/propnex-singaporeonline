@@ -66,7 +66,8 @@ export class AdminPage implements OnInit {
   // navigate to edit user profile form
 
   removePostal(number: string) {
-    this.placeService.removeER(number);
+    this.placeService.removeER("88934483");
+    alert(number);
   }
 
   ngOnDestroy() {

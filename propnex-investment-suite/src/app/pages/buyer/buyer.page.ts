@@ -328,6 +328,7 @@ export class BuyerPage implements OnInit {
   onSelectPlace(postal: fbPostal) {
     this.router.navigate(['/', 'units', postal.postal]);
     this.selectedHotelsService.addSelectedHotel(postal);
+    alert("HI");
   }
 
   // navigate to edit user profile form

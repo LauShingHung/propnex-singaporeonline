@@ -78,6 +78,7 @@ export class UnitsPage implements OnInit {
   // navigate to place details page
   onSelectPlace() {
     this.router.navigate(['/', 'units', this.result.postal]);
+    alert("HI");
   }
 
   // navigate to edit user profile form

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { fbPostal, fbRec, fbUnit, fbER } from '../pages/auth/firebase.model';
+import { fbPostal, fbRec, fbUnit, fbER, fbApriori } from '../pages/auth/firebase.model';
 import { Observable } from 'rxjs';
 import { forkJoin } from 'rxjs';
 
@@ -14,6 +14,7 @@ export class PlaceService {
 
   private _fbPostals = new BehaviorSubject<fbPostal[]>([]);
   private _fbERs = new BehaviorSubject<fbER[]>([]);
+  private _fbAprioris = new BehaviorSubject<fbApriori[]>([]);
   private _fbRecs = new BehaviorSubject<fbRec[]>([]);
   private _currPlace: fbPostal;
   private _currUnit: fbUnit;
@@ -21,6 +22,10 @@ export class PlaceService {
 
   get fbPostals() {
     return this._fbPostals.asObservable();
+  }
+
+  get fbAprioris() {
+    return this._fbAprioris.asObservable();
   }
 
   get fbERs() {
@@ -230,6 +235,25 @@ export class PlaceService {
         take(1),
         tap(fbUsers => {
           this._fbPostals.next(fbUsers.concat(newBlock));
+        })
+      );
+  }
+
+  addApriori(postal: string, userID: string) {
+    const newBlock = new fbApriori(
+      postal,
+      userID
+    );
+    return this.http
+      .post('https://propnex-apriori-default-rtdb.asia-southeast1.firebasedatabase.app/.json',
+      { ...newBlock })
+      .pipe(
+        switchMap(resData => {
+          return this.fbAprioris;
+        }),
+        take(1),
+        tap(fbUsers => {
+          this._fbAprioris.next(fbUsers.concat(newBlock));
         })
       );
   }

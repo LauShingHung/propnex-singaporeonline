@@ -80,8 +80,8 @@ export class AuthPage implements OnInit, OnDestroy {
     const name = form.value.name;
     const userType = form.value.userType;
     const isVerified = false;
-    let licenseNumber;
-    let AgencyName;
+    let licenseNumber = "";
+    let AgencyName = "";
     let mobile; // Declare licenseNumber variable
     let agencyName;
     if (userType === 'propertyAgent') {
@@ -120,7 +120,7 @@ export class AuthPage implements OnInit, OnDestroy {
          }
     } else {
       // Sign up process...
-
+      if (userType === "propertyAgent") {
       this.resultL = this.loadedFBLicenses.find(u => u.Mobile === mobile);
 
       if (this.showField === true) {
@@ -130,17 +130,20 @@ export class AuthPage implements OnInit, OnDestroy {
       }
       if (this.resultL) {
         // If the license number is found, confirm it with the user
-        licenseNumber = this.resultL.CEA;
-        AgencyName = this.resultL.Company;
+        if (licenseNumber === undefined) {
+          licenseNumber = this.resultL.CEA;
+          AgencyName = this.resultL.AgencyLicense;
+        }
+
         const alert = await this.alertController.create({
-          header: 'Please Check Whether Your License Number And Agency Name is Accurate.',
-          message: 'License number: ' + licenseNumber + '\nAgency Name: ' + AgencyName,
+          header: 'Please Check Whether Your License Number And Agency License is Accurate.',
+          message: 'License number: ' + licenseNumber + '\nAgency License: ' + AgencyName,
           buttons: [
             {
               text: 'No',
               role: 'cancel',
               handler: () => {
-                this.presentToast('Please enter correct license number and Agency Name');
+                this.presentToast('Please enter correct license number and Agency License');
                 this.showField = true;
               }
             }, {
@@ -165,6 +168,21 @@ export class AuthPage implements OnInit, OnDestroy {
         this.presentToast("Verification Unsuccessful");
       }
     }
+    else if (userType === "regularUser") {
+      this.authService.addUser(email, name, password, userType, isVerified, "0" ).subscribe(() => {
+
+      });
+      this.isLogin = true;
+      this.router.navigateByUrl('/auth');
+    }
+    else {
+      this.authService.addUser(email, name, password, userType, isVerified, "0" ).subscribe(() => {
+
+      });
+      this.isLogin = true;
+      this.router.navigateByUrl('/auth');
+    }
+  }
   }
 
   async presentToast(message: string) {

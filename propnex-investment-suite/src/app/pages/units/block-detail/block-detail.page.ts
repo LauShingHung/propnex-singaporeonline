@@ -8,6 +8,8 @@ import { AddUnitComponent } from './add-unit/add-unit.component';
 import { EditBlockComponent } from './edit-block/edit-block.component';
 import { Subscription } from 'rxjs';
 import { FilterService } from '../../filter.service';
+import { Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-block-detail',
@@ -93,6 +95,11 @@ export class BlockDetailPage implements OnInit {
     });
     this.placeService.fetchFBRecs().subscribe(() => {
       // Handle post-fetch logic if needed
+    });
+
+    this.placeService.addApriori(
+      this.currPlace.postal,this.currUser.name
+    ).subscribe(() => {
     });
   }
   

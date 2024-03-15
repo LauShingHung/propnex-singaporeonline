@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { PlaceService } from '../../../services/place.service';
 import { Validators } from '@angular/forms';
-import { ContactFormComponent } from '../../contact-form/contact-form.component';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ToastController } from '@ionic/angular';
@@ -202,7 +201,7 @@ export class AddBlockComponent implements OnInit {
           this.showSuccess("Place added successfully.");
           
           //testing
-          this.placeService.removeER("179809").subscribe(() => {
+          this.placeService.removeER("179990").subscribe(() => {
             // Handle success if needed
             console.log('Block removed successfully');
           }, error => {
