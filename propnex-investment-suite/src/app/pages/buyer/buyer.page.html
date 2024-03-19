@@ -26,7 +26,7 @@
         <ion-col size="12">
           <!-- Accommodation type filter buttons -->
           <ion-button (click)="toggleAccommodationType('Residential')">Residential</ion-button>
-          <ion-button (click)="toggleAccommodationType('Backpackers Hotel')">Backpackers' Hotel</ion-button>
+          <ion-button (click)="toggleAccommodationType('Backpackers Hostel')">Backpackers' Hostel</ion-button>
           <ion-button (click)="toggleAccommodationType('Students Hotel')">Students' Hotel</ion-button>
           <ion-button (click)="toggleAccommodationType('Hotel')">Hotel</ion-button>
           <ion-button (click)="toggleAccommodationType('Serviced Apartment')">Serviced Apartment</ion-button>
@@ -53,15 +53,6 @@
               <ion-select-option *ngFor="let type of regionTypes" [value]="type">{{ type }}</ion-select-option>
             </ion-select>            
           </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col size="12">
-          <!-- Tenure type filter buttons -->
-          <ion-button (click)="setRegion('OCR')">OCR</ion-button>
-          <ion-button (click)="setRegion('CCR')">CCR</ion-button>
-          <ion-button (click)="setRegion('RCR')">RCR</ion-button>
         </ion-col>
       </ion-row>
 

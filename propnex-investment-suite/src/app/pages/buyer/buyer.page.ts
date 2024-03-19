@@ -249,7 +249,7 @@ export class BuyerPage implements OnInit {
 
   toggleAccommodationType(type: string) {
     const index = this.selectedAccommodationType.indexOf(type);
-  
+    
     if (index !== -1) {
       // Type is already in the array, remove it
       this.selectedAccommodationType.splice(index, 1);
@@ -328,7 +328,6 @@ export class BuyerPage implements OnInit {
   onSelectPlace(postal: fbPostal) {
     this.router.navigate(['/', 'units', postal.postal]);
     this.selectedHotelsService.addSelectedHotel(postal);
-    alert("HI");
   }
 
   // navigate to edit user profile form
