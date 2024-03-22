@@ -25,13 +25,13 @@
       <ion-row>
         <ion-col size="12">
           <!-- Accommodation type filter buttons -->
-          <ion-button (click)="toggleAccommodationType('Residential')">Residential</ion-button>
-          <ion-button (click)="toggleAccommodationType('Backpackers Hostel')">Backpackers' Hostel</ion-button>
-          <ion-button (click)="toggleAccommodationType('Students Hotel')">Students' Hotel</ion-button>
-          <ion-button (click)="toggleAccommodationType('Hotel')">Hotel</ion-button>
-          <ion-button (click)="toggleAccommodationType('Serviced Apartment')">Serviced Apartment</ion-button>
-          <ion-button (click)="toggleAccommodationType('Workers Dormitories')">Workers' Dormitories</ion-button>
-                  <!-- Add more buttons as needed -->
+          <ion-button [color]="buttonClicked['Residential'] ? 'light' : 'primary'" (click)="toggleAccommodationType('Residential')">Residential</ion-button>
+          <ion-button [color]="buttonClicked['Backpackers Hostel'] ? 'light' : 'primary'" (click)="toggleAccommodationType('Backpackers Hostel')">Backpackers' Hostel</ion-button>
+          <ion-button [color]="buttonClicked['Students Hotel'] ? 'light' : 'primary'" (click)="toggleAccommodationType('Students Hotel')">Students' Hotel</ion-button>
+          <ion-button [color]="buttonClicked['Hotel'] ? 'light' : 'primary'" (click)="toggleAccommodationType('Hotel')">Hotel</ion-button>
+          <ion-button [color]="buttonClicked['Serviced Apartment'] ? 'light' : 'primary'" (click)="toggleAccommodationType('Serviced Apartment')">Serviced Apartment</ion-button>
+          <ion-button [color]="buttonClicked['Workers Dormitories'] ? 'light' : 'primary'" (click)="toggleAccommodationType('Workers Dormitories')">Workers' Dormitories</ion-button>
+          <!-- Add more buttons as needed -->
         </ion-col>
       </ion-row>
 
@@ -86,18 +86,17 @@
 
       <ion-row>
         <ion-col size="12">
-          <!-- Other filters -->
-      
           <!-- Budget filter buttons -->
-          <ion-button (click)="toggleBudgetRange({ min: 0, max: 1000000 })" [class.selected]="isBudgetRangeSelected({ min: 0, max: 1000000 })">0-1mil</ion-button>
-          <ion-button (click)="toggleBudgetRange({ min: 1000001, max: 5000000 })" [class.selected]="isBudgetRangeSelected({ min: 1000001, max: 5000000 })">1mil-5mil</ion-button>
-          <ion-button (click)="toggleBudgetRange({ min: 5000001, max: 10000000 })" [class.selected]="isBudgetRangeSelected({ min: 5000001, max: 10000000 })">5mil-10mil</ion-button>
-          <ion-button (click)="toggleBudgetRange({ min: 10000001, max: 30000001 })" [class.selected]="isBudgetRangeSelected({ min: 10000001, max: 30000001 })">10mil-30mil</ion-button>
-          <ion-button (click)="toggleBudgetRange({ min: 30000001, max: 50000000 })" [class.selected]="isBudgetRangeSelected({ min: 30000001, max: 50000000 })">30mil-50mil</ion-button>
-          <ion-button (click)="toggleBudgetRange({ min: 50000001, max: 99999999999 })" [class.selected]="isBudgetRangeSelected({ min: 50000001, max: 99999999999 })">>50mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 0, max: 1000000 })" [class.selected]="isBudgetRangeSelected({ min: 0, max: 1000000 })" [color]="isBudgetRangeSelected({ min: 0, max: 1000000 }) ? 'light' : 'primary'">0-1mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 1000001, max: 5000000 })" [class.selected]="isBudgetRangeSelected({ min: 1000001, max: 5000000 })" [color]="isBudgetRangeSelected({ min: 1000001, max: 5000000 }) ? 'light' : 'primary'">1mil-5mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 5000001, max: 10000000 })" [class.selected]="isBudgetRangeSelected({ min: 5000001, max: 10000000 })" [color]="isBudgetRangeSelected({ min: 5000001, max: 10000000 }) ? 'light' : 'primary'">5mil-10mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 10000001, max: 30000001 })" [class.selected]="isBudgetRangeSelected({ min: 10000001, max: 30000001 })" [color]="isBudgetRangeSelected({ min: 10000001, max: 30000001 }) ? 'light' : 'primary'">10mil-30mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 30000001, max: 50000000 })" [class.selected]="isBudgetRangeSelected({ min: 30000001, max: 50000000 })" [color]="isBudgetRangeSelected({ min: 30000001, max: 50000000 }) ? 'light' : 'primary'">30mil-50mil</ion-button>
+          <ion-button (click)="toggleBudgetRange({ min: 50000001, max: 99999999999 })" [class.selected]="isBudgetRangeSelected({ min: 50000001, max: 99999999999 })" [color]="isBudgetRangeSelected({ min: 50000001, max: 99999999999 }) ? 'light' : 'primary'">>50mil</ion-button>
           <!-- Add more buttons as needed -->
         </ion-col>
       </ion-row>
+      
 
       <ion-row>
         <ion-col size="12">
@@ -126,16 +125,16 @@
 
       <ion-row>
         <ion-col size="12">
-          <!-- Other filters -->
-      
-          <!-- Budget filter buttons -->
-          <ion-button (click)="setRoomRange(0, 10)">0-10</ion-button>
-          <ion-button (click)="setRoomRange(11, 30)">11-30</ion-button>
-          <ion-button (click)="setRoomRange(31, 40)">31-40</ion-button>
-          <ion-button (click)="setRoomRange(41, 60)">41-60</ion-button>
+          <!-- Room range filter buttons -->
+          <ion-button (click)="setRoomRange(0, 10)" [class.selected]="isRoomRangeSelected(0, 10)" [color]="isRoomRangeSelected(0, 10) ? 'light' : 'primary'">0-10</ion-button>
+          <ion-button (click)="setRoomRange(11, 30)" [class.selected]="isRoomRangeSelected(11, 30)" [color]="isRoomRangeSelected(11, 30) ? 'light' : 'primary'">11-30</ion-button>
+          <ion-button (click)="setRoomRange(31, 40)" [class.selected]="isRoomRangeSelected(31, 40)" [color]="isRoomRangeSelected(31, 40) ? 'light' : 'primary'">31-40</ion-button>
+          <ion-button (click)="setRoomRange(41, 60)" [class.selected]="isRoomRangeSelected(41, 60)" [color]="isRoomRangeSelected(41, 60) ? 'light' : 'primary'">41-60</ion-button>
           <!-- Add more buttons as needed -->
         </ion-col>
       </ion-row>
+      
+      
 
       <ion-row>
         <ion-col size="12">
@@ -152,20 +151,23 @@
       <ion-row>
         <ion-col size="12">
           <!-- Tenure type filter buttons -->
-          <ion-button (click)="setTenureType('99 Years')">99 Years</ion-button>
-          <ion-button (click)="setTenureType('60 Years')">60 Years</ion-button>
-          <ion-button (click)="setTenureType('Freehold')">Freehold / 999 Years</ion-button>
+          <ion-button (click)="setTenureType('99 Years')" [color]="isTenureTypeSelected('99 Years') ? 'light' : 'primary'">99 Years</ion-button>
+          <ion-button (click)="setTenureType('60 Years')" [color]="isTenureTypeSelected('60 Years') ? 'light' : 'primary'">60 Years</ion-button>
+          <ion-button (click)="setTenureType('Freehold')" [color]="isTenureTypeSelected('Freehold') ? 'light' : 'primary'">Freehold / 999 Years</ion-button>
         </ion-col>
       </ion-row>
-
+      
       <ion-row>
         <ion-col size="12">
           <ion-item>
             <ion-label>Filter</ion-label>
-            <ion-toggle [(ngModel)]="filter" (ionChange)="handleFilterYes()"></ion-toggle>
+            <ion-button (click)="handleFilterToggle()" [color]="filter ? 'primary' : 'light'">
+              {{ filter ? 'On' : 'Off' }}
+            </ion-button>
           </ion-item>
         </ion-col>
       </ion-row>
+      
       
   
       <!-- New row for displaying filtered results -->

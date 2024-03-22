@@ -117,8 +117,11 @@ export class BuyerPage implements OnInit {
   regionTypes = regionTypes;
   selectedRegions: string[] = [];
   selectedBudgetRanges: { min: number, max: number }[] = [];
+  selectedRoomRange: { min: number, max: number } = { min: -1, max: -1 };
   selectedDistricts: string[] = [];
   availableDistricts: string[] = [];
+  buttonClicked: { [key: string]: boolean } = {};
+  selectedTenureType: string = '';
 
 
   constructor(
@@ -210,13 +213,9 @@ export class BuyerPage implements OnInit {
     this.filterPostals();
   }
 
-  handleFilterYes() {
-    if (this.filter) {
-      
-    } else {
-      // Set additionalFilter to false when the toggle is switched off
-      this.filter = false;
-    }
+  handleFilterToggle() {
+    this.filter = !this.filter;
+    // Perform any other actions you want to happen after the filter is toggled
   }
 
   toggleBudgetRange(range: { min: number, max: number }) {
@@ -237,19 +236,24 @@ export class BuyerPage implements OnInit {
     return this.selectedBudgetRanges.some(r => r.min === range.min && r.max === range.max);
   }
 
+  isRoomRangeSelected(min: number, max: number): boolean {
+    return this.selectedRoomRange.min === min && this.selectedRoomRange.max === max;
+  }
+
   getSelectedBudgetRanges(): string {
     return this.selectedBudgetRanges.map(range => `${range.min}-${range.max}`).join(', ');
   }
 
-  setRoomRange(minValue: number, maxValue: number) {
-    this.minRooms = minValue;
-    this.maxRooms = maxValue;
+  setRoomRange(min: number, max: number) {
+    this.selectedRoomRange = {min,max};
+    this.minRooms = min;
+    this.maxRooms = max;
     this.filterPostals();
   }
 
   toggleAccommodationType(type: string) {
     const index = this.selectedAccommodationType.indexOf(type);
-    
+    this.buttonClicked[type] = !this.buttonClicked[type];
     if (index !== -1) {
       // Type is already in the array, remove it
       this.selectedAccommodationType.splice(index, 1);
@@ -261,15 +265,18 @@ export class BuyerPage implements OnInit {
     console.log(this.selectedAccommodationType); // Log the array to check its contents
     this.filterPostals();
   }
-  
+
   setAccommodationType(type: string[]) {
     this.selectedAccommodationType = type;
     this.filterPostals();
   }
   
-  
+  isTenureTypeSelected(type: string): boolean {
+    return this.selectedTenureType === type;
+  }
 
   setTenureType(type: string) {
+    this.selectedTenureType = type;
     this.selectedTenure = [type]; // Convert to an array to match the expected format
     this.filterPostals();
   }
