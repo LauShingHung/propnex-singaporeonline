@@ -31,28 +31,6 @@ export const regionTypes = [
   'OCR'
 ];  
 
-export const regionDistrictMapping = {
-  'RCR': [
-    'District 01 - Raffles Place, Marina, Cecil', 'District 02 - Tanjong Pagar, Chinatown',
-    'District 03 - Tiong Bahru, Alexandra, Queenstown', 'District 04 - Mount Faber, Telok Blangah, Harbourfront',
-    'District 06 - Clarke Quay, City Hall', 'District 16 - Bedok, Upper East Coast, Siglap',
-    'District 17 - Changi, Flora, Loyang', 'District 18 - Tampines, Pasir Ris',
-    'District 19 - Punggol, Sengkang, Serangoon Gardens', 'District 21 - Upper Bukit Timah, Ulu Pandan, Clementi Park',
-    'District 22 - Boon Lay, Jurong, Tuas', 'District 23 - Choa Chu Kang, Diary Farm, Hillview, Bukit Panjang, Bukit Batok',
-    'District 24 - Kranji, Lim Chu Kang, Tengah', 'District 25 - Woodlands, Admiralty',
-    'District 26 - Upper Thomson, Mandai', 'District 27 - Sembawang, Yishun, Admiralty',
-    'District 28 - Yio Chu Kang, Seletar',
-  ],
-  'CCR': [
-    'District 09 - Orchard Road, River Valley', 'District 10 - Bukit Timah, Holland, Balmoral',
-    'District 11 - Novena, Newton, Thomson',
-  ],
-  'OCR': [
-    'District 05 - Buona Vista, Pasir Panjang, Clementi', 'District 14 - Geylang, Paya Lebar, Sims',
-    'District 15 - Joo Chiat, Marina Parade, Katong', 'District 20 - Ang Mo Kio, Bishan, Thomson',
-  ],
-};
-
 export const districtTypes = [ 
     "District 01 - Raffles Place, Marina, Cecil",
     'District 02 - Tanjong Pagar, Chinatown',
@@ -83,6 +61,47 @@ export const districtTypes = [
     'District 27 - Sembawang, Yishun, Admiralty',
     'District 28 - Yio Chu Kang, Seletar'
   ];
+
+  export const regionDistrictMapping = {
+    'CCR': [
+      "District 01 - Raffles Place, Marina, Cecil",
+      "District 02 - Tanjong Pagar, Chinatown",
+      "District 04 - Mount Faber, Telok Blangah, Harbourfront",
+      "District 06 - Clarke Quay, City Hall",
+      "District 07 - Bugis, Beach Road, Golden Mile",
+      "District 09 - Orchard Road, River Valley",
+      "District 10 - Bukit Timah, Holland, Balmoral",
+      "District 11 - Novena, Newton, Thomson"
+      // Add other CCR districts if necessary
+    ],
+    'RCR': [
+      "District 03 - Tiong Bahru, Alexandra, Queenstown",
+      "District 05 - Buona Vista, Pasir Panjang, Clementi",
+      "District 08 - Little India, Farrer Park",
+      "District 12 - Toa Payoh, Serangoon, Balestier",
+      "District 13 - Macpherson, Braddell",
+      "District 14 - Geylang, Paya Lebar, Sims",
+      "District 15 - Joo Chiat, Marina Parade, Katong",
+      "District 20 - Ang Mo Kio, Bishan, Thomson"
+      // Add other RCR districts if necessary
+    ],
+    'OCR': [
+      "District 16 - Bedok, Upper East Coast, Siglap",
+      "District 17 - Changi, Flora, Loyang",
+      "District 18 - Tampines, Pasir Ris",
+      "District 19 - Punggol, Sengkang, Serangoon Gardens",
+      "District 21 - Upper Bukit Timah, Ulu Pandan, Clementi Park",
+      "District 22 - Boon Lay, Jurong, Tuas",
+      "District 23 - Choa Chu Kang, Diary Farm, Hillview, Bukit Panjang, Bukit Batok",
+      "District 24 - Kranji, Lim Chu Kang, Tengah",
+      "District 25 - Woodlands, Admiralty",
+      "District 26 - Upper Thomson, Mandai",
+      "District 27 - Sembawang, Yishun, Admiralty",
+      "District 28 - Yio Chu Kang, Seletar"
+      // Add other OCR districts if necessary
+    ]
+  };
+  
 
 @Component({
   selector: 'app-buyer',
@@ -122,7 +141,45 @@ export class BuyerPage implements OnInit {
   availableDistricts: string[] = [];
   buttonClicked: { [key: string]: boolean } = {};
   selectedTenureType: string = '';
-
+  regionDistrictMapping = {
+    'CCR': [
+      "District 01 - Raffles Place, Marina, Cecil",
+      "District 02 - Tanjong Pagar, Chinatown",
+      "District 04 - Mount Faber, Telok Blangah, Harbourfront",
+      "District 06 - Clarke Quay, City Hall",
+      "District 07 - Bugis, Beach Road, Golden Mile",
+      "District 09 - Orchard Road, River Valley",
+      "District 10 - Bukit Timah, Holland, Balmoral",
+      "District 11 - Novena, Newton, Thomson"
+      // Add other CCR districts if necessary
+    ],
+    'RCR': [
+      "District 03 - Tiong Bahru, Alexandra, Queenstown",
+      "District 05 - Buona Vista, Pasir Panjang, Clementi",
+      "District 08 - Little India, Farrer Park",
+      "District 12 - Toa Payoh, Serangoon, Balestier",
+      "District 13 - Macpherson, Braddell",
+      "District 14 - Geylang, Paya Lebar, Sims",
+      "District 15 - Joo Chiat, Marina Parade, Katong",
+      "District 20 - Ang Mo Kio, Bishan, Thomson"
+      // Add other RCR districts if necessary
+    ],
+    'OCR': [
+      "District 16 - Bedok, Upper East Coast, Siglap",
+      "District 17 - Changi, Flora, Loyang",
+      "District 18 - Tampines, Pasir Ris",
+      "District 19 - Punggol, Sengkang, Serangoon Gardens",
+      "District 21 - Upper Bukit Timah, Ulu Pandan, Clementi Park",
+      "District 22 - Boon Lay, Jurong, Tuas",
+      "District 23 - Choa Chu Kang, Diary Farm, Hillview, Bukit Panjang, Bukit Batok",
+      "District 24 - Kranji, Lim Chu Kang, Tengah",
+      "District 25 - Woodlands, Admiralty",
+      "District 26 - Upper Thomson, Mandai",
+      "District 27 - Sembawang, Yishun, Admiralty",
+      "District 28 - Yio Chu Kang, Seletar"
+      // Add other OCR districts if necessary
+    ]
+  };
 
   constructor(
     private authService: AuthService,
@@ -167,20 +224,26 @@ export class BuyerPage implements OnInit {
     this.filterPostals();
   }
 
-  handleRegionChange(selectedRegion: string) {
-    if (this.selectedRegions.includes(selectedRegion)) {
-      // Remove the region if it's already selected
-      this.selectedRegions = this.selectedRegions.filter((r) => r !== selectedRegion);
-    } else {
-      // Add the region if it's not selected
-      this.selectedRegions.push(selectedRegion);
-    }
+  handleRegionChange(selectedRegions: string[]) {
+    // If a region is already selected and is clicked again, it will be removed from the array,
+    // and its districts will also be deselected.
+    // If a new region is selected, add its districts to the selected districts.
+    this.selectedRegions = selectedRegions;
+    let updatedDistricts = [];
   
-    // Update the selectedDistricts based on all selected regions
-    this.selectedDistricts = this.getSelectedDistricts();
+    // Accumulate all districts from the selected regions
+    this.selectedRegions.forEach(region => {
+      updatedDistricts = updatedDistricts.concat(this.regionDistrictMapping[region]);
+    });
+  
+    // Filter out duplicate districts and ensure they exist in the main district list
+    this.selectedDistrict = updatedDistricts.filter((value, index, self) => 
+      self.indexOf(value) === index && this.districtTypes.includes(value)
+    );
   
     this.filterPostals();
   }
+  
 
   getSelectedDistricts(): string[] {
     const districts: string[] = [];
@@ -190,13 +253,11 @@ export class BuyerPage implements OnInit {
     return districts;
   }
   
-  getDistrictsForRegion(region: string): string[] {
-    return regionDistrictMapping[region] || [];
-  }
-  
-  handleDistrictChange() {
+  handleDistrictChange(selectedDistricts: string[]) {
+    this.selectedDistrict = selectedDistricts;
     this.filterPostals();
   }
+  
 
   
 

@@ -48,9 +48,8 @@
         <ion-col size="12">
           <ion-item>
             <ion-label>Filter by Region</ion-label>
-            <ion-select placeholder="Select Region" [(ngModel)]="selectedRegion" (ionChange)="handleRegionChange($event.detail.value)"multiple>
-              <ion-select-option value="">All Types</ion-select-option>
-              <ion-select-option *ngFor="let type of regionTypes" [value]="type">{{ type }}</ion-select-option>
+            <ion-select placeholder="Select Region" [(ngModel)]="selectedRegions" (ionChange)="handleRegionChange($event.detail.value)" multiple>
+              <ion-select-option *ngFor="let region of regionTypes" [value]="region">{{ region }}</ion-select-option>
             </ion-select>            
           </ion-item>
         </ion-col>
@@ -60,9 +59,8 @@
         <ion-col size="12">
           <ion-item >
             <ion-label>Filter by District</ion-label>
-            <ion-select placeholder="Select Type" [(ngModel)]="selectedDistrict" (ionChange)="handleDistrictChange($event.detail.value)" multiple>
-              <ion-select-option value="">All Types</ion-select-option>
-              <ion-select-option *ngFor="let type of districtTypes" [value]="type">{{ type }}</ion-select-option>
+            <ion-select placeholder="Select District" [(ngModel)]="selectedDistrict" (ionChange)="handleDistrictChange($event.detail.value)" multiple>
+              <ion-select-option *ngFor="let district of districtTypes" [value]="district">{{ district }}</ion-select-option>
             </ion-select>            
           </ion-item>
         </ion-col>
