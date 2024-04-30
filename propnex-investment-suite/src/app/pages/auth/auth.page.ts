@@ -71,6 +71,12 @@ export class AuthPage implements OnInit, OnDestroy {
     }
   }
 
+  isPasswordComplex(password: string): boolean {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return passwordRegex.test(password);
+  }
+  
+
   async onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
@@ -90,7 +96,13 @@ export class AuthPage implements OnInit, OnDestroy {
       agencyName = form.value.agencyName;
     }
 
-    form.reset();
+    
+
+    // Add a check for the password when signing up
+    if (!this.isLogin && !this.isPasswordComplex(password)) {
+      await this.presentToast('Password must be at least 8 characters long and include at least one digit, one lowercase, and one uppercase letter.');
+      return; // Do not proceed with signup if the password is not complex enough
+    }
 
     if (this.isLogin) {
          // login
@@ -183,6 +195,7 @@ export class AuthPage implements OnInit, OnDestroy {
       this.router.navigateByUrl('/auth');
     }
   }
+  form.reset();
   }
 
   async presentToast(message: string) {
